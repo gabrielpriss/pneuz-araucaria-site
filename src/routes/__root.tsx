@@ -77,14 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "PneuZ Araucária — Pneus, Alinhamento e Balanceamento" },
+      { name: "description", content: "PneuZ Araucária: venda de pneus novos, alinhamento, balanceamento, suspensão e serviços automotivos com atendimento rápido e preço justo em Araucária/PR." },
+      { name: "author", content: "PneuZ Araucária" },
+      { property: "og:title", content: "PneuZ Araucária — Centro Automotivo e Pneus" },
+      { property: "og:description", content: "Pneus, alinhamento, balanceamento e serviços automotivos em Araucária/PR." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
