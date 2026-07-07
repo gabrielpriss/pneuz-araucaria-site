@@ -278,7 +278,7 @@ function Hero() {
 
 function Brands() {
   return (
-    <section className="border-y border-border bg-muted/50 py-10">
+    <section className="relative overflow-hidden border-y border-border bg-radial-brand py-12">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-6 text-center">
           <h3 className="text-sm font-black uppercase tracking-widest text-primary">
@@ -288,15 +288,17 @@ function Brands() {
             Pneus de qualidade para cada tipo de veículo, escolhemos considerando modelo, uso, orçamento e segurança.
           </p>
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
-          {brands.map((b) => (
-            <span
-              key={b}
-              className="rounded-full border border-border bg-card px-5 py-2 text-sm font-bold uppercase tracking-wider text-primary shadow-sm"
-            >
-              {b}
-            </span>
-          ))}
+        <div className="marquee-mask overflow-hidden">
+          <div className="flex w-max animate-marquee gap-4">
+            {[...brands, ...brands].map((b, i) => (
+              <span
+                key={`${b}-${i}`}
+                className="shrink-0 rounded-full border border-border bg-card px-7 py-3 text-sm font-bold uppercase tracking-wider text-primary shadow-sm"
+              >
+                {b}
+              </span>
+            ))}
+          </div>
         </div>
         <div className="mt-8 text-center">
           <a
