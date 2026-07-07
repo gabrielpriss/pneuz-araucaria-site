@@ -33,7 +33,7 @@ export const Route = createFileRoute("/")({
 });
 
 const PHONE_DISPLAY = "(99) 99999-9999";
-const ADDRESS = "Av. Dr. Vítor do Amaral, 1380 — Centro, Araucária — PR, 83702-040";
+const ADDRESS = "Av. Dr. Vítor do Amaral, 1380 , Centro, Araucária , PR, 83702-040";
 const MAPS_URL =
   "https://www.google.com/maps?daddr=Av.+Dr.+V%C3%ADtor+do+Amaral,+1380+-+Centro,+Arauc%C3%A1ria+-+PR,+83702-040";
 
@@ -285,7 +285,7 @@ function Brands() {
             Trabalhamos com as melhores marcas
           </h3>
           <p className="mt-2 text-sm text-muted-foreground">
-            Pneus de qualidade para cada tipo de veículo — escolhemos considerando modelo, uso, orçamento e segurança.
+            Pneus de qualidade para cada tipo de veículo , escolhemos considerando modelo, uso, orçamento e segurança.
           </p>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
@@ -322,7 +322,7 @@ function Services() {
             Serviços
           </div>
           <h2 className="text-3xl font-black text-primary md:text-4xl">O que fazemos por você</h2>
-          <p className="mt-3 text-muted-foreground">Do pneu novo à revisão completa — cuidamos de cada detalhe.</p>
+          <p className="mt-3 text-muted-foreground">Do pneu novo à revisão completa , cuidamos de cada detalhe.</p>
         </div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s) => (
@@ -369,7 +369,7 @@ function WhyUs() {
             Diferenciais
           </div>
           <h2 className="text-2xl font-black text-primary sm:text-3xl md:text-4xl">Por que escolher a PneuZ Araucária?</h2>
-          <p className="mt-3 text-muted-foreground">Uma loja local com estrutura de grande rede — franquia reconhecida, atendimento próximo e personalizado.</p>
+          <p className="mt-3 text-muted-foreground">Uma loja local com estrutura de grande rede , franquia reconhecida, atendimento próximo e personalizado.</p>
         </div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((it) => (
@@ -627,7 +627,7 @@ function ContactSection() {
           <ContactCard
             icon={MapPin}
             title="Endereço"
-            lines={["Av. Dr. Vítor do Amaral, 1380", "Centro, Araucária — PR", "CEP 83702-040"]}
+            lines={["Av. Dr. Vítor do Amaral, 1380", "Centro, Araucária , PR", "CEP 83702-040"]}
           />
           <ContactCard
             icon={Phone}
@@ -637,7 +637,7 @@ function ContactSection() {
           <ContactCard
             icon={Clock}
             title="Horário"
-            lines={["Seg a Sex: 08h — 18h", "Sábado: 08h — 12h"]}
+            lines={["Seg a Sex: 08h , 18h", "Sábado: 08h , 12h"]}
           />
         </div>
         <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
@@ -719,7 +719,7 @@ function Footer() {
         <div>
           <img src={logoAsset.url} alt="PneuZ Araucária" className="h-14 w-auto rounded-lg bg-white p-2" />
           <p className="mt-4 text-sm text-white/70">
-            Centro automotivo em Araucária — pneus, alinhamento, balanceamento e serviços para o seu carro.
+            Centro automotivo em Araucária , pneus, alinhamento, balanceamento e serviços para o seu carro.
           </p>
         </div>
         <div>
@@ -734,9 +734,9 @@ function Footer() {
         <div>
           <h4 className="mb-3 text-sm font-bold uppercase tracking-widest text-[var(--accent-yellow)]">Contato</h4>
           <ul className="space-y-2 text-sm text-white/80">
-            <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0" /> Av. Dr. Vítor do Amaral, 1380 — Centro, Araucária/PR</li>
+            <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0" /> Av. Dr. Vítor do Amaral, 1380 , Centro, Araucária/PR</li>
             <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> {PHONE_DISPLAY}</li>
-            <li className="flex items-center gap-2"><Clock className="h-4 w-4" /> Seg–Sex 08–18h · Sáb 08–12h</li>
+            <li className="flex items-center gap-2"><Clock className="h-4 w-4" /> Seg,Sex 08,18h · Sáb 08,12h</li>
           </ul>
         </div>
         <div>
@@ -750,7 +750,7 @@ function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10 py-5 text-center text-xs text-white/60">
-        © {new Date().getFullYear()} PneuZ Araucária — Todos os direitos reservados. · Desenvolvido por <a href="#" className="font-semibold text-[var(--accent-yellow)]">Conceito Prime Marketing Digital</a>
+        © {new Date().getFullYear()} PneuZ Araucária , Todos os direitos reservados. · Desenvolvido por <a href="#" className="font-semibold text-[var(--accent-yellow)]">Conceito Prime Marketing Digital</a>
       </div>
     </footer>
   );
