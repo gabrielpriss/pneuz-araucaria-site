@@ -277,48 +277,6 @@ function Hero() {
   );
 }
 
-function Promos() {
-  return (
-    <section id="promocoes" className="relative -mt-12 pb-4">
-      <div className="mx-auto max-w-7xl px-4">
-        <div className="rounded-3xl bg-primary p-6 shadow-[var(--shadow-brand)] md:p-10" style={{ background: "var(--gradient-hero)" }}>
-          <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <div className="mb-2 inline-block rounded-full bg-[var(--accent-yellow)] px-4 py-1 text-[10px] font-black uppercase tracking-widest text-primary">
-                Copa das Ofertas
-              </div>
-              <h2 className="text-2xl font-black text-white md:text-3xl">Pneus em promoção</h2>
-              <p className="mt-1 text-sm text-white/70">*Promoção válida para pneus montados na loja em base de troca.</p>
-            </div>
-            <span className="rounded-full border border-[var(--accent-yellow)]/40 px-4 py-1.5 text-xs font-bold text-[var(--accent-yellow)]">
-              Cupom ARAU1446
-            </span>
-          </div>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            {promos.map((p) => (
-              <div key={p.aro} className="rounded-2xl bg-white p-5 text-center shadow-lg transition-transform hover:-translate-y-1">
-                <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{p.aro}</div>
-                <div className="mt-2 flex items-baseline justify-center gap-1 text-primary">
-                  <span className="text-xs font-bold">A partir de R$</span>
-                </div>
-                <div className="text-4xl font-black text-primary">{p.price}</div>
-                <a
-                  href={waLink(p.msg)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-3 inline-block rounded-full bg-[var(--accent-yellow)] px-4 py-2 text-xs font-bold text-primary transition-transform hover:-translate-y-0.5"
-                >
-                  Cotação WhatsApp
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Brands() {
   return (
     <section className="border-y border-border bg-muted/50 py-10">
@@ -391,10 +349,8 @@ function About() {
           <div className="absolute -left-6 -top-6 h-32 w-32 rounded-full bg-[var(--accent-yellow)] opacity-70 blur-2xl" />
           <div className="relative overflow-hidden rounded-3xl shadow-[var(--shadow-brand)]">
             <img
-              src={oficinaImg}
+              src={oficinaAsset.url}
               alt="Fachada da oficina PneuZ Araucária"
-              width={1600}
-              height={1200}
               loading="lazy"
               className="aspect-[4/3] w-full object-cover"
             />
