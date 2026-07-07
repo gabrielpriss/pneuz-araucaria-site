@@ -316,7 +316,9 @@ function Brands() {
 
 function Services() {
   return (
-    <section id="servicos" className="relative py-20 sm:py-24">
+    <section id="servicos" className="relative overflow-hidden py-20 sm:py-24">
+      <div className="absolute inset-0 -z-10 bg-dots" />
+      <div className="absolute inset-0 -z-10" style={{ background: "linear-gradient(180deg, oklch(1 0 0) 0%, oklch(0.98 0.01 260) 100%)" }} />
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-14 text-center">
           <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
@@ -363,26 +365,29 @@ function WhyUs() {
     { icon: MessageCircle, title: "Atendimento transparente", desc: "Você entende o que seu carro precisa antes de aprovar qualquer serviço." },
   ];
   return (
-    <section className="bg-muted/40 py-20 sm:py-24">
+    <section className="relative overflow-hidden py-20 sm:py-24" style={{ background: "linear-gradient(160deg, oklch(0.32 0.16 267) 0%, oklch(0.22 0.14 267) 100%)" }}>
+      <div className="absolute inset-0 -z-0 opacity-30 bg-grid" />
+      <div className="relative">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-14 text-center">
-          <div className="mb-3 inline-block rounded-full bg-primary px-5 py-1.5 text-xs font-black uppercase tracking-widest text-[var(--accent-yellow)]">
+          <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
             Diferenciais
           </div>
-          <h2 className="text-2xl font-black text-primary sm:text-3xl md:text-4xl">Por que escolher a PneuZ Araucária?</h2>
-          <p className="mt-3 text-muted-foreground">Uma loja local com estrutura de grande rede, franquia reconhecida, atendimento próximo e personalizado.</p>
+          <h2 className="text-2xl font-black text-white sm:text-3xl md:text-4xl">Por que escolher a PneuZ Araucária?</h2>
+          <p className="mt-3 text-white/70">Uma loja local com estrutura de grande rede, franquia reconhecida, atendimento próximo e personalizado.</p>
         </div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((it) => (
-            <div key={it.title} className="rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)]">
+            <div key={it.title} className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-sm backdrop-blur transition-all hover:-translate-y-1 hover:bg-white/10">
               <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--accent-yellow)] text-primary">
                 <it.icon className="h-6 w-6" />
               </div>
-              <h3 className="text-lg font-bold text-primary">{it.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{it.desc}</p>
+              <h3 className="text-lg font-bold text-white">{it.title}</h3>
+              <p className="mt-2 text-sm text-white/70">{it.desc}</p>
             </div>
           ))}
         </div>
+      </div>
       </div>
     </section>
   );
@@ -396,7 +401,7 @@ function HowItWorks() {
     { icon: Wrench, title: "Faça o serviço com segurança", desc: "Seu carro recebe o cuidado necessário com transparência." },
   ];
   return (
-    <section className="py-20 sm:py-24">
+    <section className="relative overflow-hidden py-20 sm:py-24 bg-radial-brand">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-14 text-center">
           <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
@@ -470,7 +475,8 @@ function FinalCTA() {
 
 function About() {
   return (
-    <section id="sobre" className="relative overflow-hidden bg-muted/40 py-20 sm:py-24">
+    <section id="sobre" className="relative overflow-hidden py-20 sm:py-24" style={{ background: "linear-gradient(135deg, oklch(0.98 0.01 260) 0%, oklch(0.94 0.03 90 / 0.4) 100%)" }}>
+      <div className="absolute inset-0 -z-0 opacity-40 bg-dots" />
       <div className="mx-auto grid max-w-7xl gap-12 px-4 md:grid-cols-2 md:items-center">
         <div className="relative">
           <div className="absolute -left-6 -top-6 h-32 w-32 rounded-full bg-[var(--accent-yellow)] opacity-70 blur-2xl" />
@@ -527,7 +533,10 @@ function Contact() {
 
 function Reviews() {
   return (
-    <section id="depoimentos" className="relative py-20 sm:py-24">
+    <section id="depoimentos" className="relative overflow-hidden py-20 sm:py-24">
+      <div className="absolute inset-0 -z-10" style={{ background: "linear-gradient(180deg, oklch(0.98 0.01 260) 0%, oklch(1 0 0) 100%)" }} />
+      <div className="absolute -left-24 top-24 -z-10 h-72 w-72 rounded-full bg-[var(--accent-yellow)] opacity-20 blur-3xl" />
+      <div className="absolute -right-24 bottom-24 -z-10 h-72 w-72 rounded-full bg-primary opacity-10 blur-3xl" />
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-12 text-center">
           <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
@@ -600,7 +609,7 @@ function Reviews() {
 
 function ContactSection() {
   return (
-    <section id="contato" className="py-20 sm:py-24">
+    <section id="contato" className="relative overflow-hidden py-20 sm:py-24 bg-radial-brand">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-14 text-center">
           <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
@@ -666,7 +675,7 @@ function ContactCard({ icon: Icon, title, lines }: { icon: typeof MapPin; title:
 function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="bg-muted/40 py-20 sm:py-24">
+    <section className="relative overflow-hidden py-20 sm:py-24" style={{ background: "linear-gradient(180deg, oklch(1 0 0) 0%, oklch(0.96 0.02 267) 100%)" }}>
       <div className="mx-auto max-w-3xl px-4">
         <div className="mb-10 text-center">
           <div className="mb-3 inline-block rounded-full bg-primary px-5 py-1.5 text-xs font-black uppercase tracking-widest text-[var(--accent-yellow)]">
