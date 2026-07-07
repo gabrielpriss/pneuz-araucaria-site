@@ -487,7 +487,7 @@ function About() {
             Sobre nós
           </div>
           <h2 className="text-3xl font-black leading-tight text-primary md:text-4xl">
-            +20 anos de mercado em pneus e reparação automotiva
+            Referência em pneus e reparação automotiva
           </h2>
           <p className="mt-5 text-base leading-relaxed text-foreground/80">
             A PneuZ é referência na venda de pneus e reparação automotiva, sendo uma das maiores
@@ -501,9 +501,9 @@ function About() {
             cada atendimento.
           </p>
           <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
-            <Stat n="+20" label="Anos de mercado" />
-            <Stat n="5 anos" label="Garantia dos pneus" />
-            <Stat n="3D" label="Alinhamento" />
+            <Stat n="Transparência" label="Você sabe o que seu carro precisa" />
+            <Stat n="Honestidade" label="Indicamos só o necessário" />
+            <Stat n="Qualidade" label="Produtos e serviços de primeira" />
           </div>
         </div>
       </div>
@@ -514,7 +514,7 @@ function About() {
 function Stat({ n, label }: { n: string; label: string }) {
   return (
     <div className="rounded-2xl border border-border bg-card p-4 text-center">
-      <div className="text-2xl font-black text-primary md:text-3xl">{n}</div>
+      <div className="text-lg font-black text-primary md:text-xl">{n}</div>
       <div className="mt-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{label}</div>
     </div>
   );
