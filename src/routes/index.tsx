@@ -25,21 +25,20 @@ import logoAsset from "@/assets/pneuz-logo.asset.json";
 import iconAsset from "@/assets/pneuz-icon.asset.json";
 import heroImg from "@/assets/hero-tires.jpg";
 import oficinaAsset from "@/assets/oficina-pneuz.asset.json";
+import reviewsScreenshot from "@/assets/google-reviews.asset.json";
 import { Star } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const PHONE_DISPLAY = "(41) 3795-0480";
+const PHONE_DISPLAY = "(99) 99999-9999";
 const ADDRESS = "Av. Dr. Vítor do Amaral, 1380 — Centro, Araucária — PR, 83702-040";
 const MAPS_URL =
   "https://www.google.com/maps?daddr=Av.+Dr.+V%C3%ADtor+do+Amaral,+1380+-+Centro,+Arauc%C3%A1ria+-+PR,+83702-040";
 
 const waLink = (msg: string) =>
-  `https://api.whatsapp.com/send?phone=554137950480&text=${encodeURIComponent(
-    `Cupom da PROMO: ARAU1446 - ${msg}`,
-  )}`;
+  `https://api.whatsapp.com/send?phone=5599999999999&text=${encodeURIComponent(msg)}`;
 
 const WHATSAPP = waLink(
   "Olá, vim pelo site e gostaria de mais informações. Envie este cupom para ter descontos.",
@@ -91,40 +90,44 @@ const reviews = [
 ];
 
 const services = [
-  { icon: CircleDot, title: "Pneus Novos", desc: "Pneus com 5 anos de garantia das melhores marcas do mercado." },
-  { icon: Gauge, title: "Alinhamento 3D", desc: "Alinhamento computadorizado 3D de alta precisão." },
-  { icon: Disc, title: "Balanceamento", desc: "Balanceamento eletrônico para direção suave e segura." },
-  { icon: Wrench, title: "Suspensão", desc: "Revisão completa do sistema de suspensão." },
-  { icon: ShieldCheck, title: "Freios", desc: "Revisão do sistema de freios, discos e pastilhas." },
-  { icon: Droplet, title: "Troca de Óleo", desc: "Troca de óleo e filtros com produtos de qualidade." },
-  { icon: Zap, title: "Injeção Eletrônica", desc: "Diagnóstico e reparo do sistema de injeção." },
-  { icon: Cog, title: "Troca de Embreagem", desc: "Substituição completa do kit de embreagem." },
-  { icon: Settings, title: "Correia Dentada", desc: "Troca de correia dentada e tensores." },
-  { icon: Snowflake, title: "Ar-Condicionado", desc: "Higienização e recarga do ar-condicionado automotivo." },
-  { icon: Search, title: "Diagnóstico Completo", desc: "Scanner automotivo e diagnóstico eletrônico." },
-  { icon: Droplet, title: "Limpeza de Bicos", desc: "Limpeza e teste de bicos injetores." },
+  { icon: Zap, title: "Sistema de Injeção Eletrônica", desc: "Diagnóstico e reparo eletrônico para o motor voltar a render como novo." },
+  { icon: Cog, title: "Troca de Embreagem", desc: "Substituição completa do kit de embreagem com peças de qualidade." },
+  { icon: Wrench, title: "Revisão Completa de Suspensão", desc: "Amortecedores, molas, buchas e batentes revisados por especialistas." },
+  { icon: ShieldCheck, title: "Revisão do Sistema de Freios", desc: "Discos, pastilhas, lonas e fluido inspecionados para máxima segurança." },
+  { icon: Snowflake, title: "Higienização do Ar-Condicionado", desc: "Elimina odores e bactérias, com recarga de gás quando necessário." },
+  { icon: Droplet, title: "Troca de Óleo e Filtros", desc: "Óleo, filtro de óleo, ar e combustível trocados com produtos originais." },
+  { icon: Settings, title: "Troca de Correia Dentada", desc: "Troca preventiva de correia e tensores, evitando quebras no motor." },
+  { icon: Zap, title: "Revisão do Sistema de Injeção", desc: "Testes e ajustes no sistema para performance e economia de combustível." },
+  { icon: Search, title: "Diagnóstico Completo", desc: "Scanner automotivo lê códigos e identifica falhas com precisão." },
+  { icon: CircleDot, title: "Pneus Novos", desc: "Pneus das melhores marcas com garantia e montagem na loja." },
+  { icon: Droplet, title: "Limpeza de Bico", desc: "Limpeza por ultrassom para restabelecer a vazão correta dos bicos." },
+  { icon: Gauge, title: "Alinhamento 3D e Balanceamento", desc: "Alinhamento computadorizado 3D e balanceamento eletrônico de rodas." },
 ];
 
 const faqs = [
   {
+    q: "Vocês vendem apenas pneus?",
+    a: "Não. Somos um centro automotivo completo com serviços de manutenção mecânica, elétrica e revisões.",
+  },
+  {
+    q: "Preciso agendar?",
+    a: "Não necessariamente. Mas pelo WhatsApp conseguimos agilizar o seu atendimento.",
+  },
+  {
+    q: "Vocês possuem pneus para todos os veículos?",
+    a: "Trabalhamos com diversas medidas e marcas. Consulte a disponibilidade para o seu modelo pelo WhatsApp.",
+  },
+  {
+    q: "Posso parcelar?",
+    a: "Sim. Temos condições de pagamento em até 10x sem juros.",
+  },
+  {
     q: "Os pneus têm garantia?",
-    a: "Sim. Trabalhamos com pneus novos com 5 anos de garantia, montados na loja em base de troca.",
+    a: "Sim. Trabalhamos com pneus novos com garantia, montados na loja.",
   },
   {
-    q: "Quais marcas de pneus vocês vendem?",
-    a: "Bridgestone, Continental, Dunlop, Firestone, Goodyear, Pirelli, Linglong, XBRI e linha importada.",
-  },
-  {
-    q: "Além de pneus, quais serviços são oferecidos?",
-    a: "Alinhamento 3D, balanceamento, suspensão, freios, injeção eletrônica, troca de óleo, embreagem, correia dentada, ar-condicionado e diagnóstico completo.",
-  },
-  {
-    q: "Como faço um orçamento?",
-    a: `Fale com um especialista pelo WhatsApp ou ligue para ${PHONE_DISPLAY}. O orçamento é gratuito e sem compromisso.`,
-  },
-  {
-    q: "Onde a PneuZ Araucária está localizada?",
-    a: `${ADDRESS}. Estamos em ótima localização para atender clientes de Araucária e região metropolitana de Curitiba.`,
+    q: "Vocês fazem revisão antes de trocar peças?",
+    a: "Sim. Prezamos pela transparência e indicamos apenas o que realmente for necessário.",
   },
 ];
 
@@ -136,8 +139,11 @@ function Index() {
       <Hero />
       <Brands />
       <Services />
+      <WhyUs />
+      <HowItWorks />
       <About />
       <Reviews />
+      <FinalCTA />
       <Contact />
       <FAQ />
       <Footer />
