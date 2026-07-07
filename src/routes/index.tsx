@@ -25,7 +25,6 @@ import logoAsset from "@/assets/pneuz-logo.asset.json";
 import iconAsset from "@/assets/pneuz-icon.asset.json";
 import heroImg from "@/assets/hero-tires.jpg";
 import oficinaAsset from "@/assets/oficina-pneuz.asset.json";
-import reviewsScreenshot from "@/assets/google-reviews.asset.json";
 import { Star } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -552,26 +551,11 @@ function Reviews() {
           </div>
           <p className="mt-2 text-sm text-muted-foreground">Mais de 1.000 clientes já avaliaram nossa loja no Google.</p>
         </div>
-        <div className="mb-10 flex justify-center">
-          <a
-            href="https://www.google.com/search?q=PneuZ+Arauc%C3%A1ria"
-            target="_blank"
-            rel="noreferrer"
-            className="block overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-brand)] transition-transform hover:-translate-y-1"
-          >
-            <img
-              src={reviewsScreenshot.url}
-              alt="Avaliações reais dos clientes no Google"
-              loading="lazy"
-              className="max-h-[520px] w-auto"
-            />
-          </a>
-        </div>
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {reviews.map((r) => (
             <article
               key={r.name}
-              className="flex flex-col rounded-3xl border border-border bg-gradient-to-br from-card to-primary/5 p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)] sm:p-6"
+              className="flex h-full flex-col rounded-3xl border border-border bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)]"
             >
               <div className="flex items-start justify-between gap-3">
                 <header className="flex items-start gap-3">
