@@ -24,7 +24,8 @@ import {
 import logoAsset from "@/assets/pneuz-logo.asset.json";
 import iconAsset from "@/assets/pneuz-icon.asset.json";
 import heroImg from "@/assets/hero-tires.jpg";
-import oficinaImg from "@/assets/oficina-facade.jpg";
+import oficinaAsset from "@/assets/oficina-pneuz.asset.json";
+import { Star } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -44,13 +45,6 @@ const WHATSAPP = waLink(
   "Olá, vim pelo site e gostaria de mais informações. Envie este cupom para ter descontos.",
 );
 
-const promos = [
-  { aro: "Aro 14", price: "209", msg: "Aro 14 - R$209,00 - Envie o cupom para adquirir neste preço." },
-  { aro: "Aro 15", price: "209", msg: "Aro 15 - R$209,00 - Envie o cupom para adquirir neste preço." },
-  { aro: "Aro 16", price: "279", msg: "Aro 16 - R$279,00 - Envie o cupom para adquirir neste preço." },
-  { aro: "Aro 17", price: "349", msg: "Aro 17 a partir de R$349,00 - Envie o cupom para adquirir neste preço." },
-];
-
 const brands = [
   "Bridgestone",
   "Continental",
@@ -61,6 +55,39 @@ const brands = [
   "Linglong",
   "XBRI",
   "Importados",
+];
+
+const reviews = [
+  {
+    name: "Alessandro Matos",
+    meta: "Local Guide · 26 avaliações",
+    when: "4 semanas atrás",
+    text: "Ótimo atendimento. Fui muito bem atendido pelo Gerente Bruno. Recomendo!",
+  },
+  {
+    name: "Luana Castro",
+    meta: "9 avaliações · 1 foto",
+    when: "4 semanas atrás",
+    text: "Atendimento excepcional do gerente Bruno e de toda equipe pela honestidade e compromisso! Araucária precisava de um auto center como esse!",
+  },
+  {
+    name: "Weslen Natan",
+    meta: "9 avaliações · 1 foto",
+    when: "4 semanas atrás",
+    text: "Gostaria de parabenizar toda a equipe da loja Pneu Z pelo excelente atendimento e pelo ótimo serviço realizado na troca dos pneus. Fiquei muito satisfeito com a qualidade do trabalho, a atenção e o profissionalismo demonstrados durante todo o atendimento. Parabéns a toda a equipe e muito sucesso!",
+  },
+  {
+    name: "Valdenir Palma",
+    meta: "2 avaliações",
+    when: "Editado 4 semanas atrás",
+    text: "Excelente atendimento, fui muito bem atendido pelo gerente Bruno, serviços muito bons, só fazem o que é necessário, super indico.",
+  },
+  {
+    name: "Ebner Matias",
+    meta: "Local Guide · 14 avaliações · 4 fotos",
+    when: "4 meses atrás",
+    text: "Atendimento nota 1000, os atendentes Heloisa e Thiago e o mecânico Marlon todos muito atenciosos e tiraram todas as minhas dúvidas! Recomendo.",
+  },
 ];
 
 const services = [
@@ -107,10 +134,10 @@ function Index() {
       <TopBar />
       <Header />
       <Hero />
-      <Promos />
       <Brands />
       <Services />
       <About />
+      <Reviews />
       <Contact />
       <FAQ />
       <Footer />
@@ -147,9 +174,9 @@ function Header() {
   const [open, setOpen] = useState(false);
   const links = [
     { href: "#inicio", label: "Início" },
-    { href: "#promocoes", label: "Promoções" },
     { href: "#servicos", label: "Serviços" },
     { href: "#sobre", label: "Sobre" },
+    { href: "#depoimentos", label: "Depoimentos" },
     { href: "#contato", label: "Contato" },
   ];
   return (
@@ -234,10 +261,10 @@ function Hero() {
             Fale com um especialista
           </a>
           <a
-            href="#promocoes"
+            href="#servicos"
             className="rounded-full border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
           >
-            Ver promoções
+            Nossos serviços
           </a>
         </div>
         <div className="mt-10 flex flex-wrap items-center gap-6 text-xs font-semibold uppercase tracking-widest text-white/70">
