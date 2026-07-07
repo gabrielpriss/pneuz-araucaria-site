@@ -395,6 +395,77 @@ function Stat({ n, label }: { n: string; label: string }) {
 }
 
 function Contact() {
+  return <ContactSection />;
+}
+
+function Reviews() {
+  return (
+    <section id="depoimentos" className="relative py-24">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="mb-12 text-center">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
+            <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
+              <path fill="#4285F4" d="M22 12.2c0-.7-.06-1.4-.18-2H12v3.8h5.6a4.8 4.8 0 0 1-2.08 3.15v2.6h3.36C20.9 18 22 15.4 22 12.2Z"/>
+              <path fill="#34A853" d="M12 22c2.7 0 5-.9 6.68-2.45l-3.36-2.6c-.93.63-2.13 1-3.32 1-2.55 0-4.72-1.72-5.5-4.05H3.05v2.55A10 10 0 0 0 12 22Z"/>
+              <path fill="#FBBC05" d="M6.5 13.9a6 6 0 0 1 0-3.8V7.55H3.05a10 10 0 0 0 0 8.9L6.5 13.9Z"/>
+              <path fill="#EA4335" d="M12 5.95a5.4 5.4 0 0 1 3.83 1.5l2.87-2.87A9.6 9.6 0 0 0 12 2a10 10 0 0 0-8.95 5.55L6.5 10.1c.78-2.33 2.95-4.15 5.5-4.15Z"/>
+            </svg>
+            Avaliações Google
+          </div>
+          <h2 className="text-3xl font-black text-primary md:text-4xl">O que nossos clientes dizem</h2>
+          <div className="mt-4 flex items-center justify-center gap-2">
+            <div className="flex">
+              {[0, 1, 2, 3, 4].map((i) => (
+                <Star key={i} className="h-5 w-5 fill-[#FBBC05] text-[#FBBC05]" />
+              ))}
+            </div>
+            <span className="text-sm font-bold text-primary">5,0</span>
+            <span className="text-sm text-muted-foreground">· Avaliações verificadas</span>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {reviews.map((r) => (
+            <article
+              key={r.name}
+              className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)]"
+            >
+              <header className="flex items-start gap-3">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-base font-bold text-[var(--accent-yellow)]">
+                  {r.name.charAt(0)}
+                </div>
+                <div className="min-w-0">
+                  <div className="truncate font-bold text-primary">{r.name}</div>
+                  <div className="truncate text-xs text-muted-foreground">{r.meta}</div>
+                </div>
+              </header>
+              <div className="mt-3 flex items-center gap-2">
+                <div className="flex">
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <Star key={i} className="h-4 w-4 fill-[#FBBC05] text-[#FBBC05]" />
+                  ))}
+                </div>
+                <span className="text-xs text-muted-foreground">{r.when}</span>
+              </div>
+              <p className="mt-4 text-sm leading-relaxed text-foreground/80">{r.text}</p>
+            </article>
+          ))}
+        </div>
+        <div className="mt-10 text-center">
+          <a
+            href="https://www.google.com/search?q=PneuZ+Arauc%C3%A1ria"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border-2 border-primary px-6 py-3 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+          >
+            Ver todas as avaliações no Google
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ContactSection() {
   return (
     <section id="contato" className="py-24">
       <div className="mx-auto max-w-7xl px-4">
