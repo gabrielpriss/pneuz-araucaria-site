@@ -245,10 +245,10 @@ function Hero() {
           <CircleDot className="h-3.5 w-3.5" /> Centro Automotivo
         </span>
         <h1 className="max-w-3xl text-3xl font-black leading-[1.05] tracking-tight text-white sm:text-4xl md:text-6xl">
-          Pneus novos com <span className="text-[var(--accent-yellow)]">5 anos de garantia</span> em Araucária.
+          Seu carro merece <span className="text-[var(--accent-yellow)]">cuidado de especialista</span>. Pneus e serviços automotivos completos em Araucária.
         </h1>
         <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 sm:mt-6 sm:text-lg">
-          Mais de 20 anos de mercado. Pneus, alinhamento 3D, balanceamento e mecânica automotiva com equipamentos de primeira linha e preço justo.
+          Tenha acesso às melhores marcas de pneus, serviços de manutenção e uma equipe especializada perto de você. Faça seu orçamento e receba as melhores condições sem precisar sair de Araucária.
         </p>
         <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
           <a
@@ -267,9 +267,9 @@ function Hero() {
           </a>
         </div>
         <div className="mt-8 flex flex-wrap items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70 sm:mt-10 sm:gap-6 sm:text-xs">
-          <span className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[var(--accent-yellow)]" /> 5 anos de garantia</span>
-          <span className="flex items-center gap-2"><Gauge className="h-4 w-4 text-[var(--accent-yellow)]" /> Alinhamento 3D</span>
-          <span className="flex items-center gap-2"><CircleDot className="h-4 w-4 text-[var(--accent-yellow)]" /> +20 anos de mercado</span>
+          <span className="flex items-center gap-2"><Star className="h-4 w-4 fill-[var(--accent-yellow)] text-[var(--accent-yellow)]" /> +1.000 avaliações no Google</span>
+          <span className="flex items-center gap-2"><CircleDot className="h-4 w-4 text-[var(--accent-yellow)]" /> Até 10x sem juros</span>
+          <span className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[var(--accent-yellow)]" /> Garantia em produtos e serviços</span>
         </div>
       </div>
     </section>
@@ -284,6 +284,9 @@ function Brands() {
           <h3 className="text-sm font-black uppercase tracking-widest text-primary">
             Trabalhamos com as melhores marcas
           </h3>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Pneus de qualidade para cada tipo de veículo — escolhemos considerando modelo, uso, orçamento e segurança.
+          </p>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
           {brands.map((b) => (
@@ -294,6 +297,16 @@ function Brands() {
               {b}
             </span>
           ))}
+        </div>
+        <div className="mt-8 text-center">
+          <a
+            href={WHATSAPP}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-block rounded-full bg-primary px-7 py-3 text-sm font-bold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:-translate-y-0.5"
+          >
+            Encontrar o pneu ideal para meu carro
+          </a>
         </div>
       </div>
     </section>
@@ -332,7 +345,121 @@ function Services() {
             rel="noreferrer"
             className="inline-block rounded-full bg-primary px-8 py-3.5 text-sm font-bold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:-translate-y-0.5"
           >
-            Solicitar Orçamento
+            Agendar avaliação do meu veículo
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WhyUs() {
+  const items = [
+    { icon: MapPin, title: "Localização estratégica", desc: "Centro de Araucária/PR (CEP 83702-040), em avenida de grande movimento e fácil acesso." },
+    { icon: Wrench, title: "Especialistas no segmento automotivo", desc: "Equipe com experiência e conhecimento técnico para indicar a melhor solução." },
+    { icon: CircleDot, title: "Estoque competitivo", desc: "Mais opções de pneus e maior agilidade para atender sua necessidade." },
+    { icon: ShieldCheck, title: "Preço competitivo", desc: "Condições especiais e parcelamento em até 10x sem juros." },
+    { icon: MessageCircle, title: "Atendimento transparente", desc: "Você entende o que seu carro precisa antes de aprovar qualquer serviço." },
+  ];
+  return (
+    <section className="bg-muted/40 py-20 sm:py-24">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="mb-14 text-center">
+          <div className="mb-3 inline-block rounded-full bg-primary px-5 py-1.5 text-xs font-black uppercase tracking-widest text-[var(--accent-yellow)]">
+            Diferenciais
+          </div>
+          <h2 className="text-2xl font-black text-primary sm:text-3xl md:text-4xl">Por que escolher a PneuZ Araucária?</h2>
+          <p className="mt-3 text-muted-foreground">Uma loja local com estrutura de grande rede — franquia reconhecida, atendimento próximo e personalizado.</p>
+        </div>
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((it) => (
+            <div key={it.title} className="rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)]">
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--accent-yellow)] text-primary">
+                <it.icon className="h-6 w-6" />
+              </div>
+              <h3 className="text-lg font-bold text-primary">{it.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{it.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HowItWorks() {
+  const steps = [
+    { icon: MessageCircle, title: "Chame pelo WhatsApp", desc: "Informe seu veículo ou necessidade." },
+    { icon: MapPin, title: "Venha até nossa loja", desc: "Realizamos uma avaliação completa." },
+    { icon: Search, title: "Receba seu orçamento", desc: "Nossa equipe apresenta as melhores opções." },
+    { icon: Wrench, title: "Faça o serviço com segurança", desc: "Seu carro recebe o cuidado necessário com transparência." },
+  ];
+  return (
+    <section className="py-20 sm:py-24">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="mb-14 text-center">
+          <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
+            Como funciona
+          </div>
+          <h2 className="text-2xl font-black text-primary sm:text-3xl md:text-4xl">Resolver o problema do seu carro é simples</h2>
+        </div>
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {steps.map((s, i) => (
+            <div key={s.title} className="relative rounded-2xl border border-border bg-card p-6 shadow-sm">
+              <div className="absolute -top-4 left-6 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-black text-[var(--accent-yellow)]">
+                {i + 1}
+              </div>
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-[var(--accent-yellow)]">
+                <s.icon className="h-6 w-6" />
+              </div>
+              <h3 className="text-lg font-bold text-primary">{s.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-12 text-center">
+          <a
+            href={WHATSAPP}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-block rounded-full bg-primary px-8 py-3.5 text-sm font-bold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:-translate-y-0.5"
+          >
+            Receber meu orçamento agora
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FinalCTA() {
+  const perks = [
+    "Avaliação especializada",
+    "Melhores opções para seu veículo",
+    "Condições facilitadas",
+    "Atendimento rápido pelo WhatsApp",
+  ];
+  return (
+    <section className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-hero)" }}>
+      <div className="mx-auto max-w-4xl px-4 text-center">
+        <h2 className="text-2xl font-black leading-tight text-white sm:text-3xl md:text-4xl">
+          Precisa trocar pneus ou revisar seu carro? <span className="text-[var(--accent-yellow)]">Faça uma cotação agora.</span>
+        </h2>
+        <ul className="mx-auto mt-8 grid max-w-2xl grid-cols-1 gap-3 text-left sm:grid-cols-2">
+          {perks.map((p) => (
+            <li key={p} className="flex items-center gap-3 rounded-xl bg-white/10 px-4 py-3 text-sm font-semibold text-white backdrop-blur">
+              <ShieldCheck className="h-5 w-5 text-[var(--accent-yellow)]" /> {p}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-10">
+          <a
+            href={WHATSAPP}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-10 py-4 text-base font-black uppercase tracking-wide text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
+          >
+            Quero meu orçamento
           </a>
         </div>
       </div>
