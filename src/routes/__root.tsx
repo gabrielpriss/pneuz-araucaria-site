@@ -80,10 +80,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "PneuZ Araucária — Pneus, Alinhamento e Balanceamento" },
       { name: "description", content: "PneuZ Araucária: venda de pneus novos, alinhamento, balanceamento, suspensão e serviços automotivos com atendimento rápido e preço justo em Araucária/PR." },
       { name: "author", content: "PneuZ Araucária" },
-      { property: "og:title", content: "PneuZ Araucária — Centro Automotivo e Pneus" },
-      { property: "og:description", content: "Pneus, alinhamento, balanceamento e serviços automotivos em Araucária/PR." },
+      { property: "og:title", content: "PneuZ Araucária — Pneus, Alinhamento e Balanceamento" },
+      { property: "og:description", content: "PneuZ Araucária: venda de pneus novos, alinhamento, balanceamento, suspensão e serviços automotivos com atendimento rápido e preço justo em Araucária/PR." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "PneuZ Araucária — Pneus, Alinhamento e Balanceamento" },
+      { name: "twitter:description", content: "PneuZ Araucária: venda de pneus novos, alinhamento, balanceamento, suspensão e serviços automotivos com atendimento rápido e preço justo em Araucária/PR." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4706355b-4821-4c03-bc8f-4e627c52a0bf/id-preview-ce007f9e--3bb124cf-2d4b-4474-ab03-8dacb4883f40.lovable.app-1783455018272.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4706355b-4821-4c03-bc8f-4e627c52a0bf/id-preview-ce007f9e--3bb124cf-2d4b-4474-ab03-8dacb4883f40.lovable.app-1783455018272.png" },
     ],
     links: [
       {
