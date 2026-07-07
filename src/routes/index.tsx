@@ -24,7 +24,8 @@ import {
 import logoAsset from "@/assets/pneuz-logo.asset.json";
 import iconAsset from "@/assets/pneuz-icon.asset.json";
 import heroImg from "@/assets/hero-tires.jpg";
-import oficinaImg from "@/assets/oficina-facade.jpg";
+import oficinaAsset from "@/assets/oficina-pneuz.asset.json";
+import { Star } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -44,13 +45,6 @@ const WHATSAPP = waLink(
   "Olá, vim pelo site e gostaria de mais informações. Envie este cupom para ter descontos.",
 );
 
-const promos = [
-  { aro: "Aro 14", price: "209", msg: "Aro 14 - R$209,00 - Envie o cupom para adquirir neste preço." },
-  { aro: "Aro 15", price: "209", msg: "Aro 15 - R$209,00 - Envie o cupom para adquirir neste preço." },
-  { aro: "Aro 16", price: "279", msg: "Aro 16 - R$279,00 - Envie o cupom para adquirir neste preço." },
-  { aro: "Aro 17", price: "349", msg: "Aro 17 a partir de R$349,00 - Envie o cupom para adquirir neste preço." },
-];
-
 const brands = [
   "Bridgestone",
   "Continental",
@@ -61,6 +55,39 @@ const brands = [
   "Linglong",
   "XBRI",
   "Importados",
+];
+
+const reviews = [
+  {
+    name: "Alessandro Matos",
+    meta: "Local Guide · 26 avaliações",
+    when: "4 semanas atrás",
+    text: "Ótimo atendimento. Fui muito bem atendido pelo Gerente Bruno. Recomendo!",
+  },
+  {
+    name: "Luana Castro",
+    meta: "9 avaliações · 1 foto",
+    when: "4 semanas atrás",
+    text: "Atendimento excepcional do gerente Bruno e de toda equipe pela honestidade e compromisso! Araucária precisava de um auto center como esse!",
+  },
+  {
+    name: "Weslen Natan",
+    meta: "9 avaliações · 1 foto",
+    when: "4 semanas atrás",
+    text: "Gostaria de parabenizar toda a equipe da loja Pneu Z pelo excelente atendimento e pelo ótimo serviço realizado na troca dos pneus. Fiquei muito satisfeito com a qualidade do trabalho, a atenção e o profissionalismo demonstrados durante todo o atendimento. Parabéns a toda a equipe e muito sucesso!",
+  },
+  {
+    name: "Valdenir Palma",
+    meta: "2 avaliações",
+    when: "Editado 4 semanas atrás",
+    text: "Excelente atendimento, fui muito bem atendido pelo gerente Bruno, serviços muito bons, só fazem o que é necessário, super indico.",
+  },
+  {
+    name: "Ebner Matias",
+    meta: "Local Guide · 14 avaliações · 4 fotos",
+    when: "4 meses atrás",
+    text: "Atendimento nota 1000, os atendentes Heloisa e Thiago e o mecânico Marlon todos muito atenciosos e tiraram todas as minhas dúvidas! Recomendo.",
+  },
 ];
 
 const services = [
@@ -107,10 +134,10 @@ function Index() {
       <TopBar />
       <Header />
       <Hero />
-      <Promos />
       <Brands />
       <Services />
       <About />
+      <Reviews />
       <Contact />
       <FAQ />
       <Footer />
@@ -147,9 +174,9 @@ function Header() {
   const [open, setOpen] = useState(false);
   const links = [
     { href: "#inicio", label: "Início" },
-    { href: "#promocoes", label: "Promoções" },
     { href: "#servicos", label: "Serviços" },
     { href: "#sobre", label: "Sobre" },
+    { href: "#depoimentos", label: "Depoimentos" },
     { href: "#contato", label: "Contato" },
   ];
   return (
@@ -234,58 +261,16 @@ function Hero() {
             Fale com um especialista
           </a>
           <a
-            href="#promocoes"
+            href="#servicos"
             className="rounded-full border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
           >
-            Ver promoções
+            Nossos serviços
           </a>
         </div>
         <div className="mt-10 flex flex-wrap items-center gap-6 text-xs font-semibold uppercase tracking-widest text-white/70">
           <span className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[var(--accent-yellow)]" /> 5 anos de garantia</span>
           <span className="flex items-center gap-2"><Gauge className="h-4 w-4 text-[var(--accent-yellow)]" /> Alinhamento 3D</span>
           <span className="flex items-center gap-2"><CircleDot className="h-4 w-4 text-[var(--accent-yellow)]" /> +20 anos de mercado</span>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Promos() {
-  return (
-    <section id="promocoes" className="relative -mt-12 pb-4">
-      <div className="mx-auto max-w-7xl px-4">
-        <div className="rounded-3xl bg-primary p-6 shadow-[var(--shadow-brand)] md:p-10" style={{ background: "var(--gradient-hero)" }}>
-          <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <div className="mb-2 inline-block rounded-full bg-[var(--accent-yellow)] px-4 py-1 text-[10px] font-black uppercase tracking-widest text-primary">
-                Copa das Ofertas
-              </div>
-              <h2 className="text-2xl font-black text-white md:text-3xl">Pneus em promoção</h2>
-              <p className="mt-1 text-sm text-white/70">*Promoção válida para pneus montados na loja em base de troca.</p>
-            </div>
-            <span className="rounded-full border border-[var(--accent-yellow)]/40 px-4 py-1.5 text-xs font-bold text-[var(--accent-yellow)]">
-              Cupom ARAU1446
-            </span>
-          </div>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            {promos.map((p) => (
-              <div key={p.aro} className="rounded-2xl bg-white p-5 text-center shadow-lg transition-transform hover:-translate-y-1">
-                <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{p.aro}</div>
-                <div className="mt-2 flex items-baseline justify-center gap-1 text-primary">
-                  <span className="text-xs font-bold">A partir de R$</span>
-                </div>
-                <div className="text-4xl font-black text-primary">{p.price}</div>
-                <a
-                  href={waLink(p.msg)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-3 inline-block rounded-full bg-[var(--accent-yellow)] px-4 py-2 text-xs font-bold text-primary transition-transform hover:-translate-y-0.5"
-                >
-                  Cotação WhatsApp
-                </a>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
@@ -364,10 +349,8 @@ function About() {
           <div className="absolute -left-6 -top-6 h-32 w-32 rounded-full bg-[var(--accent-yellow)] opacity-70 blur-2xl" />
           <div className="relative overflow-hidden rounded-3xl shadow-[var(--shadow-brand)]">
             <img
-              src={oficinaImg}
+              src={oficinaAsset.url}
               alt="Fachada da oficina PneuZ Araucária"
-              width={1600}
-              height={1200}
               loading="lazy"
               className="aspect-[4/3] w-full object-cover"
             />
@@ -412,6 +395,77 @@ function Stat({ n, label }: { n: string; label: string }) {
 }
 
 function Contact() {
+  return <ContactSection />;
+}
+
+function Reviews() {
+  return (
+    <section id="depoimentos" className="relative py-24">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="mb-12 text-center">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
+            <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
+              <path fill="#4285F4" d="M22 12.2c0-.7-.06-1.4-.18-2H12v3.8h5.6a4.8 4.8 0 0 1-2.08 3.15v2.6h3.36C20.9 18 22 15.4 22 12.2Z"/>
+              <path fill="#34A853" d="M12 22c2.7 0 5-.9 6.68-2.45l-3.36-2.6c-.93.63-2.13 1-3.32 1-2.55 0-4.72-1.72-5.5-4.05H3.05v2.55A10 10 0 0 0 12 22Z"/>
+              <path fill="#FBBC05" d="M6.5 13.9a6 6 0 0 1 0-3.8V7.55H3.05a10 10 0 0 0 0 8.9L6.5 13.9Z"/>
+              <path fill="#EA4335" d="M12 5.95a5.4 5.4 0 0 1 3.83 1.5l2.87-2.87A9.6 9.6 0 0 0 12 2a10 10 0 0 0-8.95 5.55L6.5 10.1c.78-2.33 2.95-4.15 5.5-4.15Z"/>
+            </svg>
+            Avaliações Google
+          </div>
+          <h2 className="text-3xl font-black text-primary md:text-4xl">O que nossos clientes dizem</h2>
+          <div className="mt-4 flex items-center justify-center gap-2">
+            <div className="flex">
+              {[0, 1, 2, 3, 4].map((i) => (
+                <Star key={i} className="h-5 w-5 fill-[#FBBC05] text-[#FBBC05]" />
+              ))}
+            </div>
+            <span className="text-sm font-bold text-primary">5,0</span>
+            <span className="text-sm text-muted-foreground">· Avaliações verificadas</span>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {reviews.map((r) => (
+            <article
+              key={r.name}
+              className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)]"
+            >
+              <header className="flex items-start gap-3">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-base font-bold text-[var(--accent-yellow)]">
+                  {r.name.charAt(0)}
+                </div>
+                <div className="min-w-0">
+                  <div className="truncate font-bold text-primary">{r.name}</div>
+                  <div className="truncate text-xs text-muted-foreground">{r.meta}</div>
+                </div>
+              </header>
+              <div className="mt-3 flex items-center gap-2">
+                <div className="flex">
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <Star key={i} className="h-4 w-4 fill-[#FBBC05] text-[#FBBC05]" />
+                  ))}
+                </div>
+                <span className="text-xs text-muted-foreground">{r.when}</span>
+              </div>
+              <p className="mt-4 text-sm leading-relaxed text-foreground/80">{r.text}</p>
+            </article>
+          ))}
+        </div>
+        <div className="mt-10 text-center">
+          <a
+            href="https://www.google.com/search?q=PneuZ+Arauc%C3%A1ria"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border-2 border-primary px-6 py-3 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+          >
+            Ver todas as avaliações no Google
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ContactSection() {
   return (
     <section id="contato" className="py-24">
       <div className="mx-auto max-w-7xl px-4">
