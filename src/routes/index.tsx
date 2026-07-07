@@ -148,22 +148,15 @@ function Index() {
 
 function TopBar() {
   return (
-    <div className="w-full bg-[var(--accent-yellow)] text-[color:var(--primary)]">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-4 py-2 text-xs font-semibold sm:text-sm">
-        <div className="flex flex-wrap items-center gap-4">
-          <a href={`tel:+554137950480`} className="flex items-center gap-2 hover:opacity-80">
-            <Phone className="h-4 w-4" /> {PHONE_DISPLAY}
+    <div className="w-full border-b border-border/70 bg-background/95">
+      <div className="mx-auto flex max-w-7xl justify-end px-4 py-2.5 sm:py-3">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <a href="#" aria-label="Instagram" className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-primary">
+            <Instagram className="h-4 w-4" />
           </a>
-          <span className="hidden items-center gap-2 sm:flex">
-            <MapPin className="h-4 w-4" /> Av. Dr. Vítor do Amaral, 1380 — Centro, Araucária/PR
-          </span>
-        </div>
-        <div className="flex items-center gap-3">
-          <a href={WHATSAPP} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 hover:opacity-80">
-            <MessageCircle className="h-4 w-4" /> Cupom ARAU1446
+          <a href="#" aria-label="Facebook" className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-primary">
+            <Facebook className="h-4 w-4" />
           </a>
-          <a href="#" aria-label="Instagram" className="hover:opacity-80"><Instagram className="h-4 w-4" /></a>
-          <a href="#" aria-label="Facebook" className="hover:opacity-80"><Facebook className="h-4 w-4" /></a>
         </div>
       </div>
     </div>
@@ -241,33 +234,33 @@ function Hero() {
         <img src={heroImg} alt="" className="h-full w-full object-cover" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(120deg, oklch(0.22 0.14 267 / 0.92) 0%, oklch(0.32 0.16 267 / 0.75) 60%, oklch(0.22 0.14 267 / 0.6) 100%)" }} />
       </div>
-      <div className="relative mx-auto flex max-w-7xl flex-col items-start px-4 py-28 md:py-40">
-        <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary">
+      <div className="relative mx-auto flex max-w-7xl flex-col items-start px-4 py-20 sm:py-28 md:py-40">
+        <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.25em] text-primary sm:text-xs">
           <CircleDot className="h-3.5 w-3.5" /> Centro Automotivo
         </span>
-        <h1 className="max-w-3xl text-4xl font-black leading-[1.05] tracking-tight text-white md:text-6xl">
+        <h1 className="max-w-3xl text-3xl font-black leading-[1.05] tracking-tight text-white sm:text-4xl md:text-6xl">
           Pneus novos com <span className="text-[var(--accent-yellow)]">5 anos de garantia</span> em Araucária.
         </h1>
-        <p className="mt-6 max-w-xl text-lg text-white/85">
+        <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 sm:mt-6 sm:text-lg">
           Mais de 20 anos de mercado. Pneus, alinhamento 3D, balanceamento e mecânica automotiva com equipamentos de primeira linha e preço justo.
         </p>
-        <div className="mt-8 flex flex-wrap gap-3">
+        <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
           <a
             href={WHATSAPP}
             target="_blank"
             rel="noreferrer"
-            className="rounded-full bg-[var(--accent-yellow)] px-7 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
+            className="inline-flex items-center justify-center rounded-full bg-[var(--accent-yellow)] px-7 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
           >
             Fale com um especialista
           </a>
           <a
             href="#servicos"
-            className="rounded-full border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
+            className="inline-flex items-center justify-center rounded-full border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
           >
             Nossos serviços
           </a>
         </div>
-        <div className="mt-10 flex flex-wrap items-center gap-6 text-xs font-semibold uppercase tracking-widest text-white/70">
+        <div className="mt-8 flex flex-wrap items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70 sm:mt-10 sm:gap-6 sm:text-xs">
           <span className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[var(--accent-yellow)]" /> 5 anos de garantia</span>
           <span className="flex items-center gap-2"><Gauge className="h-4 w-4 text-[var(--accent-yellow)]" /> Alinhamento 3D</span>
           <span className="flex items-center gap-2"><CircleDot className="h-4 w-4 text-[var(--accent-yellow)]" /> +20 anos de mercado</span>
@@ -303,7 +296,7 @@ function Brands() {
 
 function Services() {
   return (
-    <section id="servicos" className="relative py-24">
+    <section id="servicos" className="relative py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-14 text-center">
           <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
@@ -316,7 +309,7 @@ function Services() {
           {services.map((s) => (
             <div
               key={s.title}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)]"
+              className="group relative overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)] sm:p-7"
             >
               <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-primary text-[var(--accent-yellow)] transition-colors group-hover:bg-[var(--accent-yellow)] group-hover:text-primary">
                 <s.icon className="h-7 w-7" />
@@ -343,7 +336,7 @@ function Services() {
 
 function About() {
   return (
-    <section id="sobre" className="relative overflow-hidden bg-muted/40 py-24">
+    <section id="sobre" className="relative overflow-hidden bg-muted/40 py-20 sm:py-24">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 md:grid-cols-2 md:items-center">
         <div className="relative">
           <div className="absolute -left-6 -top-6 h-32 w-32 rounded-full bg-[var(--accent-yellow)] opacity-70 blur-2xl" />
@@ -374,7 +367,7 @@ function About() {
             mecânica automotiva. Avaliações sem compromisso e um especialista para acompanhar
             cada atendimento.
           </p>
-          <div className="mt-8 grid grid-cols-3 gap-4">
+          <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
             <Stat n="+20" label="Anos de mercado" />
             <Stat n="5 anos" label="Garantia dos pneus" />
             <Stat n="3D" label="Alinhamento" />
@@ -400,7 +393,7 @@ function Contact() {
 
 function Reviews() {
   return (
-    <section id="depoimentos" className="relative py-24">
+    <section id="depoimentos" className="relative py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-12 text-center">
           <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
@@ -412,8 +405,8 @@ function Reviews() {
             </svg>
             Avaliações Google
           </div>
-          <h2 className="text-3xl font-black text-primary md:text-4xl">O que nossos clientes dizem</h2>
-          <div className="mt-4 flex items-center justify-center gap-2">
+          <h2 className="text-2xl font-black text-primary sm:text-3xl md:text-4xl">O que nossos clientes dizem</h2>
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
             <div className="flex">
               {[0, 1, 2, 3, 4].map((i) => (
                 <Star key={i} className="h-5 w-5 fill-[#FBBC05] text-[#FBBC05]" />
@@ -427,18 +420,23 @@ function Reviews() {
           {reviews.map((r) => (
             <article
               key={r.name}
-              className="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)]"
+              className="flex flex-col rounded-3xl border border-border bg-gradient-to-br from-card to-primary/5 p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)] sm:p-6"
             >
-              <header className="flex items-start gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-base font-bold text-[var(--accent-yellow)]">
-                  {r.name.charAt(0)}
-                </div>
-                <div className="min-w-0">
-                  <div className="truncate font-bold text-primary">{r.name}</div>
-                  <div className="truncate text-xs text-muted-foreground">{r.meta}</div>
-                </div>
-              </header>
-              <div className="mt-3 flex items-center gap-2">
+              <div className="flex items-start justify-between gap-3">
+                <header className="flex items-start gap-3">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-base font-bold text-[var(--accent-yellow)]">
+                    {r.name.charAt(0)}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="truncate font-bold text-primary">{r.name}</div>
+                    <div className="truncate text-xs text-muted-foreground">{r.meta}</div>
+                  </div>
+                </header>
+                <span className="rounded-full bg-[var(--accent-yellow)]/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
+                  Google
+                </span>
+              </div>
+              <div className="mt-4 flex items-center gap-2">
                 <div className="flex">
                   {[0, 1, 2, 3, 4].map((i) => (
                     <Star key={i} className="h-4 w-4 fill-[#FBBC05] text-[#FBBC05]" />
@@ -467,16 +465,16 @@ function Reviews() {
 
 function ContactSection() {
   return (
-    <section id="contato" className="py-24">
+    <section id="contato" className="py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-14 text-center">
           <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
             Contato
           </div>
-          <h2 className="text-3xl font-black text-primary md:text-4xl">Entre em contato</h2>
+          <h2 className="text-2xl font-black text-primary sm:text-3xl md:text-4xl">Entre em contato</h2>
           <p className="mt-3 text-muted-foreground">Estamos prontos para atender você em Araucária.</p>
         </div>
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
           <ContactCard
             icon={MapPin}
             title="Endereço"
@@ -493,12 +491,12 @@ function ContactSection() {
             lines={["Seg a Sex: 08h — 18h", "Sábado: 08h — 12h"]}
           />
         </div>
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
+        <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
           <a
             href={WHATSAPP}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-8 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent-yellow)] px-7 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5 sm:px-8"
           >
             <MessageCircle className="h-4 w-4" /> Falar no WhatsApp
           </a>
@@ -506,7 +504,7 @@ function ContactSection() {
             href={MAPS_URL}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border-2 border-primary px-8 py-3.5 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+            className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary px-7 py-3.5 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground sm:px-8"
           >
             <MapPin className="h-4 w-4" /> Como chegar
           </a>
@@ -518,7 +516,7 @@ function ContactSection() {
 
 function ContactCard({ icon: Icon, title, lines }: { icon: typeof MapPin; title: string; lines: string[] }) {
   return (
-    <div className="rounded-2xl border border-border bg-card p-7 text-center transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)]">
+    <div className="rounded-2xl border border-border bg-card p-6 text-center transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)] sm:p-7">
       <div className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-[var(--accent-yellow)]">
         <Icon className="h-6 w-6" />
       </div>
@@ -533,13 +531,13 @@ function ContactCard({ icon: Icon, title, lines }: { icon: typeof MapPin; title:
 function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="bg-muted/40 py-24">
+    <section className="bg-muted/40 py-20 sm:py-24">
       <div className="mx-auto max-w-3xl px-4">
         <div className="mb-10 text-center">
           <div className="mb-3 inline-block rounded-full bg-primary px-5 py-1.5 text-xs font-black uppercase tracking-widest text-[var(--accent-yellow)]">
             FAQ
           </div>
-          <h2 className="text-3xl font-black text-primary md:text-4xl">Perguntas frequentes</h2>
+          <h2 className="text-2xl font-black text-primary sm:text-3xl md:text-4xl">Perguntas frequentes</h2>
         </div>
         <div className="space-y-3">
           {faqs.map((f, i) => {
@@ -606,7 +604,7 @@ function FloatingWhats() {
       target="_blank"
       rel="noreferrer"
       aria-label="WhatsApp"
-      className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[var(--shadow-brand)] transition-transform hover:scale-110"
+      className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[var(--shadow-brand)] transition-transform hover:scale-110 sm:bottom-6 sm:right-6"
     >
       <MessageCircle className="h-7 w-7" />
     </a>
