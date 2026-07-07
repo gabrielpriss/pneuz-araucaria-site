@@ -107,6 +107,8 @@ function Index() {
       <TopBar />
       <Header />
       <Hero />
+      <Promos />
+      <Brands />
       <Services />
       <About />
       <Contact />
@@ -120,11 +122,19 @@ function Index() {
 function TopBar() {
   return (
     <div className="w-full bg-[var(--accent-yellow)] text-[color:var(--primary)]">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 text-sm font-medium">
-        <a href={WHATSAPP} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:opacity-80">
-          <MessageCircle className="h-4 w-4" /> Fale conosco
-        </a>
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-4 py-2 text-xs font-semibold sm:text-sm">
+        <div className="flex flex-wrap items-center gap-4">
+          <a href={`tel:+554137950480`} className="flex items-center gap-2 hover:opacity-80">
+            <Phone className="h-4 w-4" /> {PHONE_DISPLAY}
+          </a>
+          <span className="hidden items-center gap-2 sm:flex">
+            <MapPin className="h-4 w-4" /> Av. Dr. Vítor do Amaral, 1380 — Centro, Araucária/PR
+          </span>
+        </div>
         <div className="flex items-center gap-3">
+          <a href={WHATSAPP} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 hover:opacity-80">
+            <MessageCircle className="h-4 w-4" /> Cupom ARAU1446
+          </a>
           <a href="#" aria-label="Instagram" className="hover:opacity-80"><Instagram className="h-4 w-4" /></a>
           <a href="#" aria-label="Facebook" className="hover:opacity-80"><Facebook className="h-4 w-4" /></a>
         </div>
@@ -137,6 +147,7 @@ function Header() {
   const [open, setOpen] = useState(false);
   const links = [
     { href: "#inicio", label: "Início" },
+    { href: "#promocoes", label: "Promoções" },
     { href: "#servicos", label: "Serviços" },
     { href: "#sobre", label: "Sobre" },
     { href: "#contato", label: "Contato" },
@@ -208,10 +219,10 @@ function Hero() {
           <CircleDot className="h-3.5 w-3.5" /> Centro Automotivo
         </span>
         <h1 className="max-w-3xl text-4xl font-black leading-[1.05] tracking-tight text-white md:text-6xl">
-          Seu carro em boas mãos em <span className="text-[var(--accent-yellow)]">Araucária</span>.
+          Pneus novos com <span className="text-[var(--accent-yellow)]">5 anos de garantia</span> em Araucária.
         </h1>
         <p className="mt-6 max-w-xl text-lg text-white/85">
-          Pneus novos, alinhamento, balanceamento e serviços automotivos com atendimento rápido, transparente e preço justo.
+          Mais de 20 anos de mercado. Pneus, alinhamento 3D, balanceamento e mecânica automotiva com equipamentos de primeira linha e preço justo.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <a
@@ -220,14 +231,85 @@ function Hero() {
             rel="noreferrer"
             className="rounded-full bg-[var(--accent-yellow)] px-7 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
           >
-            Fale no WhatsApp
+            Fale com um especialista
           </a>
           <a
-            href="#servicos"
+            href="#promocoes"
             className="rounded-full border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
           >
-            Nossos serviços
+            Ver promoções
           </a>
+        </div>
+        <div className="mt-10 flex flex-wrap items-center gap-6 text-xs font-semibold uppercase tracking-widest text-white/70">
+          <span className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[var(--accent-yellow)]" /> 5 anos de garantia</span>
+          <span className="flex items-center gap-2"><Gauge className="h-4 w-4 text-[var(--accent-yellow)]" /> Alinhamento 3D</span>
+          <span className="flex items-center gap-2"><CircleDot className="h-4 w-4 text-[var(--accent-yellow)]" /> +20 anos de mercado</span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Promos() {
+  return (
+    <section id="promocoes" className="relative -mt-12 pb-4">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="rounded-3xl bg-primary p-6 shadow-[var(--shadow-brand)] md:p-10" style={{ background: "var(--gradient-hero)" }}>
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <div className="mb-2 inline-block rounded-full bg-[var(--accent-yellow)] px-4 py-1 text-[10px] font-black uppercase tracking-widest text-primary">
+                Copa das Ofertas
+              </div>
+              <h2 className="text-2xl font-black text-white md:text-3xl">Pneus em promoção</h2>
+              <p className="mt-1 text-sm text-white/70">*Promoção válida para pneus montados na loja em base de troca.</p>
+            </div>
+            <span className="rounded-full border border-[var(--accent-yellow)]/40 px-4 py-1.5 text-xs font-bold text-[var(--accent-yellow)]">
+              Cupom ARAU1446
+            </span>
+          </div>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {promos.map((p) => (
+              <div key={p.aro} className="rounded-2xl bg-white p-5 text-center shadow-lg transition-transform hover:-translate-y-1">
+                <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{p.aro}</div>
+                <div className="mt-2 flex items-baseline justify-center gap-1 text-primary">
+                  <span className="text-xs font-bold">A partir de R$</span>
+                </div>
+                <div className="text-4xl font-black text-primary">{p.price}</div>
+                <a
+                  href={waLink(p.msg)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-block rounded-full bg-[var(--accent-yellow)] px-4 py-2 text-xs font-bold text-primary transition-transform hover:-translate-y-0.5"
+                >
+                  Cotação WhatsApp
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Brands() {
+  return (
+    <section className="border-y border-border bg-muted/50 py-10">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="mb-6 text-center">
+          <h3 className="text-sm font-black uppercase tracking-widest text-primary">
+            Trabalhamos com as melhores marcas
+          </h3>
+        </div>
+        <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
+          {brands.map((b) => (
+            <span
+              key={b}
+              className="rounded-full border border-border bg-card px-5 py-2 text-sm font-bold uppercase tracking-wider text-primary shadow-sm"
+            >
+              {b}
+            </span>
+          ))}
         </div>
       </div>
     </section>
@@ -280,10 +362,15 @@ function About() {
       <div className="mx-auto grid max-w-7xl gap-12 px-4 md:grid-cols-2 md:items-center">
         <div className="relative">
           <div className="absolute -left-6 -top-6 h-32 w-32 rounded-full bg-[var(--accent-yellow)] opacity-70 blur-2xl" />
-          <div className="relative overflow-hidden rounded-3xl shadow-[var(--shadow-brand)]" style={{ background: "var(--gradient-brand)" }}>
-            <div className="flex aspect-[4/3] items-center justify-center p-10">
-              <img src={iconAsset.url} alt="PneuZ" className="h-60 w-60 drop-shadow-2xl" />
-            </div>
+          <div className="relative overflow-hidden rounded-3xl shadow-[var(--shadow-brand)]">
+            <img
+              src={oficinaImg}
+              alt="Fachada da oficina PneuZ Araucária"
+              width={1600}
+              height={1200}
+              loading="lazy"
+              className="aspect-[4/3] w-full object-cover"
+            />
           </div>
         </div>
         <div>
@@ -291,22 +378,23 @@ function About() {
             Sobre nós
           </div>
           <h2 className="text-3xl font-black leading-tight text-primary md:text-4xl">
-            PneuZ Araucária — tradição em pneus e serviços automotivos
+            +20 anos de mercado em pneus e reparação automotiva
           </h2>
           <p className="mt-5 text-base leading-relaxed text-foreground/80">
-            Somos um centro automotivo completo em Araucária. Nosso compromisso é entregar
-            um atendimento humano, transparente e resolutivo — porque sabemos que seu carro
-            faz parte da sua rotina, do seu trabalho e da sua liberdade.
+            A PneuZ é referência na venda de pneus e reparação automotiva, sendo uma das maiores
+            redes de centro automotivo do país. Trabalhamos apenas com produtos e tecnologias mais
+            avançadas do mercado, buscando sempre a segurança dos nossos clientes.
           </p>
           <p className="mt-4 text-base leading-relaxed text-foreground/80">
-            Trabalhamos com pneus das melhores marcas, alinhamento computadorizado,
-            balanceamento eletrônico e uma equipe técnica preparada para cuidar do seu
-            veículo com agilidade e preço justo.
+            Nossa unidade de Araucária conta com equipe qualificada e equipamentos de primeira
+            linha para oferecer atendimento impecável e o mais alto padrão em serviços de
+            mecânica automotiva. Avaliações sem compromisso e um especialista para acompanhar
+            cada atendimento.
           </p>
           <div className="mt-8 grid grid-cols-3 gap-4">
-            <Stat n="+10" label="Anos de experiência" />
-            <Stat n="+5k" label="Clientes atendidos" />
-            <Stat n="100%" label="Compromisso" />
+            <Stat n="+20" label="Anos de mercado" />
+            <Stat n="5 anos" label="Garantia dos pneus" />
+            <Stat n="3D" label="Alinhamento" />
           </div>
         </div>
       </div>
@@ -335,11 +423,23 @@ function Contact() {
           <p className="mt-3 text-muted-foreground">Estamos prontos para atender você em Araucária.</p>
         </div>
         <div className="grid gap-5 md:grid-cols-3">
-          <ContactCard icon={MapPin} title="Endereço" lines={["Araucária — PR", "Região Metropolitana de Curitiba"]} />
-          <ContactCard icon={Clock} title="Horário" lines={["Seg a Sex: 08h — 18h", "Sábado: 08h — 12h"]} />
-          <ContactCard icon={Mail} title="Fale conosco" lines={["contato@pneuzaraucaria.com.br", "WhatsApp disponível"]} />
+          <ContactCard
+            icon={MapPin}
+            title="Endereço"
+            lines={["Av. Dr. Vítor do Amaral, 1380", "Centro, Araucária — PR", "CEP 83702-040"]}
+          />
+          <ContactCard
+            icon={Phone}
+            title="Telefone / WhatsApp"
+            lines={[PHONE_DISPLAY, "Atendimento com especialista"]}
+          />
+          <ContactCard
+            icon={Clock}
+            title="Horário"
+            lines={["Seg a Sex: 08h — 18h", "Sábado: 08h — 12h"]}
+          />
         </div>
-        <div className="mt-10 flex justify-center">
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
           <a
             href={WHATSAPP}
             target="_blank"
@@ -347,6 +447,14 @@ function Contact() {
             className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-8 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
           >
             <MessageCircle className="h-4 w-4" /> Falar no WhatsApp
+          </a>
+          <a
+            href={MAPS_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border-2 border-primary px-8 py-3.5 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+          >
+            <MapPin className="h-4 w-4" /> Como chegar
           </a>
         </div>
       </div>
@@ -416,8 +524,8 @@ function Footer() {
         <div>
           <h4 className="mb-3 text-sm font-bold uppercase tracking-widest text-[var(--accent-yellow)]">Contato</h4>
           <ul className="space-y-2 text-sm text-white/80">
-            <li className="flex items-center gap-2"><MapPin className="h-4 w-4" /> Araucária — PR</li>
-            <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> WhatsApp disponível</li>
+            <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0" /> Av. Dr. Vítor do Amaral, 1380 — Centro, Araucária/PR</li>
+            <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> {PHONE_DISPLAY}</li>
             <li className="flex items-center gap-2"><Clock className="h-4 w-4" /> Seg–Sex 08–18h · Sáb 08–12h</li>
           </ul>
         </div>
