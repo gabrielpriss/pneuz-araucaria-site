@@ -715,12 +715,21 @@ function FAQ() {
 function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-3">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-4">
         <div>
           <img src={logoAsset.url} alt="PneuZ Araucária" className="h-14 w-auto rounded-lg bg-white p-2" />
           <p className="mt-4 text-sm text-white/70">
             Centro automotivo em Araucária — pneus, alinhamento, balanceamento e serviços para o seu carro.
           </p>
+        </div>
+        <div>
+          <h4 className="mb-3 text-sm font-bold uppercase tracking-widest text-[var(--accent-yellow)]">Links</h4>
+          <ul className="space-y-2 text-sm text-white/80">
+            <li><a href="#servicos" className="hover:text-[var(--accent-yellow)]">Serviços</a></li>
+            <li><a href="#sobre" className="hover:text-[var(--accent-yellow)]">Sobre nós</a></li>
+            <li><a href="#depoimentos" className="hover:text-[var(--accent-yellow)]">Avaliações</a></li>
+            <li><a href="#contato" className="hover:text-[var(--accent-yellow)]">Contato</a></li>
+          </ul>
         </div>
         <div>
           <h4 className="mb-3 text-sm font-bold uppercase tracking-widest text-[var(--accent-yellow)]">Contato</h4>
@@ -737,10 +746,11 @@ function Footer() {
             <a href="#" aria-label="Facebook" className="rounded-full bg-white/10 p-2.5 hover:bg-[var(--accent-yellow)] hover:text-primary"><Facebook className="h-5 w-5" /></a>
             <a href={WHATSAPP} target="_blank" rel="noreferrer" aria-label="WhatsApp" className="rounded-full bg-white/10 p-2.5 hover:bg-[var(--accent-yellow)] hover:text-primary"><MessageCircle className="h-5 w-5" /></a>
           </div>
+          <a href="#" className="mt-4 inline-block text-xs text-white/60 hover:text-[var(--accent-yellow)]">Política de privacidade</a>
         </div>
       </div>
       <div className="border-t border-white/10 py-5 text-center text-xs text-white/60">
-        © {new Date().getFullYear()} PneuZ Araucária — Todos os direitos reservados.
+        © {new Date().getFullYear()} PneuZ Araucária — Todos os direitos reservados. · Desenvolvido por <a href="#" className="font-semibold text-[var(--accent-yellow)]">Conceito Prime Marketing Digital</a>
       </div>
     </footer>
   );
