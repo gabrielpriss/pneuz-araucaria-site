@@ -25,7 +25,6 @@ import logoAsset from "@/assets/pneuz-logo.asset.json";
 import iconAsset from "@/assets/pneuz-icon.asset.json";
 import heroImg from "@/assets/hero-tires.jpg";
 import oficinaAsset from "@/assets/oficina-pneuz.asset.json";
-import reviewsScreenshot from "@/assets/google-reviews.asset.json";
 import { Star } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -33,7 +32,7 @@ export const Route = createFileRoute("/")({
 });
 
 const PHONE_DISPLAY = "(99) 99999-9999";
-const ADDRESS = "Av. Dr. Vítor do Amaral, 1380 — Centro, Araucária — PR, 83702-040";
+const ADDRESS = "Av. Dr. Vítor do Amaral, 1380, Centro, Araucária, PR, 83702-040";
 const MAPS_URL =
   "https://www.google.com/maps?daddr=Av.+Dr.+V%C3%ADtor+do+Amaral,+1380+-+Centro,+Arauc%C3%A1ria+-+PR,+83702-040";
 
@@ -278,25 +277,27 @@ function Hero() {
 
 function Brands() {
   return (
-    <section className="border-y border-border bg-muted/50 py-10">
+    <section className="relative overflow-hidden border-y border-border bg-radial-brand py-12">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-6 text-center">
           <h3 className="text-sm font-black uppercase tracking-widest text-primary">
             Trabalhamos com as melhores marcas
           </h3>
           <p className="mt-2 text-sm text-muted-foreground">
-            Pneus de qualidade para cada tipo de veículo — escolhemos considerando modelo, uso, orçamento e segurança.
+            Pneus de qualidade para cada tipo de veículo, escolhemos considerando modelo, uso, orçamento e segurança.
           </p>
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
-          {brands.map((b) => (
-            <span
-              key={b}
-              className="rounded-full border border-border bg-card px-5 py-2 text-sm font-bold uppercase tracking-wider text-primary shadow-sm"
-            >
-              {b}
-            </span>
-          ))}
+        <div className="marquee-mask overflow-hidden">
+          <div className="flex w-max animate-marquee gap-4">
+            {[...brands, ...brands].map((b, i) => (
+              <span
+                key={`${b}-${i}`}
+                className="shrink-0 rounded-full border border-border bg-card px-7 py-3 text-sm font-bold uppercase tracking-wider text-primary shadow-sm"
+              >
+                {b}
+              </span>
+            ))}
+          </div>
         </div>
         <div className="mt-8 text-center">
           <a
@@ -315,14 +316,16 @@ function Brands() {
 
 function Services() {
   return (
-    <section id="servicos" className="relative py-20 sm:py-24">
+    <section id="servicos" className="relative overflow-hidden py-20 sm:py-24">
+      <div className="absolute inset-0 -z-10 bg-dots" />
+      <div className="absolute inset-0 -z-10" style={{ background: "linear-gradient(180deg, oklch(1 0 0) 0%, oklch(0.98 0.01 260) 100%)" }} />
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-14 text-center">
           <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
             Serviços
           </div>
           <h2 className="text-3xl font-black text-primary md:text-4xl">O que fazemos por você</h2>
-          <p className="mt-3 text-muted-foreground">Do pneu novo à revisão completa — cuidamos de cada detalhe.</p>
+          <p className="mt-3 text-muted-foreground">Do pneu novo à revisão completa, cuidamos de cada detalhe.</p>
         </div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s) => (
@@ -362,26 +365,29 @@ function WhyUs() {
     { icon: MessageCircle, title: "Atendimento transparente", desc: "Você entende o que seu carro precisa antes de aprovar qualquer serviço." },
   ];
   return (
-    <section className="bg-muted/40 py-20 sm:py-24">
+    <section className="relative overflow-hidden py-20 sm:py-24" style={{ background: "linear-gradient(160deg, oklch(0.32 0.16 267) 0%, oklch(0.22 0.14 267) 100%)" }}>
+      <div className="absolute inset-0 -z-0 opacity-30 bg-grid" />
+      <div className="relative">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-14 text-center">
-          <div className="mb-3 inline-block rounded-full bg-primary px-5 py-1.5 text-xs font-black uppercase tracking-widest text-[var(--accent-yellow)]">
+          <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
             Diferenciais
           </div>
-          <h2 className="text-2xl font-black text-primary sm:text-3xl md:text-4xl">Por que escolher a PneuZ Araucária?</h2>
-          <p className="mt-3 text-muted-foreground">Uma loja local com estrutura de grande rede — franquia reconhecida, atendimento próximo e personalizado.</p>
+          <h2 className="text-2xl font-black text-white sm:text-3xl md:text-4xl">Por que escolher a PneuZ Araucária?</h2>
+          <p className="mt-3 text-white/70">Uma loja local com estrutura de grande rede, franquia reconhecida, atendimento próximo e personalizado.</p>
         </div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((it) => (
-            <div key={it.title} className="rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)]">
+            <div key={it.title} className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-sm backdrop-blur transition-all hover:-translate-y-1 hover:bg-white/10">
               <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--accent-yellow)] text-primary">
                 <it.icon className="h-6 w-6" />
               </div>
-              <h3 className="text-lg font-bold text-primary">{it.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{it.desc}</p>
+              <h3 className="text-lg font-bold text-white">{it.title}</h3>
+              <p className="mt-2 text-sm text-white/70">{it.desc}</p>
             </div>
           ))}
         </div>
+      </div>
       </div>
     </section>
   );
@@ -395,7 +401,7 @@ function HowItWorks() {
     { icon: Wrench, title: "Faça o serviço com segurança", desc: "Seu carro recebe o cuidado necessário com transparência." },
   ];
   return (
-    <section className="py-20 sm:py-24">
+    <section className="relative overflow-hidden py-20 sm:py-24 bg-radial-brand">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-14 text-center">
           <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
@@ -469,7 +475,8 @@ function FinalCTA() {
 
 function About() {
   return (
-    <section id="sobre" className="relative overflow-hidden bg-muted/40 py-20 sm:py-24">
+    <section id="sobre" className="relative overflow-hidden py-20 sm:py-24" style={{ background: "linear-gradient(135deg, oklch(0.98 0.01 260) 0%, oklch(0.94 0.03 90 / 0.4) 100%)" }}>
+      <div className="absolute inset-0 -z-0 opacity-40 bg-dots" />
       <div className="mx-auto grid max-w-7xl gap-12 px-4 md:grid-cols-2 md:items-center">
         <div className="relative">
           <div className="absolute -left-6 -top-6 h-32 w-32 rounded-full bg-[var(--accent-yellow)] opacity-70 blur-2xl" />
@@ -526,7 +533,10 @@ function Contact() {
 
 function Reviews() {
   return (
-    <section id="depoimentos" className="relative py-20 sm:py-24">
+    <section id="depoimentos" className="relative overflow-hidden py-20 sm:py-24">
+      <div className="absolute inset-0 -z-10" style={{ background: "linear-gradient(180deg, oklch(0.98 0.01 260) 0%, oklch(1 0 0) 100%)" }} />
+      <div className="absolute -left-24 top-24 -z-10 h-72 w-72 rounded-full bg-[var(--accent-yellow)] opacity-20 blur-3xl" />
+      <div className="absolute -right-24 bottom-24 -z-10 h-72 w-72 rounded-full bg-primary opacity-10 blur-3xl" />
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-12 text-center">
           <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
@@ -550,26 +560,11 @@ function Reviews() {
           </div>
           <p className="mt-2 text-sm text-muted-foreground">Mais de 1.000 clientes já avaliaram nossa loja no Google.</p>
         </div>
-        <div className="mb-10 flex justify-center">
-          <a
-            href="https://www.google.com/search?q=PneuZ+Arauc%C3%A1ria"
-            target="_blank"
-            rel="noreferrer"
-            className="block overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-brand)] transition-transform hover:-translate-y-1"
-          >
-            <img
-              src={reviewsScreenshot.url}
-              alt="Avaliações reais dos clientes no Google"
-              loading="lazy"
-              className="max-h-[520px] w-auto"
-            />
-          </a>
-        </div>
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {reviews.map((r) => (
             <article
               key={r.name}
-              className="flex flex-col rounded-3xl border border-border bg-gradient-to-br from-card to-primary/5 p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)] sm:p-6"
+              className="flex h-full flex-col rounded-3xl border border-border bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)]"
             >
               <div className="flex items-start justify-between gap-3">
                 <header className="flex items-start gap-3">
@@ -614,7 +609,7 @@ function Reviews() {
 
 function ContactSection() {
   return (
-    <section id="contato" className="py-20 sm:py-24">
+    <section id="contato" className="relative overflow-hidden py-20 sm:py-24 bg-radial-brand">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-14 text-center">
           <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
@@ -627,7 +622,7 @@ function ContactSection() {
           <ContactCard
             icon={MapPin}
             title="Endereço"
-            lines={["Av. Dr. Vítor do Amaral, 1380", "Centro, Araucária — PR", "CEP 83702-040"]}
+            lines={["Av. Dr. Vítor do Amaral, 1380", "Centro, Araucária, PR", "CEP 83702-040"]}
           />
           <ContactCard
             icon={Phone}
@@ -637,7 +632,7 @@ function ContactSection() {
           <ContactCard
             icon={Clock}
             title="Horário"
-            lines={["Seg a Sex: 08h — 18h", "Sábado: 08h — 12h"]}
+            lines={["Seg a Sex: 08h às 18h", "Sábado: 08h às 12h"]}
           />
         </div>
         <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
@@ -680,7 +675,7 @@ function ContactCard({ icon: Icon, title, lines }: { icon: typeof MapPin; title:
 function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="bg-muted/40 py-20 sm:py-24">
+    <section className="relative overflow-hidden py-20 sm:py-24" style={{ background: "linear-gradient(180deg, oklch(1 0 0) 0%, oklch(0.96 0.02 267) 100%)" }}>
       <div className="mx-auto max-w-3xl px-4">
         <div className="mb-10 text-center">
           <div className="mb-3 inline-block rounded-full bg-primary px-5 py-1.5 text-xs font-black uppercase tracking-widest text-[var(--accent-yellow)]">
@@ -719,7 +714,7 @@ function Footer() {
         <div>
           <img src={logoAsset.url} alt="PneuZ Araucária" className="h-14 w-auto rounded-lg bg-white p-2" />
           <p className="mt-4 text-sm text-white/70">
-            Centro automotivo em Araucária — pneus, alinhamento, balanceamento e serviços para o seu carro.
+            Centro automotivo em Araucária, pneus, alinhamento, balanceamento e serviços para o seu carro.
           </p>
         </div>
         <div>
@@ -734,9 +729,9 @@ function Footer() {
         <div>
           <h4 className="mb-3 text-sm font-bold uppercase tracking-widest text-[var(--accent-yellow)]">Contato</h4>
           <ul className="space-y-2 text-sm text-white/80">
-            <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0" /> Av. Dr. Vítor do Amaral, 1380 — Centro, Araucária/PR</li>
+            <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0" /> Av. Dr. Vítor do Amaral, 1380, Centro, Araucária/PR</li>
             <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> {PHONE_DISPLAY}</li>
-            <li className="flex items-center gap-2"><Clock className="h-4 w-4" /> Seg–Sex 08–18h · Sáb 08–12h</li>
+            <li className="flex items-center gap-2"><Clock className="h-4 w-4" /> Seg a Sex 08 às 18h · Sáb 08 às 12h</li>
           </ul>
         </div>
         <div>
@@ -750,7 +745,7 @@ function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10 py-5 text-center text-xs text-white/60">
-        © {new Date().getFullYear()} PneuZ Araucária — Todos os direitos reservados. · Desenvolvido por <a href="#" className="font-semibold text-[var(--accent-yellow)]">Conceito Prime Marketing Digital</a>
+        © {new Date().getFullYear()} PneuZ Araucária, Todos os direitos reservados. · Desenvolvido por <a href="#" className="font-semibold text-[var(--accent-yellow)]">Conceito Prime Marketing Digital</a>
       </div>
     </footer>
   );
