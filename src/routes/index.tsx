@@ -15,43 +15,89 @@ import {
   Mail,
   Phone,
   ChevronDown,
+  Snowflake,
+  Zap,
+  Search,
+  Settings,
+  ShieldCheck,
 } from "lucide-react";
 import logoAsset from "@/assets/pneuz-logo.asset.json";
 import iconAsset from "@/assets/pneuz-icon.asset.json";
 import heroImg from "@/assets/hero-tires.jpg";
+import oficinaImg from "@/assets/oficina-facade.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const WHATSAPP =
-  "https://api.whatsapp.com/send/?phone=5541999999999&text=Ol%C3%A1%2C+vim+pelo+site+da+PneuZ+e+gostaria+de+mais+informa%C3%A7%C3%B5es";
+const PHONE_DISPLAY = "(41) 3795-0480";
+const ADDRESS = "Av. Dr. Vítor do Amaral, 1380 — Centro, Araucária — PR, 83702-040";
+const MAPS_URL =
+  "https://www.google.com/maps?daddr=Av.+Dr.+V%C3%ADtor+do+Amaral,+1380+-+Centro,+Arauc%C3%A1ria+-+PR,+83702-040";
+
+const waLink = (msg: string) =>
+  `https://api.whatsapp.com/send?phone=554137950480&text=${encodeURIComponent(
+    `Cupom da PROMO: ARAU1446 - ${msg}`,
+  )}`;
+
+const WHATSAPP = waLink(
+  "Olá, vim pelo site e gostaria de mais informações. Envie este cupom para ter descontos.",
+);
+
+const promos = [
+  { aro: "Aro 14", price: "209", msg: "Aro 14 - R$209,00 - Envie o cupom para adquirir neste preço." },
+  { aro: "Aro 15", price: "209", msg: "Aro 15 - R$209,00 - Envie o cupom para adquirir neste preço." },
+  { aro: "Aro 16", price: "279", msg: "Aro 16 - R$279,00 - Envie o cupom para adquirir neste preço." },
+  { aro: "Aro 17", price: "349", msg: "Aro 17 a partir de R$349,00 - Envie o cupom para adquirir neste preço." },
+];
+
+const brands = [
+  "Bridgestone",
+  "Continental",
+  "Dunlop",
+  "Firestone",
+  "Goodyear",
+  "Pirelli",
+  "Linglong",
+  "XBRI",
+  "Importados",
+];
 
 const services = [
-  { icon: CircleDot, title: "Pneus Novos", desc: "Venda de pneus das melhores marcas para todos os modelos." },
-  { icon: Gauge, title: "Alinhamento", desc: "Alinhamento computadorizado com precisão milimétrica." },
-  { icon: Disc, title: "Balanceamento", desc: "Balanceamento eletrônico para uma direção suave." },
-  { icon: Wrench, title: "Suspensão", desc: "Diagnóstico e reparo completo do sistema de suspensão." },
-  { icon: Cog, title: "Freios", desc: "Troca de pastilhas, discos e revisão do sistema de freios." },
-  { icon: Droplet, title: "Troca de Óleo", desc: "Óleo e filtros com produtos de alta qualidade." },
+  { icon: CircleDot, title: "Pneus Novos", desc: "Pneus com 5 anos de garantia das melhores marcas do mercado." },
+  { icon: Gauge, title: "Alinhamento 3D", desc: "Alinhamento computadorizado 3D de alta precisão." },
+  { icon: Disc, title: "Balanceamento", desc: "Balanceamento eletrônico para direção suave e segura." },
+  { icon: Wrench, title: "Suspensão", desc: "Revisão completa do sistema de suspensão." },
+  { icon: ShieldCheck, title: "Freios", desc: "Revisão do sistema de freios, discos e pastilhas." },
+  { icon: Droplet, title: "Troca de Óleo", desc: "Troca de óleo e filtros com produtos de qualidade." },
+  { icon: Zap, title: "Injeção Eletrônica", desc: "Diagnóstico e reparo do sistema de injeção." },
+  { icon: Cog, title: "Troca de Embreagem", desc: "Substituição completa do kit de embreagem." },
+  { icon: Settings, title: "Correia Dentada", desc: "Troca de correia dentada e tensores." },
+  { icon: Snowflake, title: "Ar-Condicionado", desc: "Higienização e recarga do ar-condicionado automotivo." },
+  { icon: Search, title: "Diagnóstico Completo", desc: "Scanner automotivo e diagnóstico eletrônico." },
+  { icon: Droplet, title: "Limpeza de Bicos", desc: "Limpeza e teste de bicos injetores." },
 ];
 
 const faqs = [
   {
-    q: "Quais serviços a PneuZ Araucária oferece?",
-    a: "Trabalhamos com venda de pneus novos, alinhamento, balanceamento, suspensão, freios, troca de óleo e serviços gerais de mecânica leve.",
+    q: "Os pneus têm garantia?",
+    a: "Sim. Trabalhamos com pneus novos com 5 anos de garantia, montados na loja em base de troca.",
   },
   {
-    q: "Qual é o horário de funcionamento?",
-    a: "Atendemos de segunda a sexta das 08h às 18h, e aos sábados das 08h às 12h.",
+    q: "Quais marcas de pneus vocês vendem?",
+    a: "Bridgestone, Continental, Dunlop, Firestone, Goodyear, Pirelli, Linglong, XBRI e linha importada.",
   },
   {
-    q: "Como agendar um atendimento?",
-    a: "Fale conosco pelo WhatsApp diretamente pelo botão no site, ou visite nossa loja em Araucária.",
+    q: "Além de pneus, quais serviços são oferecidos?",
+    a: "Alinhamento 3D, balanceamento, suspensão, freios, injeção eletrônica, troca de óleo, embreagem, correia dentada, ar-condicionado e diagnóstico completo.",
   },
   {
-    q: "Onde a PneuZ está localizada?",
-    a: "Estamos em Araucária, região metropolitana de Curitiba/PR.",
+    q: "Como faço um orçamento?",
+    a: `Fale com um especialista pelo WhatsApp ou ligue para ${PHONE_DISPLAY}. O orçamento é gratuito e sem compromisso.`,
+  },
+  {
+    q: "Onde a PneuZ Araucária está localizada?",
+    a: `${ADDRESS}. Estamos em ótima localização para atender clientes de Araucária e região metropolitana de Curitiba.`,
   },
 ];
 
@@ -61,6 +107,8 @@ function Index() {
       <TopBar />
       <Header />
       <Hero />
+      <Promos />
+      <Brands />
       <Services />
       <About />
       <Contact />
@@ -74,11 +122,19 @@ function Index() {
 function TopBar() {
   return (
     <div className="w-full bg-[var(--accent-yellow)] text-[color:var(--primary)]">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 text-sm font-medium">
-        <a href={WHATSAPP} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:opacity-80">
-          <MessageCircle className="h-4 w-4" /> Fale conosco
-        </a>
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-4 py-2 text-xs font-semibold sm:text-sm">
+        <div className="flex flex-wrap items-center gap-4">
+          <a href={`tel:+554137950480`} className="flex items-center gap-2 hover:opacity-80">
+            <Phone className="h-4 w-4" /> {PHONE_DISPLAY}
+          </a>
+          <span className="hidden items-center gap-2 sm:flex">
+            <MapPin className="h-4 w-4" /> Av. Dr. Vítor do Amaral, 1380 — Centro, Araucária/PR
+          </span>
+        </div>
         <div className="flex items-center gap-3">
+          <a href={WHATSAPP} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 hover:opacity-80">
+            <MessageCircle className="h-4 w-4" /> Cupom ARAU1446
+          </a>
           <a href="#" aria-label="Instagram" className="hover:opacity-80"><Instagram className="h-4 w-4" /></a>
           <a href="#" aria-label="Facebook" className="hover:opacity-80"><Facebook className="h-4 w-4" /></a>
         </div>
@@ -91,6 +147,7 @@ function Header() {
   const [open, setOpen] = useState(false);
   const links = [
     { href: "#inicio", label: "Início" },
+    { href: "#promocoes", label: "Promoções" },
     { href: "#servicos", label: "Serviços" },
     { href: "#sobre", label: "Sobre" },
     { href: "#contato", label: "Contato" },
@@ -162,10 +219,10 @@ function Hero() {
           <CircleDot className="h-3.5 w-3.5" /> Centro Automotivo
         </span>
         <h1 className="max-w-3xl text-4xl font-black leading-[1.05] tracking-tight text-white md:text-6xl">
-          Seu carro em boas mãos em <span className="text-[var(--accent-yellow)]">Araucária</span>.
+          Pneus novos com <span className="text-[var(--accent-yellow)]">5 anos de garantia</span> em Araucária.
         </h1>
         <p className="mt-6 max-w-xl text-lg text-white/85">
-          Pneus novos, alinhamento, balanceamento e serviços automotivos com atendimento rápido, transparente e preço justo.
+          Mais de 20 anos de mercado. Pneus, alinhamento 3D, balanceamento e mecânica automotiva com equipamentos de primeira linha e preço justo.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <a
@@ -174,14 +231,85 @@ function Hero() {
             rel="noreferrer"
             className="rounded-full bg-[var(--accent-yellow)] px-7 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
           >
-            Fale no WhatsApp
+            Fale com um especialista
           </a>
           <a
-            href="#servicos"
+            href="#promocoes"
             className="rounded-full border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
           >
-            Nossos serviços
+            Ver promoções
           </a>
+        </div>
+        <div className="mt-10 flex flex-wrap items-center gap-6 text-xs font-semibold uppercase tracking-widest text-white/70">
+          <span className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[var(--accent-yellow)]" /> 5 anos de garantia</span>
+          <span className="flex items-center gap-2"><Gauge className="h-4 w-4 text-[var(--accent-yellow)]" /> Alinhamento 3D</span>
+          <span className="flex items-center gap-2"><CircleDot className="h-4 w-4 text-[var(--accent-yellow)]" /> +20 anos de mercado</span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Promos() {
+  return (
+    <section id="promocoes" className="relative -mt-12 pb-4">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="rounded-3xl bg-primary p-6 shadow-[var(--shadow-brand)] md:p-10" style={{ background: "var(--gradient-hero)" }}>
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <div className="mb-2 inline-block rounded-full bg-[var(--accent-yellow)] px-4 py-1 text-[10px] font-black uppercase tracking-widest text-primary">
+                Copa das Ofertas
+              </div>
+              <h2 className="text-2xl font-black text-white md:text-3xl">Pneus em promoção</h2>
+              <p className="mt-1 text-sm text-white/70">*Promoção válida para pneus montados na loja em base de troca.</p>
+            </div>
+            <span className="rounded-full border border-[var(--accent-yellow)]/40 px-4 py-1.5 text-xs font-bold text-[var(--accent-yellow)]">
+              Cupom ARAU1446
+            </span>
+          </div>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {promos.map((p) => (
+              <div key={p.aro} className="rounded-2xl bg-white p-5 text-center shadow-lg transition-transform hover:-translate-y-1">
+                <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{p.aro}</div>
+                <div className="mt-2 flex items-baseline justify-center gap-1 text-primary">
+                  <span className="text-xs font-bold">A partir de R$</span>
+                </div>
+                <div className="text-4xl font-black text-primary">{p.price}</div>
+                <a
+                  href={waLink(p.msg)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-block rounded-full bg-[var(--accent-yellow)] px-4 py-2 text-xs font-bold text-primary transition-transform hover:-translate-y-0.5"
+                >
+                  Cotação WhatsApp
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Brands() {
+  return (
+    <section className="border-y border-border bg-muted/50 py-10">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="mb-6 text-center">
+          <h3 className="text-sm font-black uppercase tracking-widest text-primary">
+            Trabalhamos com as melhores marcas
+          </h3>
+        </div>
+        <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
+          {brands.map((b) => (
+            <span
+              key={b}
+              className="rounded-full border border-border bg-card px-5 py-2 text-sm font-bold uppercase tracking-wider text-primary shadow-sm"
+            >
+              {b}
+            </span>
+          ))}
         </div>
       </div>
     </section>
@@ -234,10 +362,15 @@ function About() {
       <div className="mx-auto grid max-w-7xl gap-12 px-4 md:grid-cols-2 md:items-center">
         <div className="relative">
           <div className="absolute -left-6 -top-6 h-32 w-32 rounded-full bg-[var(--accent-yellow)] opacity-70 blur-2xl" />
-          <div className="relative overflow-hidden rounded-3xl shadow-[var(--shadow-brand)]" style={{ background: "var(--gradient-brand)" }}>
-            <div className="flex aspect-[4/3] items-center justify-center p-10">
-              <img src={iconAsset.url} alt="PneuZ" className="h-60 w-60 drop-shadow-2xl" />
-            </div>
+          <div className="relative overflow-hidden rounded-3xl shadow-[var(--shadow-brand)]">
+            <img
+              src={oficinaImg}
+              alt="Fachada da oficina PneuZ Araucária"
+              width={1600}
+              height={1200}
+              loading="lazy"
+              className="aspect-[4/3] w-full object-cover"
+            />
           </div>
         </div>
         <div>
@@ -245,22 +378,23 @@ function About() {
             Sobre nós
           </div>
           <h2 className="text-3xl font-black leading-tight text-primary md:text-4xl">
-            PneuZ Araucária — tradição em pneus e serviços automotivos
+            +20 anos de mercado em pneus e reparação automotiva
           </h2>
           <p className="mt-5 text-base leading-relaxed text-foreground/80">
-            Somos um centro automotivo completo em Araucária. Nosso compromisso é entregar
-            um atendimento humano, transparente e resolutivo — porque sabemos que seu carro
-            faz parte da sua rotina, do seu trabalho e da sua liberdade.
+            A PneuZ é referência na venda de pneus e reparação automotiva, sendo uma das maiores
+            redes de centro automotivo do país. Trabalhamos apenas com produtos e tecnologias mais
+            avançadas do mercado, buscando sempre a segurança dos nossos clientes.
           </p>
           <p className="mt-4 text-base leading-relaxed text-foreground/80">
-            Trabalhamos com pneus das melhores marcas, alinhamento computadorizado,
-            balanceamento eletrônico e uma equipe técnica preparada para cuidar do seu
-            veículo com agilidade e preço justo.
+            Nossa unidade de Araucária conta com equipe qualificada e equipamentos de primeira
+            linha para oferecer atendimento impecável e o mais alto padrão em serviços de
+            mecânica automotiva. Avaliações sem compromisso e um especialista para acompanhar
+            cada atendimento.
           </p>
           <div className="mt-8 grid grid-cols-3 gap-4">
-            <Stat n="+10" label="Anos de experiência" />
-            <Stat n="+5k" label="Clientes atendidos" />
-            <Stat n="100%" label="Compromisso" />
+            <Stat n="+20" label="Anos de mercado" />
+            <Stat n="5 anos" label="Garantia dos pneus" />
+            <Stat n="3D" label="Alinhamento" />
           </div>
         </div>
       </div>
@@ -289,11 +423,23 @@ function Contact() {
           <p className="mt-3 text-muted-foreground">Estamos prontos para atender você em Araucária.</p>
         </div>
         <div className="grid gap-5 md:grid-cols-3">
-          <ContactCard icon={MapPin} title="Endereço" lines={["Araucária — PR", "Região Metropolitana de Curitiba"]} />
-          <ContactCard icon={Clock} title="Horário" lines={["Seg a Sex: 08h — 18h", "Sábado: 08h — 12h"]} />
-          <ContactCard icon={Mail} title="Fale conosco" lines={["contato@pneuzaraucaria.com.br", "WhatsApp disponível"]} />
+          <ContactCard
+            icon={MapPin}
+            title="Endereço"
+            lines={["Av. Dr. Vítor do Amaral, 1380", "Centro, Araucária — PR", "CEP 83702-040"]}
+          />
+          <ContactCard
+            icon={Phone}
+            title="Telefone / WhatsApp"
+            lines={[PHONE_DISPLAY, "Atendimento com especialista"]}
+          />
+          <ContactCard
+            icon={Clock}
+            title="Horário"
+            lines={["Seg a Sex: 08h — 18h", "Sábado: 08h — 12h"]}
+          />
         </div>
-        <div className="mt-10 flex justify-center">
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
           <a
             href={WHATSAPP}
             target="_blank"
@@ -301,6 +447,14 @@ function Contact() {
             className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-8 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
           >
             <MessageCircle className="h-4 w-4" /> Falar no WhatsApp
+          </a>
+          <a
+            href={MAPS_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border-2 border-primary px-8 py-3.5 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+          >
+            <MapPin className="h-4 w-4" /> Como chegar
           </a>
         </div>
       </div>
@@ -370,8 +524,8 @@ function Footer() {
         <div>
           <h4 className="mb-3 text-sm font-bold uppercase tracking-widest text-[var(--accent-yellow)]">Contato</h4>
           <ul className="space-y-2 text-sm text-white/80">
-            <li className="flex items-center gap-2"><MapPin className="h-4 w-4" /> Araucária — PR</li>
-            <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> WhatsApp disponível</li>
+            <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0" /> Av. Dr. Vítor do Amaral, 1380 — Centro, Araucária/PR</li>
+            <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> {PHONE_DISPLAY}</li>
             <li className="flex items-center gap-2"><Clock className="h-4 w-4" /> Seg–Sex 08–18h · Sáb 08–12h</li>
           </ul>
         </div>
