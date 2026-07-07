@@ -637,7 +637,7 @@ function ContactSection() {
           <ContactCard
             icon={Clock}
             title="Horário"
-            lines={["Seg a Sex: 08h , 18h", "Sábado: 08h , 12h"]}
+            lines={["Seg a Sex: 08h às 18h", "Sábado: 08h às 12h"]}
           />
         </div>
         <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
@@ -736,7 +736,7 @@ function Footer() {
           <ul className="space-y-2 text-sm text-white/80">
             <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0" /> Av. Dr. Vítor do Amaral, 1380 , Centro, Araucária/PR</li>
             <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> {PHONE_DISPLAY}</li>
-            <li className="flex items-center gap-2"><Clock className="h-4 w-4" /> Seg,Sex 08,18h · Sáb 08,12h</li>
+            <li className="flex items-center gap-2"><Clock className="h-4 w-4" /> Seg a Sex 08 às 18h · Sáb 08 às 12h</li>
           </ul>
         </div>
         <div>
