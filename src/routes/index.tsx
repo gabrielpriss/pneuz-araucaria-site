@@ -15,43 +15,89 @@ import {
   Mail,
   Phone,
   ChevronDown,
+  Snowflake,
+  Zap,
+  Search,
+  Settings,
+  ShieldCheck,
 } from "lucide-react";
 import logoAsset from "@/assets/pneuz-logo.asset.json";
 import iconAsset from "@/assets/pneuz-icon.asset.json";
 import heroImg from "@/assets/hero-tires.jpg";
+import oficinaImg from "@/assets/oficina-facade.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const WHATSAPP =
-  "https://api.whatsapp.com/send/?phone=5541999999999&text=Ol%C3%A1%2C+vim+pelo+site+da+PneuZ+e+gostaria+de+mais+informa%C3%A7%C3%B5es";
+const PHONE_DISPLAY = "(41) 3795-0480";
+const ADDRESS = "Av. Dr. Vítor do Amaral, 1380 — Centro, Araucária — PR, 83702-040";
+const MAPS_URL =
+  "https://www.google.com/maps?daddr=Av.+Dr.+V%C3%ADtor+do+Amaral,+1380+-+Centro,+Arauc%C3%A1ria+-+PR,+83702-040";
+
+const waLink = (msg: string) =>
+  `https://api.whatsapp.com/send?phone=554137950480&text=${encodeURIComponent(
+    `Cupom da PROMO: ARAU1446 - ${msg}`,
+  )}`;
+
+const WHATSAPP = waLink(
+  "Olá, vim pelo site e gostaria de mais informações. Envie este cupom para ter descontos.",
+);
+
+const promos = [
+  { aro: "Aro 14", price: "209", msg: "Aro 14 - R$209,00 - Envie o cupom para adquirir neste preço." },
+  { aro: "Aro 15", price: "209", msg: "Aro 15 - R$209,00 - Envie o cupom para adquirir neste preço." },
+  { aro: "Aro 16", price: "279", msg: "Aro 16 - R$279,00 - Envie o cupom para adquirir neste preço." },
+  { aro: "Aro 17", price: "349", msg: "Aro 17 a partir de R$349,00 - Envie o cupom para adquirir neste preço." },
+];
+
+const brands = [
+  "Bridgestone",
+  "Continental",
+  "Dunlop",
+  "Firestone",
+  "Goodyear",
+  "Pirelli",
+  "Linglong",
+  "XBRI",
+  "Importados",
+];
 
 const services = [
-  { icon: CircleDot, title: "Pneus Novos", desc: "Venda de pneus das melhores marcas para todos os modelos." },
-  { icon: Gauge, title: "Alinhamento", desc: "Alinhamento computadorizado com precisão milimétrica." },
-  { icon: Disc, title: "Balanceamento", desc: "Balanceamento eletrônico para uma direção suave." },
-  { icon: Wrench, title: "Suspensão", desc: "Diagnóstico e reparo completo do sistema de suspensão." },
-  { icon: Cog, title: "Freios", desc: "Troca de pastilhas, discos e revisão do sistema de freios." },
-  { icon: Droplet, title: "Troca de Óleo", desc: "Óleo e filtros com produtos de alta qualidade." },
+  { icon: CircleDot, title: "Pneus Novos", desc: "Pneus com 5 anos de garantia das melhores marcas do mercado." },
+  { icon: Gauge, title: "Alinhamento 3D", desc: "Alinhamento computadorizado 3D de alta precisão." },
+  { icon: Disc, title: "Balanceamento", desc: "Balanceamento eletrônico para direção suave e segura." },
+  { icon: Wrench, title: "Suspensão", desc: "Revisão completa do sistema de suspensão." },
+  { icon: ShieldCheck, title: "Freios", desc: "Revisão do sistema de freios, discos e pastilhas." },
+  { icon: Droplet, title: "Troca de Óleo", desc: "Troca de óleo e filtros com produtos de qualidade." },
+  { icon: Zap, title: "Injeção Eletrônica", desc: "Diagnóstico e reparo do sistema de injeção." },
+  { icon: Cog, title: "Troca de Embreagem", desc: "Substituição completa do kit de embreagem." },
+  { icon: Settings, title: "Correia Dentada", desc: "Troca de correia dentada e tensores." },
+  { icon: Snowflake, title: "Ar-Condicionado", desc: "Higienização e recarga do ar-condicionado automotivo." },
+  { icon: Search, title: "Diagnóstico Completo", desc: "Scanner automotivo e diagnóstico eletrônico." },
+  { icon: Droplet, title: "Limpeza de Bicos", desc: "Limpeza e teste de bicos injetores." },
 ];
 
 const faqs = [
   {
-    q: "Quais serviços a PneuZ Araucária oferece?",
-    a: "Trabalhamos com venda de pneus novos, alinhamento, balanceamento, suspensão, freios, troca de óleo e serviços gerais de mecânica leve.",
+    q: "Os pneus têm garantia?",
+    a: "Sim. Trabalhamos com pneus novos com 5 anos de garantia, montados na loja em base de troca.",
   },
   {
-    q: "Qual é o horário de funcionamento?",
-    a: "Atendemos de segunda a sexta das 08h às 18h, e aos sábados das 08h às 12h.",
+    q: "Quais marcas de pneus vocês vendem?",
+    a: "Bridgestone, Continental, Dunlop, Firestone, Goodyear, Pirelli, Linglong, XBRI e linha importada.",
   },
   {
-    q: "Como agendar um atendimento?",
-    a: "Fale conosco pelo WhatsApp diretamente pelo botão no site, ou visite nossa loja em Araucária.",
+    q: "Além de pneus, quais serviços são oferecidos?",
+    a: "Alinhamento 3D, balanceamento, suspensão, freios, injeção eletrônica, troca de óleo, embreagem, correia dentada, ar-condicionado e diagnóstico completo.",
   },
   {
-    q: "Onde a PneuZ está localizada?",
-    a: "Estamos em Araucária, região metropolitana de Curitiba/PR.",
+    q: "Como faço um orçamento?",
+    a: `Fale com um especialista pelo WhatsApp ou ligue para ${PHONE_DISPLAY}. O orçamento é gratuito e sem compromisso.`,
+  },
+  {
+    q: "Onde a PneuZ Araucária está localizada?",
+    a: `${ADDRESS}. Estamos em ótima localização para atender clientes de Araucária e região metropolitana de Curitiba.`,
   },
 ];
 
