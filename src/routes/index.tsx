@@ -548,6 +548,22 @@ function Reviews() {
             <span className="text-sm font-bold text-primary">5,0</span>
             <span className="text-sm text-muted-foreground">· Avaliações verificadas</span>
           </div>
+          <p className="mt-2 text-sm text-muted-foreground">Mais de 1.000 clientes já avaliaram nossa loja no Google.</p>
+        </div>
+        <div className="mb-10 flex justify-center">
+          <a
+            href="https://www.google.com/search?q=PneuZ+Arauc%C3%A1ria"
+            target="_blank"
+            rel="noreferrer"
+            className="block overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-brand)] transition-transform hover:-translate-y-1"
+          >
+            <img
+              src={reviewsScreenshot.url}
+              alt="Avaliações reais dos clientes no Google"
+              loading="lazy"
+              className="max-h-[520px] w-auto"
+            />
+          </a>
         </div>
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {reviews.map((r) => (
