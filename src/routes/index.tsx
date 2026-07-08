@@ -576,7 +576,7 @@ function Reviews() {
                 <Star key={i} className="h-5 w-5 fill-[#FBBC05] text-[#FBBC05]" />
               ))}
             </div>
-            <span className="text-sm font-bold text-primary">5,0</span>
+            <span className="text-sm font-bold text-primary">4,8</span>
             <span className="text-sm text-muted-foreground">· Avaliações verificadas</span>
           </div>
           <p className="mt-2 text-sm text-muted-foreground">Mais de 1.000 clientes já avaliaram nossa loja no Google.</p>
