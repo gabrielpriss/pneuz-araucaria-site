@@ -604,6 +604,7 @@ function Contact() {
 }
 
 function Reviews() {
+  const openWhats = useOpenWhats();
   return (
     <section id="depoimentos" className="relative overflow-hidden py-20 sm:py-24">
       <div className="absolute inset-0 -z-10" style={{ background: "linear-gradient(180deg, oklch(0.98 0.01 260) 0%, oklch(1 0 0) 100%)" }} />
@@ -665,14 +666,13 @@ function Reviews() {
           ))}
         </div>
         <div className="mt-10 text-center">
-          <a
-            href="https://www.google.com/search?q=PneuZ+Arauc%C3%A1ria"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border-2 border-primary px-6 py-3 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+          <button
+            type="button"
+            onClick={() => openWhats({ subject: "Informações comerciais", message: "vi as avaliações no site e quero ser o próximo cliente satisfeito da PneuZ." })}
+            className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-8 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
           >
-            Ver todas as avaliações no Google
-          </a>
+            <MessageCircle className="h-4 w-4" /> Quero um atendimento assim, falar no WhatsApp
+          </button>
         </div>
       </div>
     </section>
@@ -680,6 +680,7 @@ function Reviews() {
 }
 
 function ContactSection() {
+  const openWhats = useOpenWhats();
   return (
     <section id="contato" className="relative overflow-hidden py-20 sm:py-24 bg-radial-brand">
       <div className="mx-auto max-w-7xl px-4">
@@ -708,22 +709,20 @@ function ContactSection() {
           />
         </div>
         <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
-          <a
-            href={WHATSAPP}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            type="button"
+            onClick={() => openWhats({ subject: "Informações comerciais", message: "gostaria de falar com a PneuZ Araucária pelo WhatsApp." })}
             className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent-yellow)] px-7 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5 sm:px-8"
           >
             <MessageCircle className="h-4 w-4" /> Falar no WhatsApp
-          </a>
-          <a
-            href={MAPS_URL}
-            target="_blank"
-            rel="noreferrer"
+          </button>
+          <button
+            type="button"
+            onClick={() => openWhats({ subject: "Informações comerciais", message: "gostaria de saber como chegar até a loja e confirmar o endereço." })}
             className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary px-7 py-3.5 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground sm:px-8"
           >
             <MapPin className="h-4 w-4" /> Como chegar
-          </a>
+          </button>
         </div>
         <div className="mt-10 overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-brand)]">
           <iframe
@@ -792,6 +791,7 @@ function FAQ() {
 }
 
 function Footer() {
+  const openWhats = useOpenWhats();
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-4">
@@ -823,7 +823,7 @@ function Footer() {
           <div className="flex gap-3">
             <a href="#" aria-label="Instagram" className="rounded-full bg-white/10 p-2.5 hover:bg-[var(--accent-yellow)] hover:text-primary"><Instagram className="h-5 w-5" /></a>
             <a href="#" aria-label="Facebook" className="rounded-full bg-white/10 p-2.5 hover:bg-[var(--accent-yellow)] hover:text-primary"><Facebook className="h-5 w-5" /></a>
-            <a href={WHATSAPP} target="_blank" rel="noreferrer" aria-label="WhatsApp" className="rounded-full bg-white/10 p-2.5 hover:bg-[var(--accent-yellow)] hover:text-primary"><MessageCircle className="h-5 w-5" /></a>
+            <button type="button" onClick={() => openWhats()} aria-label="WhatsApp" className="rounded-full bg-white/10 p-2.5 hover:bg-[var(--accent-yellow)] hover:text-primary"><MessageCircle className="h-5 w-5" /></button>
           </div>
           <a href="#" className="mt-4 inline-block text-xs text-white/60 hover:text-[var(--accent-yellow)]">Política de privacidade</a>
         </div>
