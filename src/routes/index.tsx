@@ -96,6 +96,12 @@ const reviews = [
     when: "4 meses atrás",
     text: "Atendimento nota 1000, os atendentes Heloisa e Thiago e o mecânico Marlon todos muito atenciosos e tiraram todas as minhas dúvidas! Recomendo.",
   },
+  {
+    name: "Rafael Souza",
+    meta: "5 avaliações",
+    when: "1 mês atrás",
+    text: "Comprei pneus novos e fiz alinhamento, serviço rápido e preço justo. Equipe atenciosa e loja bem organizada. Voltarei sempre.",
+  },
 ];
 
 const services = [
