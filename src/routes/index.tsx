@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Wrench,
   Disc,
@@ -20,6 +20,8 @@ import {
   Search,
   Settings,
   ShieldCheck,
+  X,
+  Send,
 } from "lucide-react";
 import logoAsset from "@/assets/pneuz-logo.asset.json";
 import iconAsset from "@/assets/pneuz-icon.asset.json";
@@ -36,8 +38,9 @@ const ADDRESS = "Av. Dr. Vítor do Amaral, 1380, Centro, Araucária, PR, 83702-0
 const MAPS_URL =
   "https://www.google.com/maps?daddr=Av.+Dr.+V%C3%ADtor+do+Amaral,+1380+-+Centro,+Arauc%C3%A1ria+-+PR,+83702-040";
 
+const WA_PHONE = "5599999999999";
 const waLink = (msg: string) =>
-  `https://api.whatsapp.com/send?phone=5599999999999&text=${encodeURIComponent(msg)}`;
+  `https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${encodeURIComponent(msg)}`;
 
 const WHATSAPP = waLink(
   "Olá, vim pelo site e gostaria de mais informações. Envie este cupom para ter descontos.",
@@ -255,36 +258,71 @@ function Hero() {
         <img src={heroImg} alt="" className="h-full w-full object-cover" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(120deg, oklch(0.22 0.14 267 / 0.92) 0%, oklch(0.32 0.16 267 / 0.75) 60%, oklch(0.22 0.14 267 / 0.6) 100%)" }} />
       </div>
-      <div className="relative mx-auto flex max-w-7xl flex-col items-start px-4 py-20 sm:py-28 md:py-40">
-        <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.25em] text-primary sm:text-xs">
-          <CircleDot className="h-3.5 w-3.5" /> Centro Automotivo
-        </span>
-        <h1 className="max-w-3xl text-3xl font-black leading-[1.05] tracking-tight text-white sm:text-4xl md:text-6xl">
-          Seu carro merece <span className="text-[var(--accent-yellow)]">cuidado de especialista</span>. Pneus e serviços automotivos completos em Araucária.
-        </h1>
-        <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 sm:mt-6 sm:text-lg">
-          Tenha acesso às melhores marcas de pneus, serviços de manutenção e uma equipe especializada perto de você. Faça seu orçamento e receba as melhores condições sem precisar sair de Araucária.
-        </p>
-        <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-          <a
-            href={WHATSAPP}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center rounded-full bg-[var(--accent-yellow)] px-7 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
-          >
-            Fale com um especialista
-          </a>
-          <a
-            href="#servicos"
-            className="inline-flex items-center justify-center rounded-full border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
-          >
-            Nossos serviços
-          </a>
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-16 sm:py-24 md:py-32 lg:grid-cols-[1.15fr_1fr] lg:items-center">
+        <div className="flex flex-col items-start">
+          <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.25em] text-primary sm:text-xs">
+            <CircleDot className="h-3.5 w-3.5" /> Centro Automotivo
+          </span>
+          <h1 className="max-w-3xl text-3xl font-black leading-[1.05] tracking-tight text-white sm:text-4xl md:text-6xl">
+            Seu carro merece <span className="text-[var(--accent-yellow)]">cuidado de especialista</span>. Pneus e serviços automotivos completos em Araucária.
+          </h1>
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 sm:mt-6 sm:text-lg">
+            Tenha acesso às melhores marcas de pneus, serviços de manutenção e uma equipe especializada perto de você. Faça seu orçamento e receba as melhores condições sem precisar sair de Araucária.
+          </p>
+          <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+            <a
+              href={WHATSAPP}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center rounded-full bg-[var(--accent-yellow)] px-7 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
+            >
+              Fale com um especialista
+            </a>
+            <a
+              href="#servicos"
+              className="inline-flex items-center justify-center rounded-full border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
+            >
+              Nossos serviços
+            </a>
+          </div>
+          <div className="mt-8 flex flex-wrap items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70 sm:mt-10 sm:gap-6 sm:text-xs">
+            <span className="flex items-center gap-2"><Star className="h-4 w-4 fill-[var(--accent-yellow)] text-[var(--accent-yellow)]" /> +1.000 avaliações no Google</span>
+            <span className="flex items-center gap-2"><CircleDot className="h-4 w-4 text-[var(--accent-yellow)]" /> Até 10x sem juros</span>
+            <span className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[var(--accent-yellow)]" /> Garantia em produtos e serviços</span>
+          </div>
         </div>
-        <div className="mt-8 flex flex-wrap items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70 sm:mt-10 sm:gap-6 sm:text-xs">
-          <span className="flex items-center gap-2"><Star className="h-4 w-4 fill-[var(--accent-yellow)] text-[var(--accent-yellow)]" /> +1.000 avaliações no Google</span>
-          <span className="flex items-center gap-2"><CircleDot className="h-4 w-4 text-[var(--accent-yellow)]" /> Até 10x sem juros</span>
-          <span className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[var(--accent-yellow)]" /> Garantia em produtos e serviços</span>
+        <div className="relative hidden lg:block">
+          <div className="absolute -left-6 -top-6 h-40 w-40 rounded-full bg-[var(--accent-yellow)] opacity-40 blur-3xl" />
+          <div className="absolute -bottom-6 -right-6 h-48 w-48 rounded-full bg-primary-glow opacity-40 blur-3xl" />
+          <div className="relative overflow-hidden rounded-3xl border border-white/20 shadow-[var(--shadow-brand)] ring-1 ring-white/10">
+            <img
+              src={oficinaAsset.url}
+              alt="Fachada da sede PneuZ em Araucária"
+              className="aspect-[4/5] w-full object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/95 via-primary/60 to-transparent p-5">
+              <div className="flex items-end justify-between gap-4">
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-[0.25em] text-[var(--accent-yellow)]">Nossa sede</div>
+                  <div className="mt-1 text-lg font-black leading-tight text-white">Av. Dr. Vítor do Amaral, 1380</div>
+                  <div className="text-xs text-white/80">Centro, Araucária/PR</div>
+                </div>
+                <div className="rounded-xl bg-[var(--accent-yellow)] px-3 py-2 text-center text-primary">
+                  <div className="text-lg font-black leading-none">+1k</div>
+                  <div className="text-[9px] font-bold uppercase tracking-widest">Clientes</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute -bottom-5 -left-5 flex items-center gap-2 rounded-2xl border border-border bg-card px-4 py-3 shadow-[var(--shadow-brand)]">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-[var(--accent-yellow)]">
+              <ShieldCheck className="h-5 w-5" />
+            </div>
+            <div>
+              <div className="text-xs font-black text-primary">Estrutura de grande rede</div>
+              <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Atendimento local</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -674,6 +712,18 @@ function ContactSection() {
             <MapPin className="h-4 w-4" /> Como chegar
           </a>
         </div>
+        <div className="mt-10 overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-brand)]">
+          <iframe
+            title="Mapa da PneuZ Araucária"
+            src="https://www.google.com/maps?q=Av.+Dr.+V%C3%ADtor+do+Amaral,+1380,+Centro,+Arauc%C3%A1ria+-+PR,+83702-040&output=embed"
+            width="100%"
+            height="360"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            style={{ border: 0 }}
+            allowFullScreen
+          />
+        </div>
       </div>
     </section>
   );
@@ -773,15 +823,165 @@ function Footer() {
 }
 
 function FloatingWhats() {
+  const [open, setOpen] = useState(false);
   return (
-    <a
-      href={WHATSAPP}
-      target="_blank"
-      rel="noreferrer"
-      aria-label="WhatsApp"
-      className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[var(--shadow-brand)] transition-transform hover:scale-110 sm:bottom-6 sm:right-6"
+    <>
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        aria-label="Abrir chat do WhatsApp"
+        className="animate-wa-pulse fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[var(--shadow-brand)] transition-transform hover:scale-110 sm:bottom-6 sm:right-6"
+      >
+        <MessageCircle className="h-7 w-7" />
+      </button>
+      {open && <WhatsAppModal onClose={() => setOpen(false)} />}
+    </>
+  );
+}
+
+function maskPhone(v: string) {
+  const d = v.replace(/\D/g, "").slice(0, 11);
+  if (d.length <= 2) return d;
+  if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+  if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+}
+
+const SUBJECTS = [
+  "Orçamento de pneus",
+  "Alinhamento e balanceamento",
+  "Revisão / mecânica",
+  "Informações comerciais",
+  "Suporte técnico",
+  "Outros",
+];
+
+function WhatsAppModal({ onClose }: { onClose: () => void }) {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [subject, setSubject] = useState(SUBJECTS[0]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [onClose]);
+
+  const canSend = name.trim().length >= 2 && phone.replace(/\D/g, "").length >= 10;
+
+  const handleSend = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!canSend) return;
+    const msg =
+      `Olá, PneuZ! Meu nome é ${name.trim()}.` +
+      `\nAssunto: ${subject}.` +
+      `\nMeu WhatsApp: ${phone}.` +
+      `\nGostaria de mais informações, obrigado!`;
+    window.open(waLink(msg), "_blank", "noopener,noreferrer");
+    onClose();
+  };
+
+  return (
+    <div
+      className="fixed inset-0 z-[60] flex items-end justify-center bg-black/60 p-0 backdrop-blur-sm animate-fade-in sm:items-center sm:p-4"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
     >
-      <MessageCircle className="h-7 w-7" />
-    </a>
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="w-full max-w-md overflow-hidden rounded-t-3xl bg-[#ECE5DD] shadow-2xl sm:rounded-3xl"
+      >
+        <div className="flex items-center justify-between gap-3 bg-[#075E54] px-5 py-4 text-white">
+          <div className="flex items-center gap-3">
+            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#25D366]">
+              <MessageCircle className="h-6 w-6" />
+            </div>
+            <div className="leading-tight">
+              <div className="text-sm font-bold">PneuZ Araucária</div>
+              <div className="flex items-center gap-1.5 text-[11px] text-white/80">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#25D366]" /> Online agora
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Fechar"
+            className="rounded-full p-1.5 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        <div
+          className="px-5 py-4"
+          style={{
+            backgroundImage:
+              "radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px)",
+            backgroundSize: "16px 16px",
+          }}
+        >
+          <div className="mb-4 max-w-[85%] rounded-2xl rounded-tl-sm bg-white px-4 py-3 text-sm text-gray-800 shadow-sm">
+            Olá! 👋 Preencha seus dados para iniciarmos o atendimento no WhatsApp.
+          </div>
+
+          <form onSubmit={handleSend} className="space-y-3">
+            <div>
+              <label className="mb-1 block text-xs font-semibold text-gray-700">Primeiro nome</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value.slice(0, 40))}
+                placeholder="Seu nome"
+                required
+                className="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 outline-none focus:border-[#25D366] focus:ring-2 focus:ring-[#25D366]/30"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-xs font-semibold text-gray-700">Número de WhatsApp</label>
+              <input
+                type="tel"
+                inputMode="tel"
+                value={phone}
+                onChange={(e) => setPhone(maskPhone(e.target.value))}
+                placeholder="(41) 99999-9999"
+                required
+                className="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 outline-none focus:border-[#25D366] focus:ring-2 focus:ring-[#25D366]/30"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-xs font-semibold text-gray-700">Assunto de interesse</label>
+              <select
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                className="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 outline-none focus:border-[#25D366] focus:ring-2 focus:ring-[#25D366]/30"
+              >
+                {SUBJECTS.map((s) => (
+                  <option key={s} value={s}>{s}</option>
+                ))}
+              </select>
+            </div>
+            <button
+              type="submit"
+              disabled={!canSend}
+              className="mt-2 flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-sm font-bold text-white shadow-md transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:bg-gray-400"
+            >
+              <Send className="h-4 w-4" /> Iniciar conversa no WhatsApp
+            </button>
+            <p className="text-center text-[10px] text-gray-500">
+              Ao continuar você será redirecionado para o WhatsApp.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }
