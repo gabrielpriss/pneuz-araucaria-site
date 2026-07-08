@@ -836,19 +836,16 @@ function Footer() {
 }
 
 function FloatingWhats() {
-  const [open, setOpen] = useState(false);
+  const openWhats = useOpenWhats();
   return (
-    <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        aria-label="Abrir chat do WhatsApp"
-        className="animate-wa-pulse fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[var(--shadow-brand)] transition-transform hover:scale-110 sm:bottom-6 sm:right-6"
-      >
-        <MessageCircle className="h-7 w-7" />
-      </button>
-      {open && <WhatsAppModal onClose={() => setOpen(false)} />}
-    </>
+    <button
+      type="button"
+      onClick={() => openWhats()}
+      aria-label="Abrir chat do WhatsApp"
+      className="animate-wa-pulse fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[var(--shadow-brand)] transition-transform hover:scale-110 sm:bottom-6 sm:right-6"
+    >
+      <MessageCircle className="h-7 w-7" />
+    </button>
   );
 }
 
@@ -869,10 +866,12 @@ const SUBJECTS = [
   "Outros",
 ];
 
-function WhatsAppModal({ onClose }: { onClose: () => void }) {
+function WhatsAppModal({ intent, onClose }: { intent: WhatsIntent; onClose: () => void }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [subject, setSubject] = useState(SUBJECTS[0]);
+  const [subject, setSubject] = useState(
+    intent.subject && SUBJECTS.includes(intent.subject) ? intent.subject : SUBJECTS[0],
+  );
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -892,14 +891,17 @@ function WhatsAppModal({ onClose }: { onClose: () => void }) {
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault();
     if (!canSend) return;
+    const closing = intent.message ?? "gostaria de mais informações, obrigado!";
     const msg =
       `Olá, PneuZ! Meu nome é ${name.trim()}.` +
       `\nAssunto: ${subject}.` +
       `\nMeu WhatsApp: ${phone}.` +
-      `\nGostaria de mais informações, obrigado!`;
+      `\n${closing}`;
     window.open(waLink(msg), "_blank", "noopener,noreferrer");
     onClose();
   };
+
+  const headline = intent.headline ?? "Olá! 👋 Preencha seus dados para iniciarmos o atendimento no WhatsApp.";
 
   return (
     <div
@@ -943,7 +945,7 @@ function WhatsAppModal({ onClose }: { onClose: () => void }) {
           }}
         >
           <div className="mb-4 max-w-[85%] rounded-2xl rounded-tl-sm bg-white px-4 py-3 text-sm text-gray-800 shadow-sm">
-            Olá! 👋 Preencha seus dados para iniciarmos o atendimento no WhatsApp.
+            {headline}
           </div>
 
           <form onSubmit={handleSend} className="space-y-3">
