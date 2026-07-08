@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import {
   Wrench,
   Disc,
@@ -149,24 +149,33 @@ const faqs = [
   },
 ];
 
+type WhatsIntent = { subject?: string; message?: string; headline?: string };
+const WhatsContext = createContext<(intent?: WhatsIntent) => void>(() => {});
+const useOpenWhats = () => useContext(WhatsContext);
+
 function Index() {
+  const [intent, setIntent] = useState<WhatsIntent | null>(null);
+  const open = useCallback((i?: WhatsIntent) => setIntent(i ?? {}), []);
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <TopBar />
-      <Header />
-      <Hero />
-      <Brands />
-      <Services />
-      <WhyUs />
-      <HowItWorks />
-      <About />
-      <Reviews />
-      <FinalCTA />
-      <Contact />
-      <FAQ />
-      <Footer />
-      <FloatingWhats />
-    </div>
+    <WhatsContext.Provider value={open}>
+      <div className="min-h-screen bg-background text-foreground">
+        <TopBar />
+        <Header />
+        <Hero />
+        <Brands />
+        <Services />
+        <WhyUs />
+        <HowItWorks />
+        <About />
+        <Reviews />
+        <FinalCTA />
+        <Contact />
+        <FAQ />
+        <Footer />
+        <FloatingWhats />
+        {intent && <WhatsAppModal intent={intent} onClose={() => setIntent(null)} />}
+      </div>
+    </WhatsContext.Provider>
   );
 }
 
@@ -189,6 +198,7 @@ function TopBar() {
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const openWhats = useOpenWhats();
   const links = [
     { href: "#inicio", label: "Início" },
     { href: "#servicos", label: "Serviços" },
@@ -212,14 +222,13 @@ function Header() {
               {l.label}
             </a>
           ))}
-          <a
-            href={WHATSAPP}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            type="button"
+            onClick={() => openWhats({ subject: "Orçamento de pneus", message: "gostaria de solicitar um orçamento." })}
             className="rounded-full bg-[var(--accent-yellow)] px-5 py-2 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
           >
             Orçamento
-          </a>
+          </button>
         </nav>
         <button
           className="rounded-md p-2 md:hidden"
@@ -241,9 +250,13 @@ function Header() {
                 {l.label}
               </a>
             ))}
-            <a href={WHATSAPP} target="_blank" rel="noreferrer" className="mt-2 rounded-full bg-[var(--accent-yellow)] px-5 py-2 text-center text-sm font-bold text-primary">
+            <button
+              type="button"
+              onClick={() => { setOpen(false); openWhats({ subject: "Orçamento de pneus", message: "gostaria de solicitar um orçamento." }); }}
+              className="mt-2 rounded-full bg-[var(--accent-yellow)] px-5 py-2 text-center text-sm font-bold text-primary"
+            >
               Orçamento
-            </a>
+            </button>
           </div>
         </div>
       )}
@@ -252,6 +265,7 @@ function Header() {
 }
 
 function Hero() {
+  const openWhats = useOpenWhats();
   return (
     <section id="inicio" className="relative overflow-hidden">
       <div className="absolute inset-0">
@@ -270,14 +284,13 @@ function Hero() {
             Tenha acesso às melhores marcas de pneus, serviços de manutenção e uma equipe especializada perto de você. Faça seu orçamento e receba as melhores condições sem precisar sair de Araucária.
           </p>
           <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-            <a
-              href={WHATSAPP}
-              target="_blank"
-              rel="noreferrer"
+            <button
+              type="button"
+              onClick={() => openWhats({ subject: "Informações comerciais", message: "gostaria de falar com um especialista." })}
               className="inline-flex items-center justify-center rounded-full bg-[var(--accent-yellow)] px-7 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
             >
               Fale com um especialista
-            </a>
+            </button>
             <a
               href="#servicos"
               className="inline-flex items-center justify-center rounded-full border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
@@ -330,6 +343,7 @@ function Hero() {
 }
 
 function Brands() {
+  const openWhats = useOpenWhats();
   return (
     <section className="relative overflow-hidden border-y border-border bg-radial-brand py-12">
       <div className="mx-auto max-w-7xl px-4">
@@ -359,14 +373,13 @@ function Brands() {
           </div>
         </div>
         <div className="mt-8 text-center">
-          <a
-            href={WHATSAPP}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            type="button"
+            onClick={() => openWhats({ subject: "Orçamento de pneus", message: "quero ajuda para encontrar o pneu ideal para o meu carro." })}
             className="inline-block rounded-full bg-primary px-7 py-3 text-sm font-bold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:-translate-y-0.5"
           >
             Encontrar o pneu ideal para meu carro
-          </a>
+          </button>
         </div>
       </div>
     </section>
@@ -374,6 +387,7 @@ function Brands() {
 }
 
 function Services() {
+  const openWhats = useOpenWhats();
   return (
     <section id="servicos" className="relative overflow-hidden py-20 sm:py-24">
       <div className="absolute inset-0 -z-10 bg-dots" />
@@ -401,14 +415,13 @@ function Services() {
           ))}
         </div>
         <div className="mt-12 text-center">
-          <a
-            href={WHATSAPP}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            type="button"
+            onClick={() => openWhats({ subject: "Revisão / mecânica", message: "gostaria de agendar uma avaliação do meu veículo." })}
             className="inline-block rounded-full bg-primary px-8 py-3.5 text-sm font-bold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:-translate-y-0.5"
           >
             Agendar avaliação do meu veículo
-          </a>
+          </button>
         </div>
       </div>
     </section>
@@ -453,6 +466,7 @@ function WhyUs() {
 }
 
 function HowItWorks() {
+  const openWhats = useOpenWhats();
   const steps = [
     { icon: MessageCircle, title: "Chame pelo WhatsApp", desc: "Informe seu veículo ou necessidade." },
     { icon: MapPin, title: "Venha até nossa loja", desc: "Realizamos uma avaliação completa." },
@@ -483,14 +497,13 @@ function HowItWorks() {
           ))}
         </div>
         <div className="mt-12 text-center">
-          <a
-            href={WHATSAPP}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            type="button"
+            onClick={() => openWhats({ subject: "Orçamento de pneus", message: "quero receber meu orçamento agora." })}
             className="inline-block rounded-full bg-primary px-8 py-3.5 text-sm font-bold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:-translate-y-0.5"
           >
             Receber meu orçamento agora
-          </a>
+          </button>
         </div>
       </div>
     </section>
@@ -498,6 +511,7 @@ function HowItWorks() {
 }
 
 function FinalCTA() {
+  const openWhats = useOpenWhats();
   const perks = [
     "Avaliação especializada",
     "Melhores opções para seu veículo",
@@ -518,14 +532,13 @@ function FinalCTA() {
           ))}
         </ul>
         <div className="mt-10">
-          <a
-            href={WHATSAPP}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            type="button"
+            onClick={() => openWhats({ subject: "Orçamento de pneus", message: "quero meu orçamento, por favor." })}
             className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-10 py-4 text-base font-black uppercase tracking-wide text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
           >
             Quero meu orçamento
-          </a>
+          </button>
         </div>
       </div>
     </section>
@@ -591,6 +604,7 @@ function Contact() {
 }
 
 function Reviews() {
+  const openWhats = useOpenWhats();
   return (
     <section id="depoimentos" className="relative overflow-hidden py-20 sm:py-24">
       <div className="absolute inset-0 -z-10" style={{ background: "linear-gradient(180deg, oklch(0.98 0.01 260) 0%, oklch(1 0 0) 100%)" }} />
@@ -652,14 +666,13 @@ function Reviews() {
           ))}
         </div>
         <div className="mt-10 text-center">
-          <a
-            href="https://www.google.com/search?q=PneuZ+Arauc%C3%A1ria"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border-2 border-primary px-6 py-3 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+          <button
+            type="button"
+            onClick={() => openWhats({ subject: "Informações comerciais", message: "vi as avaliações no site e quero ser o próximo cliente satisfeito da PneuZ." })}
+            className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-8 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
           >
-            Ver todas as avaliações no Google
-          </a>
+            <MessageCircle className="h-4 w-4" /> Quero um atendimento assim, falar no WhatsApp
+          </button>
         </div>
       </div>
     </section>
@@ -667,6 +680,7 @@ function Reviews() {
 }
 
 function ContactSection() {
+  const openWhats = useOpenWhats();
   return (
     <section id="contato" className="relative overflow-hidden py-20 sm:py-24 bg-radial-brand">
       <div className="mx-auto max-w-7xl px-4">
@@ -695,22 +709,20 @@ function ContactSection() {
           />
         </div>
         <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
-          <a
-            href={WHATSAPP}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            type="button"
+            onClick={() => openWhats({ subject: "Informações comerciais", message: "gostaria de falar com a PneuZ Araucária pelo WhatsApp." })}
             className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent-yellow)] px-7 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5 sm:px-8"
           >
             <MessageCircle className="h-4 w-4" /> Falar no WhatsApp
-          </a>
-          <a
-            href={MAPS_URL}
-            target="_blank"
-            rel="noreferrer"
+          </button>
+          <button
+            type="button"
+            onClick={() => openWhats({ subject: "Informações comerciais", message: "gostaria de saber como chegar até a loja e confirmar o endereço." })}
             className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary px-7 py-3.5 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground sm:px-8"
           >
             <MapPin className="h-4 w-4" /> Como chegar
-          </a>
+          </button>
         </div>
         <div className="mt-10 overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-brand)]">
           <iframe
@@ -779,6 +791,7 @@ function FAQ() {
 }
 
 function Footer() {
+  const openWhats = useOpenWhats();
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-4">
@@ -810,7 +823,7 @@ function Footer() {
           <div className="flex gap-3">
             <a href="#" aria-label="Instagram" className="rounded-full bg-white/10 p-2.5 hover:bg-[var(--accent-yellow)] hover:text-primary"><Instagram className="h-5 w-5" /></a>
             <a href="#" aria-label="Facebook" className="rounded-full bg-white/10 p-2.5 hover:bg-[var(--accent-yellow)] hover:text-primary"><Facebook className="h-5 w-5" /></a>
-            <a href={WHATSAPP} target="_blank" rel="noreferrer" aria-label="WhatsApp" className="rounded-full bg-white/10 p-2.5 hover:bg-[var(--accent-yellow)] hover:text-primary"><MessageCircle className="h-5 w-5" /></a>
+            <button type="button" onClick={() => openWhats()} aria-label="WhatsApp" className="rounded-full bg-white/10 p-2.5 hover:bg-[var(--accent-yellow)] hover:text-primary"><MessageCircle className="h-5 w-5" /></button>
           </div>
           <a href="#" className="mt-4 inline-block text-xs text-white/60 hover:text-[var(--accent-yellow)]">Política de privacidade</a>
         </div>
@@ -823,19 +836,16 @@ function Footer() {
 }
 
 function FloatingWhats() {
-  const [open, setOpen] = useState(false);
+  const openWhats = useOpenWhats();
   return (
-    <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        aria-label="Abrir chat do WhatsApp"
-        className="animate-wa-pulse fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[var(--shadow-brand)] transition-transform hover:scale-110 sm:bottom-6 sm:right-6"
-      >
-        <MessageCircle className="h-7 w-7" />
-      </button>
-      {open && <WhatsAppModal onClose={() => setOpen(false)} />}
-    </>
+    <button
+      type="button"
+      onClick={() => openWhats()}
+      aria-label="Abrir chat do WhatsApp"
+      className="animate-wa-pulse fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[var(--shadow-brand)] transition-transform hover:scale-110 sm:bottom-6 sm:right-6"
+    >
+      <MessageCircle className="h-7 w-7" />
+    </button>
   );
 }
 
@@ -856,10 +866,12 @@ const SUBJECTS = [
   "Outros",
 ];
 
-function WhatsAppModal({ onClose }: { onClose: () => void }) {
+function WhatsAppModal({ intent, onClose }: { intent: WhatsIntent; onClose: () => void }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [subject, setSubject] = useState(SUBJECTS[0]);
+  const [subject, setSubject] = useState(
+    intent.subject && SUBJECTS.includes(intent.subject) ? intent.subject : SUBJECTS[0],
+  );
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -879,14 +891,17 @@ function WhatsAppModal({ onClose }: { onClose: () => void }) {
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault();
     if (!canSend) return;
+    const closing = intent.message ?? "gostaria de mais informações, obrigado!";
     const msg =
       `Olá, PneuZ! Meu nome é ${name.trim()}.` +
       `\nAssunto: ${subject}.` +
       `\nMeu WhatsApp: ${phone}.` +
-      `\nGostaria de mais informações, obrigado!`;
+      `\n${closing}`;
     window.open(waLink(msg), "_blank", "noopener,noreferrer");
     onClose();
   };
+
+  const headline = intent.headline ?? "Olá! 👋 Preencha seus dados para iniciarmos o atendimento no WhatsApp.";
 
   return (
     <div
@@ -930,7 +945,7 @@ function WhatsAppModal({ onClose }: { onClose: () => void }) {
           }}
         >
           <div className="mb-4 max-w-[85%] rounded-2xl rounded-tl-sm bg-white px-4 py-3 text-sm text-gray-800 shadow-sm">
-            Olá! 👋 Preencha seus dados para iniciarmos o atendimento no WhatsApp.
+            {headline}
           </div>
 
           <form onSubmit={handleSend} className="space-y-3">
