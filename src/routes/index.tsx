@@ -198,6 +198,7 @@ function TopBar() {
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const openWhats = useOpenWhats();
   const links = [
     { href: "#inicio", label: "Início" },
     { href: "#servicos", label: "Serviços" },
@@ -221,14 +222,13 @@ function Header() {
               {l.label}
             </a>
           ))}
-          <a
-            href={WHATSAPP}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            type="button"
+            onClick={() => openWhats({ subject: "Orçamento de pneus", message: "gostaria de solicitar um orçamento." })}
             className="rounded-full bg-[var(--accent-yellow)] px-5 py-2 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
           >
             Orçamento
-          </a>
+          </button>
         </nav>
         <button
           className="rounded-md p-2 md:hidden"
@@ -250,9 +250,13 @@ function Header() {
                 {l.label}
               </a>
             ))}
-            <a href={WHATSAPP} target="_blank" rel="noreferrer" className="mt-2 rounded-full bg-[var(--accent-yellow)] px-5 py-2 text-center text-sm font-bold text-primary">
+            <button
+              type="button"
+              onClick={() => { setOpen(false); openWhats({ subject: "Orçamento de pneus", message: "gostaria de solicitar um orçamento." }); }}
+              className="mt-2 rounded-full bg-[var(--accent-yellow)] px-5 py-2 text-center text-sm font-bold text-primary"
+            >
               Orçamento
-            </a>
+            </button>
           </div>
         </div>
       )}
