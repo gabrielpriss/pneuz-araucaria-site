@@ -178,4 +178,12 @@
       radial-gradient(900px 500px at 100% 100%, oklch(0.32 0.16 267 / 0.12), transparent 60%),
       oklch(0.98 0.005 260);
   }
+  @keyframes wa-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55); }
+    70% { box-shadow: 0 0 0 18px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+  }
+  .animate-wa-pulse {
+    animation: wa-pulse 1.8s ease-out infinite;
+  }
 }
