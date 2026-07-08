@@ -96,6 +96,12 @@ const reviews = [
     when: "4 meses atrás",
     text: "Atendimento nota 1000, os atendentes Heloisa e Thiago e o mecânico Marlon todos muito atenciosos e tiraram todas as minhas dúvidas! Recomendo.",
   },
+  {
+    name: "Rafael Souza",
+    meta: "5 avaliações",
+    when: "1 mês atrás",
+    text: "Comprei pneus novos e fiz alinhamento, serviço rápido e preço justo. Equipe atenciosa e loja bem organizada. Voltarei sempre.",
+  },
 ];
 
 const services = [
@@ -391,7 +397,7 @@ function WhyUs() {
           <h2 className="text-2xl font-black text-white sm:text-3xl md:text-4xl">Por que escolher a PneuZ Araucária?</h2>
           <p className="mt-3 text-white/70">Uma loja local com estrutura de grande rede, franquia reconhecida, atendimento próximo e personalizado.</p>
         </div>
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-6 [&>*:nth-child(1)]:lg:col-span-2 [&>*:nth-child(2)]:lg:col-span-2 [&>*:nth-child(3)]:lg:col-span-2 [&>*:nth-child(4)]:lg:col-span-3 [&>*:nth-child(5)]:lg:col-span-3">
           {items.map((it) => (
             <div key={it.title} className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-sm backdrop-blur transition-all hover:-translate-y-1 hover:bg-white/10">
               <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--accent-yellow)] text-primary">
@@ -570,7 +576,7 @@ function Reviews() {
                 <Star key={i} className="h-5 w-5 fill-[#FBBC05] text-[#FBBC05]" />
               ))}
             </div>
-            <span className="text-sm font-bold text-primary">5,0</span>
+            <span className="text-sm font-bold text-primary">4,8</span>
             <span className="text-sm text-muted-foreground">· Avaliações verificadas</span>
           </div>
           <p className="mt-2 text-sm text-muted-foreground">Mais de 1.000 clientes já avaliaram nossa loja no Google.</p>
