@@ -265,6 +265,7 @@ function Header() {
 }
 
 function Hero() {
+  const openWhats = useOpenWhats();
   return (
     <section id="inicio" className="relative overflow-hidden">
       <div className="absolute inset-0">
@@ -283,14 +284,13 @@ function Hero() {
             Tenha acesso às melhores marcas de pneus, serviços de manutenção e uma equipe especializada perto de você. Faça seu orçamento e receba as melhores condições sem precisar sair de Araucária.
           </p>
           <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-            <a
-              href={WHATSAPP}
-              target="_blank"
-              rel="noreferrer"
+            <button
+              type="button"
+              onClick={() => openWhats({ subject: "Informações comerciais", message: "gostaria de falar com um especialista." })}
               className="inline-flex items-center justify-center rounded-full bg-[var(--accent-yellow)] px-7 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
             >
               Fale com um especialista
-            </a>
+            </button>
             <a
               href="#servicos"
               className="inline-flex items-center justify-center rounded-full border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
@@ -343,6 +343,7 @@ function Hero() {
 }
 
 function Brands() {
+  const openWhats = useOpenWhats();
   return (
     <section className="relative overflow-hidden border-y border-border bg-radial-brand py-12">
       <div className="mx-auto max-w-7xl px-4">
@@ -372,14 +373,13 @@ function Brands() {
           </div>
         </div>
         <div className="mt-8 text-center">
-          <a
-            href={WHATSAPP}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            type="button"
+            onClick={() => openWhats({ subject: "Orçamento de pneus", message: "quero ajuda para encontrar o pneu ideal para o meu carro." })}
             className="inline-block rounded-full bg-primary px-7 py-3 text-sm font-bold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:-translate-y-0.5"
           >
             Encontrar o pneu ideal para meu carro
-          </a>
+          </button>
         </div>
       </div>
     </section>
@@ -387,6 +387,7 @@ function Brands() {
 }
 
 function Services() {
+  const openWhats = useOpenWhats();
   return (
     <section id="servicos" className="relative overflow-hidden py-20 sm:py-24">
       <div className="absolute inset-0 -z-10 bg-dots" />
@@ -414,14 +415,13 @@ function Services() {
           ))}
         </div>
         <div className="mt-12 text-center">
-          <a
-            href={WHATSAPP}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            type="button"
+            onClick={() => openWhats({ subject: "Revisão / mecânica", message: "gostaria de agendar uma avaliação do meu veículo." })}
             className="inline-block rounded-full bg-primary px-8 py-3.5 text-sm font-bold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:-translate-y-0.5"
           >
             Agendar avaliação do meu veículo
-          </a>
+          </button>
         </div>
       </div>
     </section>
