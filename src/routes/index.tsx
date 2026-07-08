@@ -43,16 +43,26 @@ const WHATSAPP = waLink(
   "Olá, vim pelo site e gostaria de mais informações. Envie este cupom para ter descontos.",
 );
 
+import bridgestoneAsset from "@/assets/brands/bridgestone.png.asset.json";
+import continentalAsset from "@/assets/brands/continental.png.asset.json";
+import dunlopAsset from "@/assets/brands/dunlop.png.asset.json";
+import firestoneAsset from "@/assets/brands/firestone.png.asset.json";
+import goodyearAsset from "@/assets/brands/goodyear.png.asset.json";
+import pirelliAsset from "@/assets/brands/pirelli.png.asset.json";
+import linglongAsset from "@/assets/brands/linglong.png.asset.json";
+import xbriAsset from "@/assets/brands/xbri.png.asset.json";
+import importadosAsset from "@/assets/brands/importados.png.asset.json";
+
 const brands = [
-  "Bridgestone",
-  "Continental",
-  "Dunlop",
-  "Firestone",
-  "Goodyear",
-  "Pirelli",
-  "Linglong",
-  "XBRI",
-  "Importados",
+  { name: "Bridgestone", src: bridgestoneAsset.url },
+  { name: "Continental", src: continentalAsset.url },
+  { name: "Dunlop", src: dunlopAsset.url },
+  { name: "Firestone", src: firestoneAsset.url },
+  { name: "Goodyear", src: goodyearAsset.url },
+  { name: "Pirelli", src: pirelliAsset.url },
+  { name: "Linglong", src: linglongAsset.url },
+  { name: "XBRI", src: xbriAsset.url },
+  { name: "Importados", src: importadosAsset.url },
 ];
 
 const reviews = [
@@ -288,14 +298,19 @@ function Brands() {
           </p>
         </div>
         <div className="marquee-mask overflow-hidden">
-          <div className="flex w-max animate-marquee gap-4">
+          <div className="flex w-max animate-marquee items-center gap-10 sm:gap-14">
             {[...brands, ...brands].map((b, i) => (
-              <span
-                key={`${b}-${i}`}
-                className="shrink-0 rounded-full border border-border bg-card px-7 py-3 text-sm font-bold uppercase tracking-wider text-primary shadow-sm"
+              <div
+                key={`${b.name}-${i}`}
+                className="flex h-20 w-40 shrink-0 items-center justify-center rounded-xl bg-card px-4 shadow-sm ring-1 ring-border sm:h-24 sm:w-48"
               >
-                {b}
-              </span>
+                <img
+                  src={b.src}
+                  alt={b.name}
+                  loading="lazy"
+                  className="max-h-12 max-w-full object-contain sm:max-h-14"
+                />
+              </div>
             ))}
           </div>
         </div>
