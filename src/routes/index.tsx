@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import {
   Wrench,
   Disc,
@@ -149,24 +149,33 @@ const faqs = [
   },
 ];
 
+type WhatsIntent = { subject?: string; message?: string; headline?: string };
+const WhatsContext = createContext<(intent?: WhatsIntent) => void>(() => {});
+const useOpenWhats = () => useContext(WhatsContext);
+
 function Index() {
+  const [intent, setIntent] = useState<WhatsIntent | null>(null);
+  const open = useCallback((i?: WhatsIntent) => setIntent(i ?? {}), []);
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <TopBar />
-      <Header />
-      <Hero />
-      <Brands />
-      <Services />
-      <WhyUs />
-      <HowItWorks />
-      <About />
-      <Reviews />
-      <FinalCTA />
-      <Contact />
-      <FAQ />
-      <Footer />
-      <FloatingWhats />
-    </div>
+    <WhatsContext.Provider value={open}>
+      <div className="min-h-screen bg-background text-foreground">
+        <TopBar />
+        <Header />
+        <Hero />
+        <Brands />
+        <Services />
+        <WhyUs />
+        <HowItWorks />
+        <About />
+        <Reviews />
+        <FinalCTA />
+        <Contact />
+        <FAQ />
+        <Footer />
+        <FloatingWhats />
+        {intent && <WhatsAppModal intent={intent} onClose={() => setIntent(null)} />}
+      </div>
+    </WhatsContext.Provider>
   );
 }
 
