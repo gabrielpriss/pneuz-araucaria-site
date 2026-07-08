@@ -466,6 +466,7 @@ function WhyUs() {
 }
 
 function HowItWorks() {
+  const openWhats = useOpenWhats();
   const steps = [
     { icon: MessageCircle, title: "Chame pelo WhatsApp", desc: "Informe seu veículo ou necessidade." },
     { icon: MapPin, title: "Venha até nossa loja", desc: "Realizamos uma avaliação completa." },
@@ -496,14 +497,13 @@ function HowItWorks() {
           ))}
         </div>
         <div className="mt-12 text-center">
-          <a
-            href={WHATSAPP}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            type="button"
+            onClick={() => openWhats({ subject: "Orçamento de pneus", message: "quero receber meu orçamento agora." })}
             className="inline-block rounded-full bg-primary px-8 py-3.5 text-sm font-bold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:-translate-y-0.5"
           >
             Receber meu orçamento agora
-          </a>
+          </button>
         </div>
       </div>
     </section>
@@ -511,6 +511,7 @@ function HowItWorks() {
 }
 
 function FinalCTA() {
+  const openWhats = useOpenWhats();
   const perks = [
     "Avaliação especializada",
     "Melhores opções para seu veículo",
@@ -531,14 +532,13 @@ function FinalCTA() {
           ))}
         </ul>
         <div className="mt-10">
-          <a
-            href={WHATSAPP}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            type="button"
+            onClick={() => openWhats({ subject: "Orçamento de pneus", message: "quero meu orçamento, por favor." })}
             className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-10 py-4 text-base font-black uppercase tracking-wide text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
           >
             Quero meu orçamento
-          </a>
+          </button>
         </div>
       </div>
     </section>
