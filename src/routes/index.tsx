@@ -833,9 +833,9 @@ function FloatingWhats() {
       type="button"
       onClick={() => openWhats()}
       aria-label="Abrir chat do WhatsApp"
-      className="animate-wa-pulse fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[var(--shadow-brand)] transition-transform hover:scale-110 sm:bottom-6 sm:right-6"
+      className="animate-wa-pulse fixed bottom-4 right-4 z-50 flex h-16 w-16 items-center justify-center rounded-full transition-transform hover:scale-110 sm:bottom-6 sm:right-6"
     >
-      <MessageCircle className="h-7 w-7" />
+      <img src={whatsappIcon} alt="WhatsApp" width={64} height={64} className="h-16 w-16" loading="lazy" />
     </button>
   );
 }
