@@ -27,6 +27,7 @@ import logoAsset from "@/assets/pneuz-logo.asset.json";
 import iconAsset from "@/assets/pneuz-icon.asset.json";
 import heroImg from "@/assets/hero-tires.jpg";
 import oficinaAsset from "@/assets/oficina-pneuz.asset.json";
+import whatsappIcon from "@/assets/whatsapp-icon.png";
 import { Star } from "lucide-react";
 
 export const Route = createFileRoute("/")({
