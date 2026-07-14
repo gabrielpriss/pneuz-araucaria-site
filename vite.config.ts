@@ -9,7 +9,17 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 export default defineConfig({
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
     server: { entry: "server" },
+    // Pré-renderiza como site estático para hospedagem em CyberPanel (Apache/OpenLiteSpeed).
+    prerender: {
+      enabled: true,
+      crawlLinks: true,
+      routes: ["/"],
+    },
+    pages: [{ path: "/" }],
+  },
+  // Gera saída estática (HTML/CSS/JS) para hospedagem no CyberPanel.
+  nitro: {
+    preset: "static",
   },
 });
