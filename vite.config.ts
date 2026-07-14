@@ -18,4 +18,8 @@ export default defineConfig({
     },
     pages: [{ path: "/" }],
   },
+  // Gera saída estática (HTML/CSS/JS) para hospedagem no CyberPanel.
+  nitro: {
+    preset: "static",
+  },
 });
