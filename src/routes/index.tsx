@@ -33,12 +33,12 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const PHONE_DISPLAY = "(99) 99999-9999";
+const PHONE_DISPLAY = "(41) 99900-3515";
 const ADDRESS = "Av. Dr. Vítor do Amaral, 1380, Centro, Araucária, PR, 83702-040";
 const MAPS_URL =
   "https://www.google.com/maps?daddr=Av.+Dr.+V%C3%ADtor+do+Amaral,+1380+-+Centro,+Arauc%C3%A1ria+-+PR,+83702-040";
 
-const WA_PHONE = "5599999999999";
+const WA_PHONE = "5541999003515";
 const waLink = (msg: string) =>
   `https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${encodeURIComponent(msg)}`;
 
