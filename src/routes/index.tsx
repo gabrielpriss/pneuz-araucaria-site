@@ -327,13 +327,13 @@ function Hero() {
               </div>
             </div>
           </div>
-          <div className="absolute -bottom-5 -left-5 flex items-center gap-2 rounded-2xl border border-border bg-card px-4 py-3 shadow-[var(--shadow-brand)]">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-[var(--accent-yellow)]">
+          <div className="absolute -bottom-5 -left-5 flex items-center gap-3 rounded-2xl border border-[var(--accent-yellow)]/40 bg-primary px-4 py-3 shadow-[var(--shadow-brand)] ring-1 ring-white/10">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-yellow)] text-primary">
               <ShieldCheck className="h-5 w-5" />
             </div>
             <div>
-              <div className="text-xs font-black text-primary">Estrutura de grande rede</div>
-              <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Atendimento local</div>
+              <div className="text-xs font-black text-white">Estrutura de grande rede</div>
+              <div className="text-[10px] font-semibold uppercase tracking-wider text-[var(--accent-yellow)]">Atendimento local</div>
             </div>
           </div>
         </div>
