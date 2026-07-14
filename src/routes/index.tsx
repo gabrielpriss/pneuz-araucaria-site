@@ -23,10 +23,10 @@ import {
   X,
   Send,
 } from "lucide-react";
-import logoAsset from "@/assets/pneuz-logo.asset.json";
-import iconAsset from "@/assets/pneuz-icon.asset.json";
+import logoAsset from "@/assets/pneuz-logo.jpg";
+import iconAsset from "@/assets/pneuz-icon.png";
 import heroImg from "@/assets/hero-tires.jpg";
-import oficinaAsset from "@/assets/oficina-pneuz.asset.json";
+import oficinaAsset from "@/assets/oficina-pneuz.png";
 import whatsappIcon from "@/assets/whatsapp-icon.png";
 import { Star } from "lucide-react";
 
@@ -47,26 +47,26 @@ const WHATSAPP = waLink(
   "Olá, vim pelo site e gostaria de mais informações. Envie este cupom para ter descontos.",
 );
 
-import bridgestoneAsset from "@/assets/brands/bridgestone.png.asset.json";
-import continentalAsset from "@/assets/brands/continental.png.asset.json";
-import dunlopAsset from "@/assets/brands/dunlop.png.asset.json";
-import firestoneAsset from "@/assets/brands/firestone.png.asset.json";
-import goodyearAsset from "@/assets/brands/goodyear.png.asset.json";
-import pirelliAsset from "@/assets/brands/pirelli.png.asset.json";
-import linglongAsset from "@/assets/brands/linglong.png.asset.json";
-import xbriAsset from "@/assets/brands/xbri.png.asset.json";
-import importadosAsset from "@/assets/brands/importados.png.asset.json";
+import bridgestoneAsset from "@/assets/brands/bridgestone.png";
+import continentalAsset from "@/assets/brands/continental.png";
+import dunlopAsset from "@/assets/brands/dunlop.png";
+import firestoneAsset from "@/assets/brands/firestone.png";
+import goodyearAsset from "@/assets/brands/goodyear.png";
+import pirelliAsset from "@/assets/brands/pirelli.png";
+import linglongAsset from "@/assets/brands/linglong.png";
+import xbriAsset from "@/assets/brands/xbri.png";
+import importadosAsset from "@/assets/brands/importados.png";
 
 const brands = [
-  { name: "Bridgestone", src: bridgestoneAsset.url },
-  { name: "Continental", src: continentalAsset.url },
-  { name: "Dunlop", src: dunlopAsset.url },
-  { name: "Firestone", src: firestoneAsset.url },
-  { name: "Goodyear", src: goodyearAsset.url },
-  { name: "Pirelli", src: pirelliAsset.url },
-  { name: "Linglong", src: linglongAsset.url },
-  { name: "XBRI", src: xbriAsset.url },
-  { name: "Importados", src: importadosAsset.url },
+  { name: "Bridgestone", src: bridgestoneAsset },
+  { name: "Continental", src: continentalAsset },
+  { name: "Dunlop", src: dunlopAsset },
+  { name: "Firestone", src: firestoneAsset },
+  { name: "Goodyear", src: goodyearAsset },
+  { name: "Pirelli", src: pirelliAsset },
+  { name: "Linglong", src: linglongAsset },
+  { name: "XBRI", src: xbriAsset },
+  { name: "Importados", src: importadosAsset },
 ];
 
 const reviews = [
@@ -211,7 +211,7 @@ function Header() {
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
         <a href="#inicio" className="flex items-center gap-3">
-          <img src={iconAsset.url} alt="PneuZ Araucária" className="h-11 w-11" />
+          <img src={iconAsset} alt="PneuZ Araucária" className="h-11 w-11" />
           <div className="leading-tight">
             <div className="text-lg font-extrabold tracking-tight text-primary">PneuZ</div>
             <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">Araucária</div>
@@ -310,7 +310,7 @@ function Hero() {
           <div className="absolute -bottom-6 -right-6 h-48 w-48 rounded-full bg-primary-glow opacity-40 blur-3xl" />
           <div className="relative overflow-hidden rounded-3xl border border-white/20 shadow-[var(--shadow-brand)] ring-1 ring-white/10">
             <img
-              src={oficinaAsset.url}
+              src={oficinaAsset}
               alt="Fachada da sede PneuZ em Araucária"
               className="aspect-[4/5] w-full object-cover"
             />
@@ -546,7 +546,7 @@ function About() {
           <div className="absolute -left-6 -top-6 h-32 w-32 rounded-full bg-[var(--accent-yellow)] opacity-70 blur-2xl" />
           <div className="relative overflow-hidden rounded-3xl shadow-[var(--shadow-brand)]">
             <img
-              src={oficinaAsset.url}
+              src={oficinaAsset}
               alt="Fachada da oficina PneuZ Araucária"
               loading="lazy"
               className="aspect-[4/3] w-full object-cover"
@@ -788,7 +788,7 @@ function Footer() {
     <footer className="bg-primary text-primary-foreground">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-4">
         <div>
-          <img src={logoAsset.url} alt="PneuZ Araucária" className="h-14 w-auto rounded-lg bg-white p-2" />
+          <img src={logoAsset} alt="PneuZ Araucária" className="h-14 w-auto rounded-lg bg-white p-2" />
           <p className="mt-4 text-sm text-white/70">
             Centro automotivo em Araucária, pneus, alinhamento, balanceamento e serviços para o seu carro.
           </p>
