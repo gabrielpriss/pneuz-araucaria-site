@@ -185,10 +185,10 @@ function TopBar() {
     <div className="w-full border-b border-border/70 bg-background/95">
       <div className="mx-auto flex max-w-7xl justify-end px-4 py-2.5 sm:py-3">
         <div className="flex items-center gap-1.5 sm:gap-2">
-          <a href="#" aria-label="Instagram" className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-primary">
+          <a href="https://www.instagram.com/pneuz_araucaria" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-primary">
             <Instagram className="h-4 w-4" />
           </a>
-          <a href="#" aria-label="Facebook" className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-primary">
+          <a href="https://www.facebook.com/pneuzaraucaria/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-primary">
             <Facebook className="h-4 w-4" />
           </a>
         </div>
@@ -813,8 +813,8 @@ function Footer() {
         <div>
           <h4 className="mb-3 text-sm font-bold uppercase tracking-widest text-[var(--accent-yellow)]">Redes sociais</h4>
           <div className="flex gap-3">
-            <a href="#" aria-label="Instagram" className="rounded-full bg-white/10 p-2.5 hover:bg-[var(--accent-yellow)] hover:text-primary"><Instagram className="h-5 w-5" /></a>
-            <a href="#" aria-label="Facebook" className="rounded-full bg-white/10 p-2.5 hover:bg-[var(--accent-yellow)] hover:text-primary"><Facebook className="h-5 w-5" /></a>
+            <a href="https://www.instagram.com/pneuz_araucaria" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="rounded-full bg-white/10 p-2.5 hover:bg-[var(--accent-yellow)] hover:text-primary"><Instagram className="h-5 w-5" /></a>
+            <a href="https://www.facebook.com/pneuzaraucaria/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="rounded-full bg-white/10 p-2.5 hover:bg-[var(--accent-yellow)] hover:text-primary"><Facebook className="h-5 w-5" /></a>
             <button type="button" onClick={() => openWhats()} aria-label="WhatsApp" className="rounded-full bg-white/10 p-2.5 hover:bg-[var(--accent-yellow)] hover:text-primary"><MessageCircle className="h-5 w-5" /></button>
           </div>
           <a href="#" className="mt-4 inline-block text-xs text-white/60 hover:text-[var(--accent-yellow)]">Política de privacidade</a>
