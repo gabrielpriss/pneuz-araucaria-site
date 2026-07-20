@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Wrench,
   Disc,
@@ -20,8 +20,6 @@ import {
   Search,
   Settings,
   ShieldCheck,
-  X,
-  Send,
 } from "lucide-react";
 import logoAsset from "@/assets/pneuz-logo.jpg";
 import iconAsset from "@/assets/pneuz-icon.png";
@@ -46,6 +44,14 @@ const waLink = (msg: string) =>
 const WHATSAPP = waLink(
   "Olá, vim pelo site e gostaria de mais informações. Envie este cupom para ter descontos.",
 );
+
+const tirePromos = [
+  { aro: 13, price: "189,90" },
+  { aro: 14, price: "199,90" },
+  { aro: 15, price: "209,90" },
+  { aro: 16, price: "259,90" },
+  { aro: 17, price: "309,90" },
+];
 
 import bridgestoneAsset from "@/assets/brands/bridgestone.png";
 import continentalAsset from "@/assets/brands/continental.png";
@@ -150,33 +156,24 @@ const faqs = [
   },
 ];
 
-type WhatsIntent = { subject?: string; message?: string; headline?: string };
-const WhatsContext = createContext<(intent?: WhatsIntent) => void>(() => {});
-const useOpenWhats = () => useContext(WhatsContext);
-
 function Index() {
-  const [intent, setIntent] = useState<WhatsIntent | null>(null);
-  const open = useCallback((i?: WhatsIntent) => setIntent(i ?? {}), []);
   return (
-    <WhatsContext.Provider value={open}>
-      <div className="min-h-screen bg-background text-foreground">
-        <TopBar />
-        <Header />
-        <Hero />
-        <Brands />
-        <Services />
-        <WhyUs />
-        <HowItWorks />
-        <About />
-        <Reviews />
-        <FinalCTA />
-        <Contact />
-        <FAQ />
-        <Footer />
-        <FloatingWhats />
-        {intent && <WhatsAppModal intent={intent} onClose={() => setIntent(null)} />}
-      </div>
-    </WhatsContext.Provider>
+    <div className="min-h-screen bg-background text-foreground">
+      <TopBar />
+      <Header />
+      <Hero />
+      <Brands />
+      <Services />
+      <WhyUs />
+      <HowItWorks />
+      <About />
+      <Reviews />
+      <FinalCTA />
+      <Contact />
+      <FAQ />
+      <Footer />
+      <FloatingWhats />
+    </div>
   );
 }
 
@@ -199,7 +196,6 @@ function TopBar() {
 
 function Header() {
   const [open, setOpen] = useState(false);
-  const openWhats = useOpenWhats();
   const links = [
     { href: "#inicio", label: "Início" },
     { href: "#servicos", label: "Serviços" },
@@ -223,13 +219,14 @@ function Header() {
               {l.label}
             </a>
           ))}
-          <button
-            type="button"
-            onClick={() => openWhats({ subject: "Orçamento de pneus", message: "gostaria de solicitar um orçamento." })}
+          <a
+            href={waLink("Olá, gostaria de solicitar um orçamento.")}
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-full bg-[var(--accent-yellow)] px-5 py-2 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
           >
             Orçamento
-          </button>
+          </a>
         </nav>
         <button
           className="rounded-md p-2 md:hidden"
@@ -251,13 +248,15 @@ function Header() {
                 {l.label}
               </a>
             ))}
-            <button
-              type="button"
-              onClick={() => { setOpen(false); openWhats({ subject: "Orçamento de pneus", message: "gostaria de solicitar um orçamento." }); }}
+            <a
+              href={waLink("Olá, gostaria de solicitar um orçamento.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
               className="mt-2 rounded-full bg-[var(--accent-yellow)] px-5 py-2 text-center text-sm font-bold text-primary"
             >
               Orçamento
-            </button>
+            </a>
           </div>
         </div>
       )}
@@ -266,7 +265,6 @@ function Header() {
 }
 
 function Hero() {
-  const openWhats = useOpenWhats();
   return (
     <section id="inicio" className="relative overflow-hidden">
       <div className="absolute inset-0">
@@ -285,13 +283,14 @@ function Hero() {
             Tenha acesso às melhores marcas de pneus, serviços de manutenção e uma equipe especializada perto de você. Faça seu orçamento e receba as melhores condições sem precisar sair de Araucária.
           </p>
           <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-            <button
-              type="button"
-              onClick={() => openWhats({ subject: "Informações comerciais", message: "gostaria de falar com um especialista." })}
+            <a
+              href={waLink("Olá, gostaria de falar com um especialista.")}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full bg-[var(--accent-yellow)] px-7 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
             >
               Fale com um especialista
-            </button>
+            </a>
             <a
               href="#servicos"
               className="inline-flex items-center justify-center rounded-full border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
@@ -330,12 +329,49 @@ function Hero() {
           </div>
         </div>
       </div>
+      <div className="relative mx-auto max-w-7xl px-4 pb-12 sm:pb-16">
+        <div className="rounded-3xl border border-white/15 bg-white/10 p-5 backdrop-blur sm:p-7">
+          <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-lg font-black uppercase tracking-wide text-white sm:text-xl">
+              Pneus em promoção
+            </h2>
+            <a
+              href={waLink("Olá, vi a promoção de pneus no site e quero mais detalhes.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-5 py-2 text-xs font-bold text-primary transition-transform hover:-translate-y-0.5"
+            >
+              <MessageCircle className="h-4 w-4" /> Chamar no WhatsApp
+            </a>
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+            {tirePromos.map((t) => (
+              <a
+                key={t.aro}
+                href={waLink(`Olá, vim pelo site e quero saber mais sobre o pneu Aro ${t.aro} a partir de R$ ${t.price}.`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group rounded-2xl bg-white/10 p-4 text-center transition-all hover:-translate-y-1 hover:bg-[var(--accent-yellow)]"
+              >
+                <div className="text-xs font-bold uppercase tracking-widest text-white/70 group-hover:text-primary/70">
+                  Aro {t.aro}
+                </div>
+                <div className="mt-1 text-[11px] font-semibold text-white/60 group-hover:text-primary/70">
+                  a partir de
+                </div>
+                <div className="mt-1 text-2xl font-black text-[var(--accent-yellow)] group-hover:text-primary">
+                  R$ {t.price}
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
 
 function Brands() {
-  const openWhats = useOpenWhats();
   return (
     <section className="relative overflow-hidden border-y border-border bg-radial-brand py-12">
       <div className="mx-auto max-w-7xl px-4">
@@ -365,13 +401,14 @@ function Brands() {
           </div>
         </div>
         <div className="mt-8 text-center">
-          <button
-            type="button"
-            onClick={() => openWhats({ subject: "Orçamento de pneus", message: "quero ajuda para encontrar o pneu ideal para o meu carro." })}
+          <a
+            href={waLink("Olá, quero ajuda para encontrar o pneu ideal para o meu carro.")}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block rounded-full bg-primary px-7 py-3 text-sm font-bold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:-translate-y-0.5"
           >
             Encontrar o pneu ideal para meu carro
-          </button>
+          </a>
         </div>
       </div>
     </section>
@@ -379,7 +416,6 @@ function Brands() {
 }
 
 function Services() {
-  const openWhats = useOpenWhats();
   return (
     <section id="servicos" className="relative overflow-hidden py-20 sm:py-24">
       <div className="absolute inset-0 -z-10 bg-dots" />
@@ -407,13 +443,14 @@ function Services() {
           ))}
         </div>
         <div className="mt-12 text-center">
-          <button
-            type="button"
-            onClick={() => openWhats({ subject: "Revisão / mecânica", message: "gostaria de agendar uma avaliação do meu veículo." })}
+          <a
+            href={waLink("Olá, gostaria de agendar uma avaliação do meu veículo.")}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block rounded-full bg-primary px-8 py-3.5 text-sm font-bold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:-translate-y-0.5"
           >
             Agendar avaliação do meu veículo
-          </button>
+          </a>
         </div>
       </div>
     </section>
@@ -458,7 +495,6 @@ function WhyUs() {
 }
 
 function HowItWorks() {
-  const openWhats = useOpenWhats();
   const steps = [
     { icon: MessageCircle, title: "Chame pelo WhatsApp", desc: "Informe seu veículo ou necessidade." },
     { icon: MapPin, title: "Venha até nossa loja", desc: "Realizamos uma avaliação completa." },
@@ -489,13 +525,14 @@ function HowItWorks() {
           ))}
         </div>
         <div className="mt-12 text-center">
-          <button
-            type="button"
-            onClick={() => openWhats({ subject: "Orçamento de pneus", message: "quero receber meu orçamento agora." })}
+          <a
+            href={waLink("Olá, quero receber meu orçamento agora.")}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block rounded-full bg-primary px-8 py-3.5 text-sm font-bold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:-translate-y-0.5"
           >
             Receber meu orçamento agora
-          </button>
+          </a>
         </div>
       </div>
     </section>
@@ -503,7 +540,6 @@ function HowItWorks() {
 }
 
 function FinalCTA() {
-  const openWhats = useOpenWhats();
   const perks = [
     "Avaliação especializada",
     "Melhores opções para seu veículo",
@@ -524,13 +560,14 @@ function FinalCTA() {
           ))}
         </ul>
         <div className="mt-10">
-          <button
-            type="button"
-            onClick={() => openWhats({ subject: "Orçamento de pneus", message: "quero meu orçamento, por favor." })}
+          <a
+            href={waLink("Olá, quero meu orçamento, por favor.")}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-10 py-4 text-base font-black uppercase tracking-wide text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
           >
             Quero meu orçamento
-          </button>
+          </a>
         </div>
       </div>
     </section>
@@ -596,7 +633,6 @@ function Contact() {
 }
 
 function Reviews() {
-  const openWhats = useOpenWhats();
   return (
     <section id="depoimentos" className="relative overflow-hidden py-20 sm:py-24">
       <div className="absolute inset-0 -z-10" style={{ background: "linear-gradient(180deg, oklch(0.98 0.01 260) 0%, oklch(1 0 0) 100%)" }} />
@@ -658,13 +694,14 @@ function Reviews() {
           ))}
         </div>
         <div className="mt-10 text-center">
-          <button
-            type="button"
-            onClick={() => openWhats({ subject: "Informações comerciais", message: "vi as avaliações no site e quero ser o próximo cliente satisfeito da PneuZ." })}
+          <a
+            href={waLink("Olá, vi as avaliações no site e quero ser o próximo cliente satisfeito da PneuZ.")}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-8 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
           >
             <MessageCircle className="h-4 w-4" /> Quero um atendimento assim, falar no WhatsApp
-          </button>
+          </a>
         </div>
       </div>
     </section>
@@ -672,7 +709,6 @@ function Reviews() {
 }
 
 function ContactSection() {
-  const openWhats = useOpenWhats();
   return (
     <section id="contato" className="relative overflow-hidden py-20 sm:py-24 bg-radial-brand">
       <div className="mx-auto max-w-7xl px-4">
@@ -701,20 +737,22 @@ function ContactSection() {
           />
         </div>
         <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
-          <button
-            type="button"
-            onClick={() => openWhats({ subject: "Informações comerciais", message: "gostaria de falar com a PneuZ Araucária pelo WhatsApp." })}
+          <a
+            href={waLink("Olá, gostaria de falar com a PneuZ Araucária pelo WhatsApp.")}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent-yellow)] px-7 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5 sm:px-8"
           >
             <MessageCircle className="h-4 w-4" /> Falar no WhatsApp
-          </button>
-          <button
-            type="button"
-            onClick={() => openWhats({ subject: "Informações comerciais", message: "gostaria de saber como chegar até a loja e confirmar o endereço." })}
+          </a>
+          <a
+            href={waLink("Olá, gostaria de saber como chegar até a loja e confirmar o endereço.")}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary px-7 py-3.5 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground sm:px-8"
           >
             <MapPin className="h-4 w-4" /> Como chegar
-          </button>
+          </a>
         </div>
         <div className="mt-10 overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-brand)]">
           <iframe
@@ -783,7 +821,6 @@ function FAQ() {
 }
 
 function Footer() {
-  const openWhats = useOpenWhats();
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-4">
@@ -815,7 +852,7 @@ function Footer() {
           <div className="flex gap-3">
             <a href="https://www.instagram.com/pneuz_araucaria" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="rounded-full bg-white/10 p-2.5 hover:bg-[var(--accent-yellow)] hover:text-primary"><Instagram className="h-5 w-5" /></a>
             <a href="https://www.facebook.com/pneuzaraucaria/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="rounded-full bg-white/10 p-2.5 hover:bg-[var(--accent-yellow)] hover:text-primary"><Facebook className="h-5 w-5" /></a>
-            <button type="button" onClick={() => openWhats()} aria-label="WhatsApp" className="rounded-full bg-white/10 p-2.5 hover:bg-[var(--accent-yellow)] hover:text-primary"><MessageCircle className="h-5 w-5" /></button>
+            <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="rounded-full bg-white/10 p-2.5 hover:bg-[var(--accent-yellow)] hover:text-primary"><MessageCircle className="h-5 w-5" /></a>
           </div>
           <a href="#" className="mt-4 inline-block text-xs text-white/60 hover:text-[var(--accent-yellow)]">Política de privacidade</a>
         </div>
@@ -828,167 +865,15 @@ function Footer() {
 }
 
 function FloatingWhats() {
-  const openWhats = useOpenWhats();
   return (
-    <button
-      type="button"
-      onClick={() => openWhats()}
+    <a
+      href={WHATSAPP}
+      target="_blank"
+      rel="noopener noreferrer"
       aria-label="Abrir chat do WhatsApp"
       className="animate-wa-pulse fixed bottom-4 right-4 z-50 flex h-16 w-16 items-center justify-center rounded-full transition-transform hover:scale-110 sm:bottom-6 sm:right-6"
     >
       <img src={whatsappIcon} alt="WhatsApp" width={64} height={64} className="h-16 w-16" loading="lazy" />
-    </button>
-  );
-}
-
-function maskPhone(v: string) {
-  const d = v.replace(/\D/g, "").slice(0, 11);
-  if (d.length <= 2) return d;
-  if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
-  if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
-  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
-}
-
-const SUBJECTS = [
-  "Orçamento de pneus",
-  "Alinhamento e balanceamento",
-  "Revisão / mecânica",
-  "Informações comerciais",
-  "Suporte técnico",
-  "Outros",
-];
-
-function WhatsAppModal({ intent, onClose }: { intent: WhatsIntent; onClose: () => void }) {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [subject, setSubject] = useState(
-    intent.subject && SUBJECTS.includes(intent.subject) ? intent.subject : SUBJECTS[0],
-  );
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prev;
-    };
-  }, [onClose]);
-
-  const canSend = name.trim().length >= 2 && phone.replace(/\D/g, "").length >= 10;
-
-  const handleSend = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!canSend) return;
-    const closing = intent.message ?? "gostaria de mais informações, obrigado!";
-    const msg =
-      `Olá, PneuZ! Meu nome é ${name.trim()}.` +
-      `\nAssunto: ${subject}.` +
-      `\nMeu WhatsApp: ${phone}.` +
-      `\n${closing}`;
-    window.open(waLink(msg), "_blank", "noopener,noreferrer");
-    onClose();
-  };
-
-  const headline = intent.headline ?? "Olá! 👋 Preencha seus dados para iniciarmos o atendimento no WhatsApp.";
-
-  return (
-    <div
-      className="fixed inset-0 z-[60] flex items-end justify-center bg-black/60 p-0 backdrop-blur-sm animate-fade-in sm:items-center sm:p-4"
-      onClick={onClose}
-      role="dialog"
-      aria-modal="true"
-    >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-md overflow-hidden rounded-t-3xl bg-[#ECE5DD] shadow-2xl sm:rounded-3xl"
-      >
-        <div className="flex items-center justify-between gap-3 bg-[#075E54] px-5 py-4 text-white">
-          <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#25D366]">
-              <MessageCircle className="h-6 w-6" />
-            </div>
-            <div className="leading-tight">
-              <div className="text-sm font-bold">PneuZ Araucária</div>
-              <div className="flex items-center gap-1.5 text-[11px] text-white/80">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#25D366]" /> Online agora
-              </div>
-            </div>
-          </div>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Fechar"
-            className="rounded-full p-1.5 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
-          >
-            <X className="h-5 w-5" />
-          </button>
-        </div>
-
-        <div
-          className="px-5 py-4"
-          style={{
-            backgroundImage:
-              "radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px)",
-            backgroundSize: "16px 16px",
-          }}
-        >
-          <div className="mb-4 max-w-[85%] rounded-2xl rounded-tl-sm bg-white px-4 py-3 text-sm text-gray-800 shadow-sm">
-            {headline}
-          </div>
-
-          <form onSubmit={handleSend} className="space-y-3">
-            <div>
-              <label className="mb-1 block text-xs font-semibold text-gray-700">Primeiro nome</label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value.slice(0, 40))}
-                placeholder="Seu nome"
-                required
-                className="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 outline-none focus:border-[#25D366] focus:ring-2 focus:ring-[#25D366]/30"
-              />
-            </div>
-            <div>
-              <label className="mb-1 block text-xs font-semibold text-gray-700">Número de WhatsApp</label>
-              <input
-                type="tel"
-                inputMode="tel"
-                value={phone}
-                onChange={(e) => setPhone(maskPhone(e.target.value))}
-                placeholder="(41) 99999-9999"
-                required
-                className="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 outline-none focus:border-[#25D366] focus:ring-2 focus:ring-[#25D366]/30"
-              />
-            </div>
-            <div>
-              <label className="mb-1 block text-xs font-semibold text-gray-700">Assunto de interesse</label>
-              <select
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
-                className="w-full rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900 outline-none focus:border-[#25D366] focus:ring-2 focus:ring-[#25D366]/30"
-              >
-                {SUBJECTS.map((s) => (
-                  <option key={s} value={s}>{s}</option>
-                ))}
-              </select>
-            </div>
-            <button
-              type="submit"
-              disabled={!canSend}
-              className="mt-2 flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 text-sm font-bold text-white shadow-md transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:bg-gray-400"
-            >
-              <Send className="h-4 w-4" /> Iniciar conversa no WhatsApp
-            </button>
-            <p className="text-center text-[10px] text-gray-500">
-              Ao continuar você será redirecionado para o WhatsApp.
-            </p>
-          </form>
-        </div>
-      </div>
-    </div>
+    </a>
   );
 }
