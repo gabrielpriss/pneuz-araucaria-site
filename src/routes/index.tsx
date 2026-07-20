@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   Wrench,
   Gauge,
@@ -24,9 +24,18 @@ import {
 } from "lucide-react";
 import logoAsset from "@/assets/pneuz-logo.jpg";
 import iconAsset from "@/assets/pneuz-icon.png";
-import oficinaAsset from "@/assets/oficina-pneuz.png";
+import oficinaAsset from "@/assets/oficina-facade.jpg";
+import heroTiresImg from "@/assets/hero-tires.jpg";
 import whatsappIcon from "@/assets/whatsapp-icon.png";
 import { Star } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -52,6 +61,8 @@ const tirePromos = [
   { aro: 16, price: "259,90" },
   { aro: 17, price: "309,90" },
 ];
+
+const tireCarouselOpts = { loop: true, align: "start" as const };
 
 const heroBenefits = [
   { icon: Tag, label: "Preços exclusivos para instalação em loja" },
@@ -273,55 +284,6 @@ function Header() {
   );
 }
 
-function TireWheelArt({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 400 400" className={className} aria-hidden="true">
-      <defs>
-        <radialGradient id="tireShine" cx="32%" cy="26%" r="80%">
-          <stop offset="0%" stopColor="#3d434c" />
-          <stop offset="55%" stopColor="#1c1f24" />
-          <stop offset="100%" stopColor="#07080a" />
-        </radialGradient>
-        <radialGradient id="rimShine" cx="34%" cy="28%" r="75%">
-          <stop offset="0%" stopColor="#f6f8fb" />
-          <stop offset="35%" stopColor="#cdd5e2" />
-          <stop offset="72%" stopColor="#7c8aa3" />
-          <stop offset="100%" stopColor="#3c4a63" />
-        </radialGradient>
-        <radialGradient id="hubShine" cx="35%" cy="30%" r="70%">
-          <stop offset="0%" stopColor="#eef1f6" />
-          <stop offset="100%" stopColor="#8894a8" />
-        </radialGradient>
-      </defs>
-      <circle cx="200" cy="200" r="190" fill="url(#tireShine)" />
-      <circle cx="200" cy="200" r="190" fill="none" stroke="#000" strokeOpacity="0.5" strokeWidth="2" />
-      {Array.from({ length: 32 }).map((_, i) => (
-        <rect
-          key={i}
-          x="196"
-          y="10"
-          width="8"
-          height="24"
-          rx="2"
-          fill="#000"
-          opacity="0.55"
-          transform={`rotate(${(i / 32) * 360} 200 200)`}
-        />
-      ))}
-      <circle cx="200" cy="200" r="126" fill="url(#rimShine)" />
-      <circle cx="200" cy="200" r="126" fill="none" stroke="#2b3345" strokeWidth="3" />
-      {Array.from({ length: 7 }).map((_, i) => (
-        <g key={i} transform={`rotate(${(i / 7) * 360} 200 200)`}>
-          <path d="M200 200 L213 76 A132 132 0 0 1 233 82 Z" fill="#5b6a86" opacity="0.92" />
-        </g>
-      ))}
-      <circle cx="200" cy="200" r="44" fill="#1f2733" />
-      <circle cx="200" cy="200" r="44" fill="none" stroke="#8895ab" strokeWidth="2" />
-      <circle cx="200" cy="200" r="17" fill="url(#hubShine)" />
-    </svg>
-  );
-}
-
 function HeroParticles() {
   const particles = [
     { left: "8%", size: 5, duration: 5.5, delay: 0 },
@@ -368,7 +330,7 @@ function Hero() {
       <div className="absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-accent-red opacity-25 blur-[120px]" aria-hidden="true" />
       <div className="absolute inset-0 border-b border-white/5" aria-hidden="true" />
 
-      <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-4 py-16 sm:py-20 lg:grid-cols-[1.1fr_1fr] lg:py-28">
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-4 pb-24 pt-16 sm:pb-28 sm:pt-20 lg:grid-cols-[1.1fr_1fr] lg:pb-32 lg:pt-28">
         <div className="flex flex-col items-start">
           <span className="animate-hero-rise mb-5 inline-flex items-center gap-2 rounded-full border border-accent-red/40 bg-accent-red/15 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.25em] text-white sm:text-xs">
             <Zap className="h-3.5 w-3.5 text-[var(--accent-yellow)]" /> Oferta por tempo limitado
@@ -383,7 +345,7 @@ function Hero() {
             className="animate-hero-rise mt-5 max-w-lg text-base leading-relaxed text-white/75 sm:text-lg"
             style={{ animationDelay: "180ms" }}
           >
-            As melhores marcas do mercado, montagem especializada e condições facilitadas para você sair rodando com segurança hoje mesmo — em nosso centro automotivo completo em Araucária.
+            As melhores marcas do mercado, montagem especializada e condições facilitadas para você sair rodando com segurança hoje mesmo, no nosso centro automotivo completo em Araucária.
           </p>
 
           <ul
@@ -428,12 +390,21 @@ function Hero() {
           </div>
         </div>
 
-        <div className="relative mx-auto flex w-full max-w-[26rem] items-center justify-center py-8 lg:mx-0 lg:py-0">
-          <div className="absolute inset-8 -z-10 rounded-full bg-[var(--accent-yellow)]/25 blur-[80px]" aria-hidden="true" />
-          <div className="absolute inset-8 -z-10 translate-x-10 translate-y-10 rounded-full bg-accent-red/25 blur-[100px]" aria-hidden="true" />
-          <div className="absolute left-1/3 top-[-15%] -z-10 h-[130%] w-24 -rotate-[18deg] bg-gradient-to-b from-white/25 via-white/5 to-transparent blur-2xl" aria-hidden="true" />
-          <div className="absolute right-1/3 top-[-15%] -z-10 h-[130%] w-24 rotate-[18deg] bg-gradient-to-b from-white/15 via-white/5 to-transparent blur-2xl" aria-hidden="true" />
-          <TireWheelArt className="animate-tire-float w-full max-w-[22rem] drop-shadow-[0_35px_60px_rgba(0,0,0,0.6)]" />
+        <div className="relative mx-auto flex w-full max-w-[28rem] items-center justify-center py-4 lg:mx-0">
+          <div className="absolute inset-4 -z-10 rounded-[2.5rem] bg-[var(--accent-yellow)]/25 blur-[80px]" aria-hidden="true" />
+          <div className="absolute inset-4 -z-10 translate-x-8 translate-y-8 rounded-[2.5rem] bg-accent-red/20 blur-[100px]" aria-hidden="true" />
+          <div className="absolute left-1/3 top-[-10%] -z-10 h-[120%] w-24 -rotate-[18deg] bg-gradient-to-b from-white/20 via-white/5 to-transparent blur-2xl" aria-hidden="true" />
+          <div className="absolute right-1/3 top-[-10%] -z-10 h-[120%] w-24 rotate-[18deg] bg-gradient-to-b from-white/10 via-white/5 to-transparent blur-2xl" aria-hidden="true" />
+
+          <div className="animate-tire-float relative w-full overflow-hidden rounded-[2rem] border border-white/15 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.7)] ring-1 ring-white/10">
+            <img
+              src={heroTiresImg}
+              alt="Estoque de pneus novos na PneuZ Araucária"
+              className="aspect-[4/5] w-full object-cover"
+              loading="eager"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/5 to-transparent" aria-hidden="true" />
+          </div>
 
           <div className="animate-badge-glow absolute -left-2 top-2 flex items-center gap-2 rounded-2xl border border-white/10 bg-primary/85 px-3.5 py-2.5 shadow-2xl backdrop-blur sm:-left-8 sm:top-6">
             <ShieldCheck className="h-5 w-5 shrink-0 text-[var(--accent-yellow)]" />
@@ -454,13 +425,101 @@ function Hero() {
           </div>
         </div>
       </div>
+
+      <div className="absolute inset-x-0 bottom-0 leading-[0] text-white" aria-hidden="true">
+        <svg viewBox="0 0 1440 110" className="h-16 w-full sm:h-24" preserveAspectRatio="none">
+          <path d="M0,50 C240,110 480,0 720,35 C960,70 1200,110 1440,55 L1440,110 L0,110 Z" fill="currentColor" />
+        </svg>
+      </div>
     </section>
   );
 }
 
-function TireOffers() {
+function TireOfferCard({ t }: { t: { aro: number; price: string } }) {
   return (
-    <section className="relative overflow-hidden bg-white py-16 sm:py-20">
+    <div className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+      <div className="relative h-36 w-full overflow-hidden sm:h-40">
+        <img
+          src={heroTiresImg}
+          alt={`Pneu novo aro ${t.aro} disponível para instalação na PneuZ Araucária`}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" aria-hidden="true" />
+        <span
+          className="absolute -left-8 top-3 w-32 -rotate-45 bg-accent-red py-1 text-center text-[8px] font-black uppercase tracking-wider text-white shadow-md"
+          aria-hidden="true"
+        >
+          Pneus novos
+        </span>
+        <span className="absolute right-2 top-2 flex h-10 w-10 flex-col items-center justify-center rounded-full bg-[var(--accent-yellow)]/95 text-center leading-none text-primary shadow-md">
+          <span className="text-[6px] font-bold uppercase">até</span>
+          <span className="text-xs font-black">10x</span>
+        </span>
+        <div className="absolute bottom-2 left-2 flex items-center gap-1 rounded-full border border-white/30 bg-white/15 px-2.5 py-1 text-[8px] font-black uppercase tracking-wide text-white backdrop-blur-md">
+          <ShieldCheck className="h-3 w-3 text-[var(--accent-yellow)]" /> Garantia de 5 anos
+        </div>
+      </div>
+
+      <div className="flex flex-1 flex-col items-center px-4 pb-5 pt-4 text-center">
+        <div className="text-xs font-black uppercase tracking-widest text-primary">Aro {t.aro}</div>
+        <div className="mt-2 rounded-2xl bg-primary px-4 py-2">
+          <div className="text-[9px] font-bold uppercase tracking-wide text-white/60">a partir de</div>
+          <div className="text-2xl font-black leading-none text-[var(--accent-yellow)]">R$ {t.price}</div>
+        </div>
+        <p className="mt-3 text-[10px] font-semibold leading-snug text-muted-foreground">
+          Preço exclusivo para instalação em loja
+        </p>
+        <p className="text-[10px] font-semibold leading-snug text-muted-foreground">
+          Parcelamento em até 10x no cartão
+        </p>
+        <a
+          href={waLink(`Olá, vim pelo site e quero solicitar um orçamento do pneu Aro ${t.aro} a partir de R$ ${t.price}.`)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex w-full items-center justify-center gap-1.5 rounded-full bg-accent-red px-3 py-3 text-xs font-bold uppercase tracking-wide text-white shadow-md transition-colors hover:bg-primary"
+        >
+          <MessageCircle className="h-4 w-4" /> Solicitar orçamento
+        </a>
+      </div>
+    </div>
+  );
+}
+
+function TireOffers() {
+  const [api, setApi] = useState<CarouselApi>();
+  const [selected, setSelected] = useState(0);
+  const [count, setCount] = useState(0);
+  const autoplay = useRef(true);
+
+  useEffect(() => {
+    if (!api) return;
+    setCount(api.scrollSnapList().length);
+    setSelected(api.selectedScrollSnap());
+    const onSelect = () => setSelected(api.selectedScrollSnap());
+    api.on("select", onSelect);
+    return () => {
+      api.off("select", onSelect);
+    };
+  }, [api]);
+
+  useEffect(() => {
+    if (!api) return;
+    const id = window.setInterval(() => {
+      if (autoplay.current) api.scrollNext();
+    }, 4200);
+    return () => window.clearInterval(id);
+  }, [api]);
+
+  const pause = useCallback(() => {
+    autoplay.current = false;
+  }, []);
+  const resume = useCallback(() => {
+    autoplay.current = true;
+  }, []);
+
+  return (
+    <section className="relative overflow-hidden bg-white pb-16 pt-10 sm:pb-20 sm:pt-14">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mb-10 text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-accent-red/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-accent-red">
@@ -471,55 +530,35 @@ function TireOffers() {
             Preço exclusivo para instalação em nossa loja em Araucária. Parcelamento em até 10x no cartão.
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 sm:gap-x-5 lg:grid-cols-5">
-          {tirePromos.map((t) => (
-            <div key={t.aro} className="group relative flex flex-col items-center pt-4 transition-transform hover:-translate-y-1.5">
-              <span
-                className="absolute -left-8 top-3 z-20 w-32 -rotate-45 bg-accent-red py-1 text-center text-[8px] font-black uppercase tracking-wider text-white shadow-md"
-                aria-hidden="true"
-              >
-                Pneus novos
-              </span>
-              <span className="absolute right-1 top-0 z-20 flex h-11 w-11 flex-col items-center justify-center rounded-full bg-[var(--accent-yellow)] text-center leading-none text-primary shadow-md">
-                <span className="text-[6px] font-bold uppercase">até</span>
-                <span className="text-xs font-black">10x</span>
-              </span>
 
-              <div className="relative flex h-28 w-full items-center justify-center overflow-hidden rounded-t-3xl border border-border bg-radial-brand sm:h-32">
-                <TireWheelArt className="h-24 w-24 -rotate-12 drop-shadow-xl transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105 sm:h-28 sm:w-28" />
-              </div>
+        <Carousel
+          setApi={setApi}
+          opts={tireCarouselOpts}
+          onMouseEnter={pause}
+          onMouseLeave={resume}
+          onTouchStart={pause}
+          className="mx-auto"
+        >
+          <CarouselContent className="-ml-4 py-2">
+            {tirePromos.map((t) => (
+              <CarouselItem key={t.aro} className="basis-[80%] pl-4 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                <TireOfferCard t={t} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden border-accent-red text-accent-red hover:bg-accent-red hover:text-white sm:-left-4 sm:flex" />
+          <CarouselNext className="hidden border-accent-red text-accent-red hover:bg-accent-red hover:text-white sm:-right-4 sm:flex" />
+        </Carousel>
 
-              <div
-                className="relative z-10 -mt-1 flex w-[90%] flex-col items-center bg-accent-red px-2 pb-4 pt-3 text-center text-white shadow-lg"
-                style={{ clipPath: "polygon(0 0, 100% 0, 100% 80%, 88% 100%, 12% 100%, 0 80%)" }}
-              >
-                <div className="text-[10px] font-black uppercase tracking-widest">Aro {t.aro}</div>
-                <div className="mt-0.5 text-[8px] font-semibold uppercase tracking-wide text-white/80">a partir de</div>
-                <div className="text-xl font-black leading-none text-[var(--accent-yellow)] sm:text-2xl">R$ {t.price}</div>
-              </div>
-
-              <div className="-mt-1 flex items-center gap-1 rounded-full border border-[var(--accent-yellow)]/50 bg-[var(--accent-yellow)]/15 px-2.5 py-1 text-[8px] font-black uppercase tracking-wide text-primary shadow-sm">
-                <ShieldCheck className="h-3 w-3" /> Garantia de 5 anos
-              </div>
-
-              <div className="mt-2 px-1 text-center">
-                <p className="text-[8px] font-semibold leading-snug text-muted-foreground">
-                  Preço exclusivo para instalação em loja
-                </p>
-                <p className="text-[8px] font-semibold leading-snug text-muted-foreground">
-                  Parcelamento em até 10x no cartão
-                </p>
-              </div>
-
-              <a
-                href={waLink(`Olá, vim pelo site e quero solicitar um orçamento do pneu Aro ${t.aro} a partir de R$ ${t.price}.`)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-full bg-accent-red px-3 py-2.5 text-[10px] font-bold uppercase tracking-wide text-white shadow-md transition-colors hover:bg-primary"
-              >
-                <MessageCircle className="h-3.5 w-3.5" /> Solicitar orçamento
-              </a>
-            </div>
+        <div className="mt-6 flex items-center justify-center gap-2">
+          {Array.from({ length: count }).map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              aria-label={`Ir para oferta ${i + 1}`}
+              onClick={() => api?.scrollTo(i)}
+              className={`h-1.5 rounded-full transition-all ${i === selected ? "w-6 bg-accent-red" : "w-1.5 bg-border"}`}
+            />
           ))}
         </div>
       </div>
