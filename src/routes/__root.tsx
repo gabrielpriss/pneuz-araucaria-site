@@ -114,6 +114,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-S3Q87Z3CCG"></script>
         <script>{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-S3Q87Z3CCG');`}</script>
+        <script>{`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "xpinka3c2v");`}</script>
       </head>
       <body>
         {children}
