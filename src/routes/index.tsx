@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Wrench,
-  Disc,
   Gauge,
   Cog,
   Droplet,
@@ -20,10 +19,11 @@ import {
   Search,
   Settings,
   ShieldCheck,
+  CreditCard,
+  Tag,
 } from "lucide-react";
 import logoAsset from "@/assets/pneuz-logo.jpg";
 import iconAsset from "@/assets/pneuz-icon.png";
-import heroImg from "@/assets/hero-tires.jpg";
 import oficinaAsset from "@/assets/oficina-pneuz.png";
 import whatsappIcon from "@/assets/whatsapp-icon.png";
 import { Star } from "lucide-react";
@@ -51,6 +51,14 @@ const tirePromos = [
   { aro: 15, price: "209,90" },
   { aro: 16, price: "259,90" },
   { aro: 17, price: "309,90" },
+];
+
+const heroBenefits = [
+  { icon: Tag, label: "Preços exclusivos para instalação em loja" },
+  { icon: ShieldCheck, label: "Garantia de 5 anos em todos os pneus" },
+  { icon: CreditCard, label: "Parcelamento em até 10x no cartão" },
+  { icon: Wrench, label: "Instalação rápida por profissionais especializados" },
+  { icon: MessageCircle, label: "Orçamento imediato pelo WhatsApp" },
 ];
 
 import bridgestoneAsset from "@/assets/brands/bridgestone.png";
@@ -162,6 +170,7 @@ function Index() {
       <TopBar />
       <Header />
       <Hero />
+      <TireOffers />
       <Brands />
       <Services />
       <WhyUs />
@@ -264,117 +273,243 @@ function Header() {
   );
 }
 
+function TireWheelArt({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 400 400" className={className} aria-hidden="true">
+      <defs>
+        <radialGradient id="tireShine" cx="32%" cy="26%" r="80%">
+          <stop offset="0%" stopColor="#3d434c" />
+          <stop offset="55%" stopColor="#1c1f24" />
+          <stop offset="100%" stopColor="#07080a" />
+        </radialGradient>
+        <radialGradient id="rimShine" cx="34%" cy="28%" r="75%">
+          <stop offset="0%" stopColor="#f6f8fb" />
+          <stop offset="35%" stopColor="#cdd5e2" />
+          <stop offset="72%" stopColor="#7c8aa3" />
+          <stop offset="100%" stopColor="#3c4a63" />
+        </radialGradient>
+        <radialGradient id="hubShine" cx="35%" cy="30%" r="70%">
+          <stop offset="0%" stopColor="#eef1f6" />
+          <stop offset="100%" stopColor="#8894a8" />
+        </radialGradient>
+      </defs>
+      <circle cx="200" cy="200" r="190" fill="url(#tireShine)" />
+      <circle cx="200" cy="200" r="190" fill="none" stroke="#000" strokeOpacity="0.5" strokeWidth="2" />
+      {Array.from({ length: 32 }).map((_, i) => (
+        <rect
+          key={i}
+          x="196"
+          y="10"
+          width="8"
+          height="24"
+          rx="2"
+          fill="#000"
+          opacity="0.55"
+          transform={`rotate(${(i / 32) * 360} 200 200)`}
+        />
+      ))}
+      <circle cx="200" cy="200" r="126" fill="url(#rimShine)" />
+      <circle cx="200" cy="200" r="126" fill="none" stroke="#2b3345" strokeWidth="3" />
+      {Array.from({ length: 7 }).map((_, i) => (
+        <g key={i} transform={`rotate(${(i / 7) * 360} 200 200)`}>
+          <path d="M200 200 L213 76 A132 132 0 0 1 233 82 Z" fill="#5b6a86" opacity="0.92" />
+        </g>
+      ))}
+      <circle cx="200" cy="200" r="44" fill="#1f2733" />
+      <circle cx="200" cy="200" r="44" fill="none" stroke="#8895ab" strokeWidth="2" />
+      <circle cx="200" cy="200" r="17" fill="url(#hubShine)" />
+    </svg>
+  );
+}
+
+function HeroParticles() {
+  const particles = [
+    { left: "8%", size: 5, duration: 5.5, delay: 0 },
+    { left: "18%", size: 3, duration: 4.2, delay: 1.1 },
+    { left: "32%", size: 4, duration: 6.1, delay: 0.4 },
+    { left: "46%", size: 3, duration: 5, delay: 2 },
+    { left: "58%", size: 5, duration: 4.6, delay: 0.8 },
+    { left: "71%", size: 3, duration: 5.8, delay: 1.6 },
+    { left: "83%", size: 4, duration: 5.2, delay: 0.2 },
+    { left: "93%", size: 3, duration: 4.8, delay: 2.4 },
+  ];
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+      {particles.map((p, i) => (
+        <span
+          key={i}
+          className="hero-particle absolute bottom-0 rounded-full bg-[var(--accent-yellow)]"
+          style={{
+            left: p.left,
+            width: p.size,
+            height: p.size,
+            animationDuration: `${p.duration}s`,
+            animationDelay: `${p.delay}s`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 function Hero() {
   return (
-    <section id="inicio" className="relative overflow-hidden">
-      <div className="absolute inset-0">
-        <img src={heroImg} alt="" className="h-full w-full object-cover" />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(120deg, oklch(0.22 0.14 267 / 0.92) 0%, oklch(0.32 0.16 267 / 0.75) 60%, oklch(0.22 0.14 267 / 0.6) 100%)" }} />
-      </div>
-      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-16 sm:py-24 md:py-32 lg:grid-cols-[1.15fr_1fr] lg:items-center">
+    <section
+      id="inicio"
+      className="relative overflow-hidden"
+      style={{
+        background:
+          "radial-gradient(ellipse 900px 700px at 15% -10%, oklch(0.34 0.17 267) 0%, oklch(0.14 0.05 264) 55%, oklch(0.06 0.02 260) 100%)",
+      }}
+    >
+      <div className="hero-speedlines absolute inset-0 opacity-70" aria-hidden="true" />
+      <HeroParticles />
+      <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-[var(--accent-yellow)] opacity-20 blur-[110px]" aria-hidden="true" />
+      <div className="absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-accent-red opacity-25 blur-[120px]" aria-hidden="true" />
+      <div className="absolute inset-0 border-b border-white/5" aria-hidden="true" />
+
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-4 py-16 sm:py-20 lg:grid-cols-[1.1fr_1fr] lg:py-28">
         <div className="flex flex-col items-start">
-          <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.25em] text-primary sm:text-xs">
-            <CircleDot className="h-3.5 w-3.5" /> Centro Automotivo
+          <span className="animate-hero-rise mb-5 inline-flex items-center gap-2 rounded-full border border-accent-red/40 bg-accent-red/15 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.25em] text-white sm:text-xs">
+            <Zap className="h-3.5 w-3.5 text-[var(--accent-yellow)]" /> Oferta por tempo limitado
           </span>
-          <h1 className="max-w-3xl text-3xl font-black leading-[1.05] tracking-tight text-white sm:text-4xl md:text-6xl">
-            Seu carro merece <span className="text-[var(--accent-yellow)]">cuidado de especialista</span>. Pneus e serviços automotivos completos em Araucária.
+          <h1
+            className="animate-hero-rise max-w-xl text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl"
+            style={{ animationDelay: "90ms" }}
+          >
+            Pneus novos. <span className="text-[var(--accent-yellow)]">Preço imbatível.</span> Instalação na hora.
           </h1>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 sm:mt-6 sm:text-lg">
-            Tenha acesso às melhores marcas de pneus, serviços de manutenção e uma equipe especializada perto de você. Faça seu orçamento e receba as melhores condições sem precisar sair de Araucária.
+          <p
+            className="animate-hero-rise mt-5 max-w-lg text-base leading-relaxed text-white/75 sm:text-lg"
+            style={{ animationDelay: "180ms" }}
+          >
+            As melhores marcas do mercado, montagem especializada e condições facilitadas para você sair rodando com segurança hoje mesmo — em nosso centro automotivo completo em Araucária.
           </p>
-          <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+
+          <ul
+            className="animate-hero-rise mt-7 grid w-full grid-cols-1 gap-2.5 sm:grid-cols-2"
+            style={{ animationDelay: "270ms" }}
+          >
+            {heroBenefits.map((b) => (
+              <li
+                key={b.label}
+                className="flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-xs font-semibold text-white/90 backdrop-blur"
+              >
+                <b.icon className="h-4 w-4 shrink-0 text-[var(--accent-yellow)]" /> {b.label}
+              </li>
+            ))}
+          </ul>
+
+          <div
+            className="animate-hero-rise mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row"
+            style={{ animationDelay: "360ms" }}
+          >
             <a
-              href={waLink("Olá, gostaria de falar com um especialista.")}
+              href={waLink("Olá, vim pelo site e quero solicitar um orçamento de pneus.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full bg-[var(--accent-yellow)] px-7 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent-yellow)] px-8 py-4 text-sm font-black uppercase tracking-wide text-primary shadow-[0_20px_45px_-15px_oklch(0.85_0.17_90_/_0.7)] transition-all hover:-translate-y-1 hover:shadow-[0_28px_55px_-15px_oklch(0.85_0.17_90_/_0.85)]"
             >
-              Fale com um especialista
+              <MessageCircle className="h-4 w-4 transition-transform group-hover:scale-110" /> Solicitar orçamento no WhatsApp
             </a>
             <a
               href="#servicos"
-              className="inline-flex items-center justify-center rounded-full border border-white/30 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
+              className="inline-flex items-center justify-center rounded-full border border-white/25 px-8 py-4 text-sm font-bold text-white transition-colors hover:bg-white/10"
             >
-              Nossos serviços
+              Ver todos os serviços
             </a>
           </div>
-          <div className="mt-8 flex flex-wrap items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70 sm:mt-10 sm:gap-6 sm:text-xs">
-            <span className="flex items-center gap-2"><Star className="h-4 w-4 fill-[var(--accent-yellow)] text-[var(--accent-yellow)]" /> +1.000 avaliações no Google</span>
-            <span className="flex items-center gap-2"><CircleDot className="h-4 w-4 text-[var(--accent-yellow)]" /> Até 10x sem juros</span>
-            <span className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[var(--accent-yellow)]" /> Garantia em produtos e serviços</span>
+
+          <div
+            className="animate-hero-rise mt-8 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/60 sm:text-xs"
+            style={{ animationDelay: "440ms" }}
+          >
+            <Star className="h-4 w-4 fill-[var(--accent-yellow)] text-[var(--accent-yellow)]" /> +1.000 avaliações no Google
           </div>
         </div>
-        <div className="relative hidden lg:block">
-          <div className="absolute -left-6 -top-6 h-40 w-40 rounded-full bg-[var(--accent-yellow)] opacity-40 blur-3xl" />
-          <div className="absolute -bottom-6 -right-6 h-48 w-48 rounded-full bg-primary-glow opacity-40 blur-3xl" />
-          <div className="relative overflow-hidden rounded-3xl border border-white/20 shadow-[var(--shadow-brand)] ring-1 ring-white/10">
-            <img
-              src={oficinaAsset}
-              alt="Fachada da sede PneuZ em Araucária"
-              className="aspect-[4/5] w-full object-cover"
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/95 via-primary/60 to-transparent p-5">
-              <div className="flex items-end justify-between gap-4">
-                <div>
-                  <div className="text-[10px] font-bold uppercase tracking-[0.25em] text-[var(--accent-yellow)]">Nossa sede</div>
-                  <div className="mt-1 text-lg font-black leading-tight text-white">Av. Dr. Vítor do Amaral, 1380</div>
-                  <div className="text-xs text-white/80">Centro, Araucária/PR</div>
-                </div>
-                <div className="rounded-xl bg-[var(--accent-yellow)] px-3 py-2 text-center text-primary">
-                  <div className="text-lg font-black leading-none">+1k</div>
-                  <div className="text-[9px] font-bold uppercase tracking-widest">Clientes</div>
-                </div>
-              </div>
+
+        <div className="relative mx-auto flex w-full max-w-[26rem] items-center justify-center py-8 lg:mx-0 lg:py-0">
+          <div className="absolute inset-8 -z-10 rounded-full bg-[var(--accent-yellow)]/25 blur-[80px]" aria-hidden="true" />
+          <div className="absolute inset-8 -z-10 translate-x-10 translate-y-10 rounded-full bg-accent-red/25 blur-[100px]" aria-hidden="true" />
+          <TireWheelArt className="animate-tire-float w-full max-w-[22rem] drop-shadow-[0_35px_60px_rgba(0,0,0,0.6)]" />
+
+          <div className="animate-badge-glow absolute -left-2 top-2 flex items-center gap-2 rounded-2xl border border-white/10 bg-primary/85 px-3.5 py-2.5 shadow-2xl backdrop-blur sm:-left-8 sm:top-6">
+            <ShieldCheck className="h-5 w-5 shrink-0 text-[var(--accent-yellow)]" />
+            <div className="leading-tight">
+              <div className="text-sm font-black text-white">5 anos</div>
+              <div className="text-[9px] font-bold uppercase tracking-widest text-white/60">de garantia</div>
             </div>
+          </div>
+
+          <div className="absolute -right-2 top-1/3 flex items-center gap-2 rounded-2xl border border-white/10 bg-primary/85 px-3.5 py-2.5 shadow-2xl backdrop-blur sm:-right-6">
+            <CreditCard className="h-5 w-5 shrink-0 text-[var(--accent-yellow)]" />
+            <div className="text-sm font-black text-white">10x sem juros</div>
+          </div>
+
+          <div className="animate-price-glow absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-2xl bg-[var(--accent-yellow)] px-5 py-3 text-center shadow-[var(--shadow-yellow)] sm:-bottom-4">
+            <div className="text-[9px] font-black uppercase tracking-widest text-primary/70">a partir de</div>
+            <div className="text-2xl font-black leading-none text-primary">R$ 189,90</div>
           </div>
         </div>
       </div>
-      <div className="relative mx-auto max-w-7xl px-4 pb-12 sm:pb-16">
-        <div
-          className="overflow-hidden rounded-3xl shadow-[var(--shadow-brand)] ring-4 ring-[var(--accent-yellow)]/40"
-          style={{ background: "linear-gradient(135deg, oklch(0.9 0.19 95) 0%, oklch(0.82 0.19 85) 100%)" }}
-        >
-          <div className="px-5 pb-2 pt-7 text-center sm:px-10 sm:pt-9">
-            <div className="mx-auto mb-3 inline-flex items-center gap-2 rounded-full bg-primary px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.25em] text-[var(--accent-yellow)]">
-              <CircleDot className="h-3.5 w-3.5" /> Promoção de pneus
-            </div>
-            <h2 className="mx-auto max-w-2xl text-2xl font-black leading-tight text-primary sm:text-3xl md:text-4xl">
-              Os melhores preços você encontra na PneuZ Araucária
-            </h2>
-            <p className="mx-auto mt-2 max-w-lg text-xs font-bold uppercase tracking-wide text-primary/70 sm:text-sm">
-              Preços válidos apenas para instalação em nossa loja em Araucária
-            </p>
-          </div>
-          <div className="grid grid-cols-2 gap-3 px-4 pb-6 pt-5 sm:grid-cols-3 sm:gap-4 sm:px-8 sm:pb-8 lg:grid-cols-5">
-            {tirePromos.map((t) => (
-              <a
-                key={t.aro}
-                href={waLink(`Olá, vim pelo site e quero saber mais sobre o pneu Aro ${t.aro} a partir de R$ ${t.price}.`)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative flex flex-col items-center overflow-hidden rounded-2xl bg-primary pb-4 pt-7 text-center shadow-lg transition-transform hover:-translate-y-1.5"
-              >
-                <span
-                  className="absolute -left-9 top-3 w-32 bg-red-600 py-1 text-center text-[9px] font-black uppercase tracking-wider text-white shadow-sm"
-                  style={{ transform: "rotate(-45deg)" }}
-                >
-                  Pneus novos
-                </span>
-                <span className="absolute right-2 top-2 flex h-9 w-9 items-center justify-center rounded-full bg-[var(--accent-yellow)] text-[10px] font-black leading-none text-primary">
-                  10x
-                </span>
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-[var(--accent-yellow)]">
-                  <Disc className="h-8 w-8" />
+    </section>
+  );
+}
+
+function TireOffers() {
+  return (
+    <section className="relative overflow-hidden bg-white py-16 sm:py-20">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="mb-10 text-center">
+          <span className="inline-flex items-center gap-2 rounded-full bg-accent-red/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-accent-red">
+            <Tag className="h-3.5 w-3.5" /> Ofertas da semana
+          </span>
+          <h2 className="mt-3 text-2xl font-black text-primary sm:text-3xl md:text-4xl">Preços exclusivos por aro</h2>
+          <p className="mx-auto mt-2 max-w-xl text-sm font-semibold text-muted-foreground">
+            Preço exclusivo para instalação em nossa loja em Araucária. Parcelamento em até 10x no cartão.
+          </p>
+        </div>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+          {tirePromos.map((t) => (
+            <div
+              key={t.aro}
+              className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition-all hover:-translate-y-1.5 hover:shadow-[var(--shadow-brand)]"
+            >
+              <span className="absolute left-3 top-3 z-10 rounded-full bg-accent-red px-2.5 py-1 text-[9px] font-black uppercase tracking-wider text-white shadow">
+                Oferta
+              </span>
+              <span className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[var(--accent-yellow)] text-[10px] font-black text-primary shadow">
+                10x
+              </span>
+              <div className="relative flex h-28 items-center justify-center bg-radial-brand pt-3 sm:h-32">
+                <TireWheelArt className="h-24 w-24 drop-shadow-lg transition-transform group-hover:scale-105 sm:h-28 sm:w-28" />
+              </div>
+              <div className="flex flex-1 flex-col items-center px-3 pb-4 pt-2 text-center">
+                <div className="text-xs font-black uppercase tracking-widest text-primary">Aro {t.aro}</div>
+                <div className="mt-2 rounded-xl bg-[var(--accent-yellow)]/15 px-3 py-1.5">
+                  <div className="text-[9px] font-bold uppercase tracking-wide text-primary/60">a partir de</div>
+                  <div className="text-xl font-black text-primary">R$ {t.price}</div>
                 </div>
-                <div className="mt-3 text-xs font-bold uppercase tracking-widest text-white/70">Aro {t.aro}</div>
-                <div className="text-[10px] font-semibold uppercase tracking-wide text-white/50">a partir de</div>
-                <div className="mt-1 text-xl font-black text-[var(--accent-yellow)] sm:text-2xl">R$ {t.price}</div>
-                <span className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[var(--accent-yellow)] px-3 py-1.5 text-[10px] font-bold text-primary transition-colors group-hover:bg-white">
-                  <MessageCircle className="h-3 w-3" /> WhatsApp
-                </span>
-              </a>
-            ))}
-          </div>
+                <div className="mt-2 flex items-center gap-1 text-[9px] font-bold uppercase tracking-wide text-muted-foreground">
+                  <ShieldCheck className="h-3 w-3 text-primary" /> 5 anos de garantia
+                </div>
+                <p className="mt-1.5 text-[9px] font-semibold leading-snug text-muted-foreground">
+                  Preço exclusivo para instalação em loja
+                </p>
+                <p className="text-[9px] font-semibold leading-snug text-muted-foreground">
+                  Parcelamento em até 10x no cartão
+                </p>
+                <a
+                  href={waLink(`Olá, vim pelo site e quero solicitar um orçamento do pneu Aro ${t.aro} a partir de R$ ${t.price}.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-full bg-primary px-3 py-2.5 text-[11px] font-bold text-white transition-colors group-hover:bg-accent-red"
+                >
+                  <MessageCircle className="h-3.5 w-3.5" /> Solicitar orçamento
+                </a>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
