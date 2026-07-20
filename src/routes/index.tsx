@@ -372,19 +372,14 @@ function Hero() {
         </div>
 
         <div className="relative mx-auto flex w-full max-w-[28rem] items-center justify-center py-4 lg:mx-0">
-          <div className="absolute inset-4 -z-10 rounded-[2.5rem] bg-[var(--accent-yellow)]/25 blur-[80px]" aria-hidden="true" />
-          <div className="absolute inset-4 -z-10 translate-x-8 translate-y-8 rounded-[2.5rem] bg-accent-red/20 blur-[100px]" aria-hidden="true" />
-          <div className="absolute left-1/3 top-[-10%] -z-10 h-[120%] w-24 -rotate-[18deg] bg-gradient-to-b from-white/20 via-white/5 to-transparent blur-2xl" aria-hidden="true" />
-          <div className="absolute right-1/3 top-[-10%] -z-10 h-[120%] w-24 rotate-[18deg] bg-gradient-to-b from-white/10 via-white/5 to-transparent blur-2xl" aria-hidden="true" />
-
-          <div className="animate-tire-float relative w-full overflow-hidden rounded-[2rem] border border-white/15 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.7)] ring-1 ring-white/10">
+          <div className="relative w-full overflow-hidden rounded-[2rem] border border-white/15 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]">
             <img
               src={oficinaAsset}
               alt="Fachada da unidade PneuZ Araucária"
               className="aspect-[4/5] w-full object-cover"
               loading="eager"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/5 to-transparent" aria-hidden="true" />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-transparent to-transparent" aria-hidden="true" />
           </div>
 
           <div className="animate-badge-glow absolute -left-2 top-2 flex items-center gap-2 rounded-2xl border border-white/10 bg-primary/85 px-3.5 py-2.5 shadow-2xl backdrop-blur sm:-left-8 sm:top-6">
@@ -407,7 +402,7 @@ function Hero() {
         </div>
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 leading-[0] text-white" aria-hidden="true">
+      <div className="absolute inset-x-0 bottom-0 leading-[0]" style={{ color: "var(--surface-graphite)" }} aria-hidden="true">
         <svg viewBox="0 0 1440 110" className="h-16 w-full sm:h-24" preserveAspectRatio="none">
           <path d="M0,50 C240,110 480,0 720,35 C960,70 1200,110 1440,55 L1440,110 L0,110 Z" fill="currentColor" />
         </svg>
@@ -502,14 +497,18 @@ function TireOffers() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-white pb-16 pt-10 sm:pb-20 sm:pt-14">
+    <section
+      className="relative overflow-hidden pb-16 pt-10 sm:pb-20 sm:pt-14"
+      style={{ background: "var(--gradient-graphite)" }}
+    >
+      <div className="absolute inset-0 -z-0 opacity-[0.06] bg-grid" aria-hidden="true" />
       <div className="mx-auto max-w-7xl px-4">
         <Reveal className="mb-10 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-accent-red/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-accent-red">
+          <span className="inline-flex items-center gap-2 rounded-full border border-accent-red/30 bg-accent-red/15 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-accent-red">
             <Tag className="h-3.5 w-3.5" /> Ofertas da semana
           </span>
-          <h2 className="mt-3 text-2xl font-black text-primary sm:text-3xl md:text-4xl">Preços exclusivos por aro</h2>
-          <p className="mx-auto mt-2 max-w-xl text-sm font-semibold text-muted-foreground">
+          <h2 className="mt-3 text-2xl font-black text-white sm:text-3xl md:text-4xl">Preços exclusivos por aro</h2>
+          <p className="mx-auto mt-2 max-w-xl text-sm font-semibold text-white/60">
             Preço exclusivo para instalação em nossa loja em Araucária. Parcelamento em até 10x no cartão.
           </p>
         </Reveal>
@@ -540,7 +539,7 @@ function TireOffers() {
               type="button"
               aria-label={`Ir para oferta ${i + 1}`}
               onClick={() => api?.scrollTo(i)}
-              className={`h-1.5 rounded-full transition-all ${i === selected ? "w-6 bg-accent-red" : "w-1.5 bg-border"}`}
+              className={`h-1.5 rounded-full transition-all ${i === selected ? "w-6 bg-accent-red" : "w-1.5 bg-white/20"}`}
             />
           ))}
         </div>
@@ -588,43 +587,43 @@ function Reveal({
 
 function Brands() {
   return (
-    <section className="relative overflow-hidden border-y border-border bg-radial-brand py-12">
+    <section className="relative overflow-hidden border-y border-white/10 py-12" style={{ background: "var(--gradient-navy)" }}>
       <div className="mx-auto max-w-7xl px-4">
         <Reveal className="mb-6 text-center">
-          <h3 className="text-sm font-black uppercase tracking-widest text-primary">
+          <h3 className="text-sm font-black uppercase tracking-widest text-[var(--accent-yellow)]">
             Trabalhamos com as melhores marcas
           </h3>
-          <p className="mt-2 text-sm text-muted-foreground">
+          <p className="mt-2 text-sm text-white/60">
             Pneus de qualidade para cada tipo de veículo, escolhemos considerando modelo, uso, orçamento e segurança.
           </p>
         </Reveal>
-        <div className="marquee-mask overflow-hidden">
-          <div className="flex w-max animate-marquee items-center gap-10 sm:gap-14">
-            {[...brands, ...brands].map((b, i) => (
-              <div
-                key={`${b.name}-${i}`}
-                className="flex h-20 w-40 shrink-0 items-center justify-center rounded-xl bg-card px-4 shadow-sm ring-1 ring-border sm:h-24 sm:w-48"
-              >
-                <img
-                  src={b.src}
-                  alt={b.name}
-                  loading="lazy"
-                  className="max-h-12 max-w-full object-contain sm:max-h-14"
-                />
-              </div>
-            ))}
-          </div>
+      </div>
+      <div className="marquee-mask overflow-hidden">
+        <div className="flex w-max animate-marquee items-center gap-10 sm:gap-14">
+          {[...brands, ...brands].map((b, i) => (
+            <div
+              key={`${b.name}-${i}`}
+              className="flex h-20 w-40 shrink-0 items-center justify-center rounded-xl bg-white px-4 shadow-md sm:h-24 sm:w-48"
+            >
+              <img
+                src={b.src}
+                alt={b.name}
+                loading="lazy"
+                className="max-h-12 max-w-full object-contain sm:max-h-14"
+              />
+            </div>
+          ))}
         </div>
-        <div className="mt-8 text-center">
-          <a
-            href={waLink("Olá, quero ajuda para encontrar o pneu ideal para o meu carro.")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block rounded-full bg-primary px-7 py-3 text-sm font-bold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:-translate-y-0.5"
-          >
-            Encontrar o pneu ideal para meu carro
-          </a>
-        </div>
+      </div>
+      <div className="mx-auto mt-8 max-w-7xl px-4 text-center">
+        <a
+          href={waLink("Olá, quero ajuda para encontrar o pneu ideal para o meu carro.")}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block rounded-full bg-[var(--accent-yellow)] px-7 py-3 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
+        >
+          Encontrar o pneu ideal para meu carro
+        </a>
       </div>
     </section>
   );
@@ -632,28 +631,27 @@ function Brands() {
 
 function Services() {
   return (
-    <section id="servicos" className="relative overflow-hidden py-20 sm:py-24">
-      <div className="absolute inset-0 -z-10 bg-dots" />
-      <div className="absolute inset-0 -z-10" style={{ background: "linear-gradient(180deg, oklch(1 0 0) 0%, oklch(0.98 0.01 260) 100%)" }} />
+    <section id="servicos" className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-graphite)" }}>
+      <div className="absolute inset-0 -z-10 opacity-[0.07] bg-dots" />
       <div className="mx-auto max-w-7xl px-4">
         <Reveal className="mb-14 text-center">
           <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
             Serviços
           </div>
-          <h2 className="text-3xl font-black text-primary md:text-4xl">O que fazemos por você</h2>
-          <p className="mt-3 text-muted-foreground">Do pneu novo à revisão completa, cuidamos de cada detalhe.</p>
+          <h2 className="text-3xl font-black text-white md:text-4xl">O que fazemos por você</h2>
+          <p className="mt-3 text-white/65">Do pneu novo à revisão completa, cuidamos de cada detalhe.</p>
         </Reveal>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s) => (
             <div
               key={s.title}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)] sm:p-7"
+              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur transition-all hover:-translate-y-1 hover:bg-white/10 sm:p-7"
             >
-              <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-primary text-[var(--accent-yellow)] transition-colors group-hover:bg-[var(--accent-yellow)] group-hover:text-primary">
+              <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-[var(--accent-yellow)] text-primary transition-colors">
                 <s.icon className="h-7 w-7" />
               </div>
-              <h3 className="text-lg font-bold text-primary">{s.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
+              <h3 className="text-lg font-bold text-white">{s.title}</h3>
+              <p className="mt-2 text-sm text-white/65">{s.desc}</p>
             </div>
           ))}
         </div>
@@ -662,7 +660,7 @@ function Services() {
             href={waLink("Olá, gostaria de agendar uma avaliação do meu veículo.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block rounded-full bg-primary px-8 py-3.5 text-sm font-bold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:-translate-y-0.5"
+            className="inline-block rounded-full bg-[var(--accent-yellow)] px-8 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
           >
             Agendar avaliação do meu veículo
           </a>
@@ -717,25 +715,25 @@ function HowItWorks() {
     { icon: Wrench, title: "Faça o serviço com segurança", desc: "Seu carro recebe o cuidado necessário com transparência." },
   ];
   return (
-    <section className="relative overflow-hidden py-20 sm:py-24 bg-radial-brand">
+    <section className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-graphite)" }}>
       <div className="mx-auto max-w-7xl px-4">
         <Reveal className="mb-14 text-center">
           <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
             Como funciona
           </div>
-          <h2 className="text-2xl font-black text-primary sm:text-3xl md:text-4xl">Resolver o problema do seu carro é simples</h2>
+          <h2 className="text-2xl font-black text-white sm:text-3xl md:text-4xl">Resolver o problema do seu carro é simples</h2>
         </Reveal>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((s, i) => (
-            <div key={s.title} className="relative rounded-2xl border border-border bg-card p-6 shadow-sm">
-              <div className="absolute -top-4 left-6 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-black text-[var(--accent-yellow)]">
+            <div key={s.title} className="relative rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all hover:-translate-y-1 hover:bg-white/10">
+              <div className="absolute -top-4 left-6 flex h-8 w-8 items-center justify-center rounded-full bg-[var(--accent-yellow)] text-sm font-black text-primary shadow-md">
                 {i + 1}
               </div>
               <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-[var(--accent-yellow)]">
                 <s.icon className="h-6 w-6" />
               </div>
-              <h3 className="text-lg font-bold text-primary">{s.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
+              <h3 className="text-lg font-bold text-white">{s.title}</h3>
+              <p className="mt-2 text-sm text-white/65">{s.desc}</p>
             </div>
           ))}
         </div>
@@ -744,7 +742,7 @@ function HowItWorks() {
             href={waLink("Olá, quero receber meu orçamento agora.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block rounded-full bg-primary px-8 py-3.5 text-sm font-bold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:-translate-y-0.5"
+            className="inline-block rounded-full bg-[var(--accent-yellow)] px-8 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
           >
             Receber meu orçamento agora
           </a>
@@ -791,34 +789,33 @@ function FinalCTA() {
 
 function About() {
   return (
-    <section id="sobre" className="relative overflow-hidden py-20 sm:py-24" style={{ background: "linear-gradient(135deg, oklch(0.98 0.01 260) 0%, oklch(0.94 0.03 90 / 0.4) 100%)" }}>
-      <div className="absolute inset-0 -z-0 opacity-40 bg-dots" />
+    <section id="sobre" className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-navy)" }}>
+      <div className="absolute inset-0 -z-0 opacity-[0.06] bg-dots" />
       <div className="mx-auto grid max-w-7xl gap-12 px-4 md:grid-cols-2 md:items-center">
         <Reveal className="relative">
-          <div className="absolute -left-6 -top-6 h-32 w-32 rounded-full bg-[var(--accent-yellow)] opacity-70 blur-2xl" />
-          <div className="relative overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-brand)]">
+          <div className="absolute -left-6 -top-6 h-32 w-32 rounded-full bg-[var(--accent-yellow)] opacity-30 blur-2xl" />
+          <div className="relative overflow-hidden rounded-3xl border border-white/15 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]">
             <img
               src={oficinaAsset}
               alt="Fachada da unidade PneuZ Araucária"
               loading="lazy"
               className="aspect-[4/3] w-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/25 via-transparent to-transparent" aria-hidden="true" />
           </div>
         </Reveal>
         <Reveal>
-          <div className="mb-3 inline-block rounded-full bg-primary px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[var(--accent-yellow)]">
+          <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary">
             Sobre nós
           </div>
-          <h2 className="text-3xl font-black leading-tight text-primary md:text-4xl">
+          <h2 className="text-3xl font-black leading-tight text-white md:text-4xl">
             Referência em pneus e reparação automotiva
           </h2>
-          <p className="mt-5 text-base leading-relaxed text-foreground/80">
+          <p className="mt-5 text-base leading-relaxed text-white/75">
             A PneuZ é referência na venda de pneus e reparação automotiva, sendo uma das maiores
             redes de centro automotivo do país. Trabalhamos apenas com produtos e tecnologias mais
             avançadas do mercado, buscando sempre a segurança dos nossos clientes.
           </p>
-          <p className="mt-4 text-base leading-relaxed text-foreground/80">
+          <p className="mt-4 text-base leading-relaxed text-white/75">
             Nossa unidade de Araucária conta com equipe qualificada e equipamentos de primeira
             linha para oferecer atendimento impecável e o mais alto padrão em serviços de
             mecânica automotiva. Avaliações sem compromisso e um especialista para acompanhar
@@ -837,9 +834,9 @@ function About() {
 
 function Stat({ n, label }: { n: string; label: string }) {
   return (
-    <div className="rounded-2xl border border-border bg-card p-4 text-center">
-      <div className="text-lg font-black text-primary md:text-xl">{n}</div>
-      <div className="mt-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{label}</div>
+    <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center backdrop-blur transition-all hover:-translate-y-1 hover:bg-white/10">
+      <div className="text-lg font-black text-[var(--accent-yellow)] md:text-xl">{n}</div>
+      <div className="mt-1 text-[11px] font-semibold uppercase tracking-wider text-white/60">{label}</div>
     </div>
   );
 }
@@ -850,10 +847,9 @@ function Contact() {
 
 function Reviews() {
   return (
-    <section id="depoimentos" className="relative overflow-hidden py-20 sm:py-24">
-      <div className="absolute inset-0 -z-10" style={{ background: "linear-gradient(180deg, oklch(0.98 0.01 260) 0%, oklch(1 0 0) 100%)" }} />
-      <div className="absolute -left-24 top-24 -z-10 h-72 w-72 rounded-full bg-[var(--accent-yellow)] opacity-20 blur-3xl" />
-      <div className="absolute -right-24 bottom-24 -z-10 h-72 w-72 rounded-full bg-primary opacity-10 blur-3xl" />
+    <section id="depoimentos" className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-graphite)" }}>
+      <div className="absolute -left-24 top-24 -z-10 h-72 w-72 rounded-full bg-[var(--accent-yellow)] opacity-10 blur-3xl" />
+      <div className="absolute -right-24 bottom-24 -z-10 h-72 w-72 rounded-full bg-primary opacity-20 blur-3xl" />
       <div className="mx-auto max-w-7xl px-4">
         <Reveal className="mb-12 text-center">
           <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
@@ -865,23 +861,23 @@ function Reviews() {
             </svg>
             Avaliações Google
           </div>
-          <h2 className="text-2xl font-black text-primary sm:text-3xl md:text-4xl">O que nossos clientes dizem</h2>
+          <h2 className="text-2xl font-black text-white sm:text-3xl md:text-4xl">O que nossos clientes dizem</h2>
           <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
             <div className="flex">
               {[0, 1, 2, 3, 4].map((i) => (
                 <Star key={i} className="h-5 w-5 fill-[#FBBC05] text-[#FBBC05]" />
               ))}
             </div>
-            <span className="text-sm font-bold text-primary">4,8</span>
-            <span className="text-sm text-muted-foreground">· Avaliações verificadas</span>
+            <span className="text-sm font-bold text-white">4,8</span>
+            <span className="text-sm text-white/60">· Avaliações verificadas</span>
           </div>
-          <p className="mt-2 text-sm text-muted-foreground">Mais de 1.000 clientes já avaliaram nossa loja no Google.</p>
+          <p className="mt-2 text-sm text-white/60">Mais de 1.000 clientes já avaliaram nossa loja no Google.</p>
         </Reveal>
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {reviews.map((r) => (
             <article
               key={r.name}
-              className="flex h-full flex-col rounded-3xl border border-border bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)]"
+              className="flex h-full flex-col rounded-3xl border border-border bg-card p-6 shadow-[0_20px_45px_-20px_rgba(0,0,0,0.5)] transition-all hover:-translate-y-1 hover:shadow-[0_25px_55px_-18px_rgba(0,0,0,0.6)]"
             >
               <div className="flex items-start justify-between gap-3">
                 <header className="flex items-start gap-3">
@@ -926,14 +922,14 @@ function Reviews() {
 
 function ContactSection() {
   return (
-    <section id="contato" className="relative overflow-hidden py-20 sm:py-24 bg-radial-brand">
+    <section id="contato" className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-graphite)" }}>
       <div className="mx-auto max-w-7xl px-4">
         <Reveal className="mb-14 text-center">
           <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
             Contato
           </div>
-          <h2 className="text-2xl font-black text-primary sm:text-3xl md:text-4xl">Entre em contato</h2>
-          <p className="mt-3 text-muted-foreground">Estamos prontos para atender você em Araucária.</p>
+          <h2 className="text-2xl font-black text-white sm:text-3xl md:text-4xl">Entre em contato</h2>
+          <p className="mt-3 text-white/65">Estamos prontos para atender você em Araucária.</p>
         </Reveal>
         <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
           <ContactCard
@@ -965,12 +961,12 @@ function ContactSection() {
             href={waLink("Olá, gostaria de saber como chegar até a loja e confirmar o endereço.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary px-7 py-3.5 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground sm:px-8"
+            className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/25 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10 sm:px-8"
           >
             <MapPin className="h-4 w-4" /> Como chegar
           </a>
         </div>
-        <div className="mt-10 overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-brand)]">
+        <div className="mt-10 overflow-hidden rounded-3xl border border-white/15 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]">
           <iframe
             title="Mapa da PneuZ Araucária"
             src="https://www.google.com/maps?q=Av.+Dr.+V%C3%ADtor+do+Amaral,+1380,+Centro,+Arauc%C3%A1ria+-+PR,+83702-040&output=embed"
@@ -989,13 +985,13 @@ function ContactSection() {
 
 function ContactCard({ icon: Icon, title, lines }: { icon: typeof MapPin; title: string; lines: string[] }) {
   return (
-    <div className="rounded-2xl border border-border bg-card p-6 text-center transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)] sm:p-7">
-      <div className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-[var(--accent-yellow)]">
+    <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur transition-all hover:-translate-y-1 hover:bg-white/10 sm:p-7">
+      <div className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--accent-yellow)] text-primary">
         <Icon className="h-6 w-6" />
       </div>
-      <h3 className="text-lg font-bold text-primary">{title}</h3>
+      <h3 className="text-lg font-bold text-white">{title}</h3>
       {lines.map((l) => (
-        <p key={l} className="mt-1 text-sm text-muted-foreground">{l}</p>
+        <p key={l} className="mt-1 text-sm text-white/65">{l}</p>
       ))}
     </div>
   );
@@ -1004,28 +1000,28 @@ function ContactCard({ icon: Icon, title, lines }: { icon: typeof MapPin; title:
 function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="relative overflow-hidden py-20 sm:py-24" style={{ background: "linear-gradient(180deg, oklch(1 0 0) 0%, oklch(0.96 0.02 267) 100%)" }}>
+    <section className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-navy)" }}>
       <div className="mx-auto max-w-3xl px-4">
         <Reveal className="mb-10 text-center">
-          <div className="mb-3 inline-block rounded-full bg-primary px-5 py-1.5 text-xs font-black uppercase tracking-widest text-[var(--accent-yellow)]">
+          <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
             FAQ
           </div>
-          <h2 className="text-2xl font-black text-primary sm:text-3xl md:text-4xl">Perguntas frequentes</h2>
+          <h2 className="text-2xl font-black text-white sm:text-3xl md:text-4xl">Perguntas frequentes</h2>
         </Reveal>
         <div className="space-y-3">
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (
-              <div key={f.q} className="overflow-hidden rounded-2xl border border-border bg-card">
+              <div key={f.q} className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur transition-colors hover:bg-white/[0.07]">
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
                   className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
                 >
-                  <span className="font-bold text-primary">{f.q}</span>
-                  <ChevronDown className={`h-5 w-5 shrink-0 text-primary transition-transform ${isOpen ? "rotate-180" : ""}`} />
+                  <span className="font-bold text-white">{f.q}</span>
+                  <ChevronDown className={`h-5 w-5 shrink-0 text-[var(--accent-yellow)] transition-transform ${isOpen ? "rotate-180" : ""}`} />
                 </button>
                 {isOpen && (
-                  <div className="px-6 pb-5 text-sm leading-relaxed text-foreground/75">{f.a}</div>
+                  <div className="px-6 pb-5 text-sm leading-relaxed text-white/70">{f.a}</div>
                 )}
               </div>
             );
