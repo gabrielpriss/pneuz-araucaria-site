@@ -408,7 +408,7 @@ function Hero() {
               href={waLink("Olá, vim pelo site e quero solicitar um orçamento de pneus.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent-yellow)] px-8 py-4 text-sm font-black uppercase tracking-wide text-primary shadow-[0_20px_45px_-15px_oklch(0.85_0.17_90_/_0.7)] transition-all hover:-translate-y-1 hover:shadow-[0_28px_55px_-15px_oklch(0.85_0.17_90_/_0.85)]"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent-red px-8 py-4 text-sm font-black uppercase tracking-wide text-white shadow-[0_20px_45px_-15px_oklch(0.57_0.22_27_/_0.75)] transition-all hover:-translate-y-1 hover:shadow-[0_28px_55px_-15px_oklch(0.57_0.22_27_/_0.9)]"
             >
               <MessageCircle className="h-4 w-4 transition-transform group-hover:scale-110" /> Solicitar orçamento no WhatsApp
             </a>
@@ -431,6 +431,8 @@ function Hero() {
         <div className="relative mx-auto flex w-full max-w-[26rem] items-center justify-center py-8 lg:mx-0 lg:py-0">
           <div className="absolute inset-8 -z-10 rounded-full bg-[var(--accent-yellow)]/25 blur-[80px]" aria-hidden="true" />
           <div className="absolute inset-8 -z-10 translate-x-10 translate-y-10 rounded-full bg-accent-red/25 blur-[100px]" aria-hidden="true" />
+          <div className="absolute left-1/3 top-[-15%] -z-10 h-[130%] w-24 -rotate-[18deg] bg-gradient-to-b from-white/25 via-white/5 to-transparent blur-2xl" aria-hidden="true" />
+          <div className="absolute right-1/3 top-[-15%] -z-10 h-[130%] w-24 rotate-[18deg] bg-gradient-to-b from-white/15 via-white/5 to-transparent blur-2xl" aria-hidden="true" />
           <TireWheelArt className="animate-tire-float w-full max-w-[22rem] drop-shadow-[0_35px_60px_rgba(0,0,0,0.6)]" />
 
           <div className="animate-badge-glow absolute -left-2 top-2 flex items-center gap-2 rounded-2xl border border-white/10 bg-primary/85 px-3.5 py-2.5 shadow-2xl backdrop-blur sm:-left-8 sm:top-6">
@@ -469,45 +471,54 @@ function TireOffers() {
             Preço exclusivo para instalação em nossa loja em Araucária. Parcelamento em até 10x no cartão.
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 sm:gap-x-5 lg:grid-cols-5">
           {tirePromos.map((t) => (
-            <div
-              key={t.aro}
-              className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition-all hover:-translate-y-1.5 hover:shadow-[var(--shadow-brand)]"
-            >
-              <span className="absolute left-3 top-3 z-10 rounded-full bg-accent-red px-2.5 py-1 text-[9px] font-black uppercase tracking-wider text-white shadow">
-                Oferta
+            <div key={t.aro} className="group relative flex flex-col items-center pt-4 transition-transform hover:-translate-y-1.5">
+              <span
+                className="absolute -left-8 top-3 z-20 w-32 -rotate-45 bg-accent-red py-1 text-center text-[8px] font-black uppercase tracking-wider text-white shadow-md"
+                aria-hidden="true"
+              >
+                Pneus novos
               </span>
-              <span className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[var(--accent-yellow)] text-[10px] font-black text-primary shadow">
-                10x
+              <span className="absolute right-1 top-0 z-20 flex h-11 w-11 flex-col items-center justify-center rounded-full bg-[var(--accent-yellow)] text-center leading-none text-primary shadow-md">
+                <span className="text-[6px] font-bold uppercase">até</span>
+                <span className="text-xs font-black">10x</span>
               </span>
-              <div className="relative flex h-28 items-center justify-center bg-radial-brand pt-3 sm:h-32">
-                <TireWheelArt className="h-24 w-24 drop-shadow-lg transition-transform group-hover:scale-105 sm:h-28 sm:w-28" />
+
+              <div className="relative flex h-28 w-full items-center justify-center overflow-hidden rounded-t-3xl border border-border bg-radial-brand sm:h-32">
+                <TireWheelArt className="h-24 w-24 -rotate-12 drop-shadow-xl transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105 sm:h-28 sm:w-28" />
               </div>
-              <div className="flex flex-1 flex-col items-center px-3 pb-4 pt-2 text-center">
-                <div className="text-xs font-black uppercase tracking-widest text-primary">Aro {t.aro}</div>
-                <div className="mt-2 rounded-xl bg-[var(--accent-yellow)]/15 px-3 py-1.5">
-                  <div className="text-[9px] font-bold uppercase tracking-wide text-primary/60">a partir de</div>
-                  <div className="text-xl font-black text-primary">R$ {t.price}</div>
-                </div>
-                <div className="mt-2 flex items-center gap-1 text-[9px] font-bold uppercase tracking-wide text-muted-foreground">
-                  <ShieldCheck className="h-3 w-3 text-primary" /> 5 anos de garantia
-                </div>
-                <p className="mt-1.5 text-[9px] font-semibold leading-snug text-muted-foreground">
+
+              <div
+                className="relative z-10 -mt-1 flex w-[90%] flex-col items-center bg-accent-red px-2 pb-4 pt-3 text-center text-white shadow-lg"
+                style={{ clipPath: "polygon(0 0, 100% 0, 100% 80%, 88% 100%, 12% 100%, 0 80%)" }}
+              >
+                <div className="text-[10px] font-black uppercase tracking-widest">Aro {t.aro}</div>
+                <div className="mt-0.5 text-[8px] font-semibold uppercase tracking-wide text-white/80">a partir de</div>
+                <div className="text-xl font-black leading-none text-[var(--accent-yellow)] sm:text-2xl">R$ {t.price}</div>
+              </div>
+
+              <div className="-mt-1 flex items-center gap-1 rounded-full border border-[var(--accent-yellow)]/50 bg-[var(--accent-yellow)]/15 px-2.5 py-1 text-[8px] font-black uppercase tracking-wide text-primary shadow-sm">
+                <ShieldCheck className="h-3 w-3" /> Garantia de 5 anos
+              </div>
+
+              <div className="mt-2 px-1 text-center">
+                <p className="text-[8px] font-semibold leading-snug text-muted-foreground">
                   Preço exclusivo para instalação em loja
                 </p>
-                <p className="text-[9px] font-semibold leading-snug text-muted-foreground">
+                <p className="text-[8px] font-semibold leading-snug text-muted-foreground">
                   Parcelamento em até 10x no cartão
                 </p>
-                <a
-                  href={waLink(`Olá, vim pelo site e quero solicitar um orçamento do pneu Aro ${t.aro} a partir de R$ ${t.price}.`)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-full bg-primary px-3 py-2.5 text-[11px] font-bold text-white transition-colors group-hover:bg-accent-red"
-                >
-                  <MessageCircle className="h-3.5 w-3.5" /> Solicitar orçamento
-                </a>
               </div>
+
+              <a
+                href={waLink(`Olá, vim pelo site e quero solicitar um orçamento do pneu Aro ${t.aro} a partir de R$ ${t.price}.`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-full bg-accent-red px-3 py-2.5 text-[10px] font-bold uppercase tracking-wide text-white shadow-md transition-colors hover:bg-primary"
+              >
+                <MessageCircle className="h-3.5 w-3.5" /> Solicitar orçamento
+              </a>
             </div>
           ))}
         </div>
