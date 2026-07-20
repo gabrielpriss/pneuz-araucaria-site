@@ -42,7 +42,7 @@ const waLink = (msg: string) =>
   `https://api.whatsapp.com/send?phone=${WA_PHONE}&text=${encodeURIComponent(msg)}`;
 
 const WHATSAPP = waLink(
-  "Olá, vim pelo site e gostaria de mais informações. Envie este cupom para ter descontos.",
+  "Olá, vim pelo site e gostaria de mais informações.",
 );
 
 const tirePromos = [
@@ -330,38 +330,48 @@ function Hero() {
         </div>
       </div>
       <div className="relative mx-auto max-w-7xl px-4 pb-12 sm:pb-16">
-        <div className="rounded-3xl border border-white/15 bg-white/10 p-5 backdrop-blur sm:p-7">
-          <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-            <h2 className="text-lg font-black uppercase tracking-wide text-white sm:text-xl">
-              Pneus em promoção
+        <div
+          className="overflow-hidden rounded-3xl shadow-[var(--shadow-brand)] ring-4 ring-[var(--accent-yellow)]/40"
+          style={{ background: "linear-gradient(135deg, oklch(0.9 0.19 95) 0%, oklch(0.82 0.19 85) 100%)" }}
+        >
+          <div className="px-5 pb-2 pt-7 text-center sm:px-10 sm:pt-9">
+            <div className="mx-auto mb-3 inline-flex items-center gap-2 rounded-full bg-primary px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.25em] text-[var(--accent-yellow)]">
+              <CircleDot className="h-3.5 w-3.5" /> Promoção de pneus
+            </div>
+            <h2 className="mx-auto max-w-2xl text-2xl font-black leading-tight text-primary sm:text-3xl md:text-4xl">
+              Os melhores preços você encontra na PneuZ Araucária
             </h2>
-            <a
-              href={waLink("Olá, vi a promoção de pneus no site e quero mais detalhes.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-5 py-2 text-xs font-bold text-primary transition-transform hover:-translate-y-0.5"
-            >
-              <MessageCircle className="h-4 w-4" /> Chamar no WhatsApp
-            </a>
+            <p className="mx-auto mt-2 max-w-lg text-xs font-bold uppercase tracking-wide text-primary/70 sm:text-sm">
+              Preços válidos apenas para instalação em nossa loja em Araucária
+            </p>
           </div>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="grid grid-cols-2 gap-3 px-4 pb-6 pt-5 sm:grid-cols-3 sm:gap-4 sm:px-8 sm:pb-8 lg:grid-cols-5">
             {tirePromos.map((t) => (
               <a
                 key={t.aro}
                 href={waLink(`Olá, vim pelo site e quero saber mais sobre o pneu Aro ${t.aro} a partir de R$ ${t.price}.`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group rounded-2xl bg-white/10 p-4 text-center transition-all hover:-translate-y-1 hover:bg-[var(--accent-yellow)]"
+                className="group relative flex flex-col items-center overflow-hidden rounded-2xl bg-primary pb-4 pt-7 text-center shadow-lg transition-transform hover:-translate-y-1.5"
               >
-                <div className="text-xs font-bold uppercase tracking-widest text-white/70 group-hover:text-primary/70">
-                  Aro {t.aro}
+                <span
+                  className="absolute -left-9 top-3 w-32 bg-red-600 py-1 text-center text-[9px] font-black uppercase tracking-wider text-white shadow-sm"
+                  style={{ transform: "rotate(-45deg)" }}
+                >
+                  Pneus novos
+                </span>
+                <span className="absolute right-2 top-2 flex h-9 w-9 items-center justify-center rounded-full bg-[var(--accent-yellow)] text-[10px] font-black leading-none text-primary">
+                  10x
+                </span>
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-[var(--accent-yellow)]">
+                  <Disc className="h-8 w-8" />
                 </div>
-                <div className="mt-1 text-[11px] font-semibold text-white/60 group-hover:text-primary/70">
-                  a partir de
-                </div>
-                <div className="mt-1 text-2xl font-black text-[var(--accent-yellow)] group-hover:text-primary">
-                  R$ {t.price}
-                </div>
+                <div className="mt-3 text-xs font-bold uppercase tracking-widest text-white/70">Aro {t.aro}</div>
+                <div className="text-[10px] font-semibold uppercase tracking-wide text-white/50">a partir de</div>
+                <div className="mt-1 text-xl font-black text-[var(--accent-yellow)] sm:text-2xl">R$ {t.price}</div>
+                <span className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[var(--accent-yellow)] px-3 py-1.5 text-[10px] font-bold text-primary transition-colors group-hover:bg-white">
+                  <MessageCircle className="h-3 w-3" /> WhatsApp
+                </span>
               </a>
             ))}
           </div>
