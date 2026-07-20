@@ -25,13 +25,13 @@ import {
 import logoAsset from "@/assets/pneuz-logo.jpg";
 import iconAsset from "@/assets/pneuz-icon.png";
 import oficinaAsset from "@/assets/oficina-pneuz.png";
-import heroTiresImg from "@/assets/hero-tires.jpg";
 import whatsappIcon from "@/assets/whatsapp-icon.png";
-import tireGoodyear4 from "@/assets/tires/tire-goodyear-4.webp";
-import tireKelly2 from "@/assets/tires/tire-kelly-2.webp";
-import tireKelly4 from "@/assets/tires/tire-kelly-4.webp";
-import tireKellyEdge4 from "@/assets/tires/tire-kelly-edge-4.jpg";
-import tireWheelProfile from "@/assets/tires/tire-wheel-profile.png";
+import heroWarehouseImg from "@/assets/photos/warehouse-dark.jpg";
+import warehouseStacksWide from "@/assets/photos/warehouse-stacks-wide.jpg";
+import warehouseStacksTall from "@/assets/photos/warehouse-stacks-tall.jpg";
+import warehouseLean from "@/assets/photos/warehouse-lean.jpg";
+import mechanicRollingTire from "@/assets/photos/mechanic-rolling-tire.jpg";
+import mechanicCarryingTire from "@/assets/photos/mechanic-carrying-tire.jpg";
 import { Star } from "lucide-react";
 import {
   Carousel,
@@ -294,7 +294,7 @@ function Hero() {
     <section id="inicio" className="relative overflow-hidden">
       <div className="absolute inset-0" aria-hidden="true">
         <img
-          src={heroTiresImg}
+          src={heroWarehouseImg}
           alt=""
           className="h-full w-full object-cover"
           loading="eager"
@@ -411,19 +411,25 @@ function Hero() {
   );
 }
 
-const tirePromoPhotos = [tireKelly2, tireGoodyear4, tireKelly4, tireKellyEdge4, tireWheelProfile];
+const tirePromoPhotos = [
+  warehouseStacksWide,
+  mechanicRollingTire,
+  warehouseStacksTall,
+  mechanicCarryingTire,
+  warehouseLean,
+];
 
 function TireOfferCard({ t, photo }: { t: { aro: number; price: string }; photo: string }) {
   return (
     <div className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
-      <div className="relative flex h-36 w-full items-center justify-center overflow-hidden bg-radial-brand sm:h-40">
+      <div className="relative h-36 w-full overflow-hidden sm:h-40">
         <img
           src={photo}
           alt={`Pneu novo aro ${t.aro} disponível para instalação na PneuZ Araucária`}
           loading="lazy"
-          className="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-110"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" aria-hidden="true" />
         <span
           className="absolute -left-8 top-3 w-32 -rotate-45 bg-accent-red py-1 text-center text-[8px] font-black uppercase tracking-wider text-white shadow-md"
           aria-hidden="true"
@@ -434,8 +440,8 @@ function TireOfferCard({ t, photo }: { t: { aro: number; price: string }; photo:
           <span className="text-[6px] font-bold uppercase">até</span>
           <span className="text-xs font-black">10x</span>
         </span>
-        <div className="absolute bottom-2 left-2 flex items-center gap-1 rounded-full border border-primary/15 bg-white/70 px-2.5 py-1 text-[8px] font-black uppercase tracking-wide text-primary shadow-sm backdrop-blur-md">
-          <ShieldCheck className="h-3 w-3 text-primary" /> Garantia de 5 anos
+        <div className="absolute bottom-2 left-2 flex items-center gap-1 rounded-full border border-white/25 bg-white/15 px-2.5 py-1 text-[8px] font-black uppercase tracking-wide text-white shadow-sm backdrop-blur-md">
+          <ShieldCheck className="h-3 w-3 text-[var(--accent-yellow)]" /> Garantia de 5 anos
         </div>
       </div>
 
