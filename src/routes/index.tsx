@@ -27,6 +27,11 @@ import iconAsset from "@/assets/pneuz-icon.png";
 import oficinaAsset from "@/assets/oficina-pneuz.png";
 import heroTiresImg from "@/assets/hero-tires.jpg";
 import whatsappIcon from "@/assets/whatsapp-icon.png";
+import tireGoodyear4 from "@/assets/tires/tire-goodyear-4.webp";
+import tireKelly2 from "@/assets/tires/tire-kelly-2.webp";
+import tireKelly4 from "@/assets/tires/tire-kelly-4.webp";
+import tireKellyEdge4 from "@/assets/tires/tire-kelly-edge-4.jpg";
+import tireWheelProfile from "@/assets/tires/tire-wheel-profile.png";
 import { Star } from "lucide-react";
 import {
   Carousel,
@@ -411,20 +416,19 @@ function Hero() {
   );
 }
 
-const tirePhotoCrops = ["25% 35%", "60% 15%", "85% 55%", "15% 70%", "50% 45%"];
+const tirePromoPhotos = [tireKelly2, tireGoodyear4, tireKelly4, tireKellyEdge4, tireWheelProfile];
 
-function TireOfferCard({ t, crop }: { t: { aro: number; price: string }; crop: string }) {
+function TireOfferCard({ t, photo }: { t: { aro: number; price: string }; photo: string }) {
   return (
     <div className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
-      <div className="relative h-36 w-full overflow-hidden sm:h-40">
+      <div className="relative flex h-36 w-full items-center justify-center overflow-hidden bg-radial-brand sm:h-40">
         <img
-          src={heroTiresImg}
+          src={photo}
           alt={`Pneu novo aro ${t.aro} disponível para instalação na PneuZ Araucária`}
           loading="lazy"
-          style={{ objectPosition: crop }}
-          className="h-full w-full scale-125 object-cover transition-transform duration-500 group-hover:scale-[1.35]"
+          className="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" aria-hidden="true" />
         <span
           className="absolute -left-8 top-3 w-32 -rotate-45 bg-accent-red py-1 text-center text-[8px] font-black uppercase tracking-wider text-white shadow-md"
           aria-hidden="true"
@@ -435,8 +439,8 @@ function TireOfferCard({ t, crop }: { t: { aro: number; price: string }; crop: s
           <span className="text-[6px] font-bold uppercase">até</span>
           <span className="text-xs font-black">10x</span>
         </span>
-        <div className="absolute bottom-2 left-2 flex items-center gap-1 rounded-full border border-white/30 bg-white/15 px-2.5 py-1 text-[8px] font-black uppercase tracking-wide text-white backdrop-blur-md">
-          <ShieldCheck className="h-3 w-3 text-[var(--accent-yellow)]" /> Garantia de 5 anos
+        <div className="absolute bottom-2 left-2 flex items-center gap-1 rounded-full border border-primary/15 bg-white/70 px-2.5 py-1 text-[8px] font-black uppercase tracking-wide text-primary shadow-sm backdrop-blur-md">
+          <ShieldCheck className="h-3 w-3 text-primary" /> Garantia de 5 anos
         </div>
       </div>
 
@@ -521,7 +525,7 @@ function TireOffers() {
           <CarouselContent className="-ml-4 py-2">
             {tirePromos.map((t, i) => (
               <CarouselItem key={t.aro} className="basis-[80%] pl-4 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                <TireOfferCard t={t} crop={tirePhotoCrops[i % tirePhotoCrops.length]} />
+                <TireOfferCard t={t} photo={tirePromoPhotos[i % tirePromoPhotos.length]} />
               </CarouselItem>
             ))}
           </CarouselContent>
