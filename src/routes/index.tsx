@@ -505,16 +505,18 @@ function TireOffers() {
   return (
     <section
       className="relative overflow-hidden pb-16 pt-10 sm:pb-20 sm:pt-14"
-      style={{ background: "var(--gradient-graphite)" }}
+      style={{ background: "var(--gradient-light)" }}
     >
-      <div className="absolute inset-0 -z-0 opacity-[0.06] bg-grid" aria-hidden="true" />
+      <div className="absolute inset-0 -z-0 opacity-[0.5] bg-lines-blue" aria-hidden="true" />
+      <div className="absolute -left-32 top-0 -z-0 h-72 w-72 rounded-full bg-primary opacity-[0.06] blur-[110px]" aria-hidden="true" />
+      <div className="absolute -right-32 bottom-0 -z-0 h-72 w-72 rounded-full bg-accent-red opacity-[0.05] blur-[110px]" aria-hidden="true" />
       <div className="mx-auto max-w-7xl px-4">
         <Reveal className="mb-10 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-accent-red/30 bg-accent-red/15 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-accent-red">
+          <span className="inline-flex items-center gap-2 rounded-full bg-accent-red/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-accent-red">
             <Tag className="h-3.5 w-3.5" /> Ofertas da semana
           </span>
-          <h2 className="mt-3 text-2xl font-black text-white sm:text-3xl md:text-4xl">Preços exclusivos por aro</h2>
-          <p className="mx-auto mt-2 max-w-xl text-sm font-semibold text-white/60">
+          <h2 className="mt-3 text-2xl font-black text-primary sm:text-3xl md:text-4xl">Preços exclusivos por aro</h2>
+          <p className="mx-auto mt-2 max-w-xl text-sm font-semibold text-muted-foreground">
             Preço exclusivo para instalação em nossa loja em Araucária. Parcelamento em até 10x no cartão.
           </p>
         </Reveal>
@@ -545,7 +547,7 @@ function TireOffers() {
               type="button"
               aria-label={`Ir para oferta ${i + 1}`}
               onClick={() => api?.scrollTo(i)}
-              className={`h-1.5 rounded-full transition-all ${i === selected ? "w-6 bg-accent-red" : "w-1.5 bg-white/20"}`}
+              className={`h-1.5 rounded-full transition-all ${i === selected ? "w-6 bg-accent-red" : "w-1.5 bg-border"}`}
             />
           ))}
         </div>
@@ -593,8 +595,10 @@ function Reveal({
 
 function Brands() {
   return (
-    <section className="relative overflow-hidden border-y border-white/10 py-12" style={{ background: "var(--gradient-navy)" }}>
-      <div className="mx-auto max-w-7xl px-4">
+    <section className="relative overflow-hidden border-y border-white/10 py-12" style={{ background: "var(--gradient-blue-brand)" }}>
+      <div className="absolute inset-0 -z-0 opacity-40 bg-lines-white" aria-hidden="true" />
+      <div className="absolute -right-20 top-0 -z-0 h-64 w-64 rounded-full bg-[var(--accent-yellow)] opacity-[0.08] blur-[100px]" aria-hidden="true" />
+      <div className="relative mx-auto max-w-7xl px-4">
         <Reveal className="mb-6 text-center">
           <h3 className="text-sm font-black uppercase tracking-widest text-[var(--accent-yellow)]">
             Trabalhamos com as melhores marcas
@@ -637,27 +641,28 @@ function Brands() {
 
 function Services() {
   return (
-    <section id="servicos" className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-graphite)" }}>
-      <div className="absolute inset-0 -z-10 opacity-[0.07] bg-dots" />
+    <section id="servicos" className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-light)" }}>
+      <div className="absolute inset-0 -z-10 opacity-[0.08] bg-dots" />
+      <div className="absolute -right-24 top-10 -z-10 h-72 w-72 rounded-full bg-primary opacity-[0.05] blur-[110px]" aria-hidden="true" />
       <div className="mx-auto max-w-7xl px-4">
         <Reveal className="mb-14 text-center">
           <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
             Serviços
           </div>
-          <h2 className="text-3xl font-black text-white md:text-4xl">O que fazemos por você</h2>
-          <p className="mt-3 text-white/65">Do pneu novo à revisão completa, cuidamos de cada detalhe.</p>
+          <h2 className="text-3xl font-black text-primary md:text-4xl">O que fazemos por você</h2>
+          <p className="mt-3 text-muted-foreground">Do pneu novo à revisão completa, cuidamos de cada detalhe.</p>
         </Reveal>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s) => (
             <div
               key={s.title}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur transition-all hover:-translate-y-1 hover:bg-white/10 sm:p-7"
+              className="group relative overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)] sm:p-7"
             >
-              <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-[var(--accent-yellow)] text-primary transition-colors">
+              <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-primary text-[var(--accent-yellow)] transition-colors group-hover:bg-[var(--accent-yellow)] group-hover:text-primary">
                 <s.icon className="h-7 w-7" />
               </div>
-              <h3 className="text-lg font-bold text-white">{s.title}</h3>
-              <p className="mt-2 text-sm text-white/65">{s.desc}</p>
+              <h3 className="text-lg font-bold text-primary">{s.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
             </div>
           ))}
         </div>
@@ -666,7 +671,7 @@ function Services() {
             href={waLink("Olá, gostaria de agendar uma avaliação do meu veículo.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block rounded-full bg-[var(--accent-yellow)] px-8 py-3.5 text-sm font-bold text-primary shadow-[var(--shadow-yellow)] transition-transform hover:-translate-y-0.5"
+            className="inline-block rounded-full bg-primary px-8 py-3.5 text-sm font-bold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:-translate-y-0.5"
           >
             Agendar avaliação do meu veículo
           </a>
@@ -685,8 +690,9 @@ function WhyUs() {
     { icon: MessageCircle, title: "Atendimento transparente", desc: "Você entende o que seu carro precisa antes de aprovar qualquer serviço." },
   ];
   return (
-    <section className="relative overflow-hidden py-20 sm:py-24" style={{ background: "linear-gradient(160deg, oklch(0.32 0.16 267) 0%, oklch(0.22 0.14 267) 100%)" }}>
+    <section className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-blue-brand)" }}>
       <div className="absolute inset-0 -z-0 opacity-30 bg-grid" />
+      <div className="absolute -right-24 top-10 -z-0 h-72 w-72 rounded-full bg-[var(--accent-yellow)] opacity-[0.07] blur-[110px]" aria-hidden="true" />
       <div className="relative">
       <div className="mx-auto max-w-7xl px-4">
         <Reveal className="mb-14 text-center">
@@ -722,7 +728,9 @@ function HowItWorks() {
   ];
   return (
     <section className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-graphite)" }}>
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="absolute -left-20 top-0 -z-0 h-80 w-80 rounded-full bg-primary-glow opacity-20 blur-[120px]" aria-hidden="true" />
+      <div className="absolute -right-20 bottom-0 -z-0 h-72 w-72 rounded-full bg-primary opacity-25 blur-[110px]" aria-hidden="true" />
+      <div className="relative mx-auto max-w-7xl px-4">
         <Reveal className="mb-14 text-center">
           <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
             Como funciona
@@ -767,7 +775,9 @@ function FinalCTA() {
   ];
   return (
     <section className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-hero)" }}>
-      <Reveal className="mx-auto max-w-4xl px-4 text-center">
+      <div className="absolute inset-0 -z-0 opacity-40 bg-lines-white" aria-hidden="true" />
+      <div className="absolute left-1/2 top-0 -z-0 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-[var(--accent-yellow)] opacity-[0.08] blur-[120px]" aria-hidden="true" />
+      <Reveal className="relative mx-auto max-w-4xl px-4 text-center">
         <h2 className="text-2xl font-black leading-tight text-white sm:text-3xl md:text-4xl">
           Precisa trocar pneus ou revisar seu carro? <span className="text-[var(--accent-yellow)]">Faça uma cotação agora.</span>
         </h2>
@@ -795,12 +805,13 @@ function FinalCTA() {
 
 function About() {
   return (
-    <section id="sobre" className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-navy)" }}>
-      <div className="absolute inset-0 -z-0 opacity-[0.06] bg-dots" />
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 md:grid-cols-2 md:items-center">
+    <section id="sobre" className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-light)" }}>
+      <div className="absolute inset-0 -z-0 opacity-40 bg-dots" />
+      <div className="absolute -right-24 bottom-0 -z-0 h-72 w-72 rounded-full bg-primary opacity-[0.06] blur-[110px]" aria-hidden="true" />
+      <div className="relative mx-auto grid max-w-7xl gap-12 px-4 md:grid-cols-2 md:items-center">
         <Reveal className="relative">
-          <div className="absolute -left-6 -top-6 h-32 w-32 rounded-full bg-[var(--accent-yellow)] opacity-30 blur-2xl" />
-          <div className="relative overflow-hidden rounded-3xl border border-white/15 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]">
+          <div className="absolute -left-6 -top-6 h-32 w-32 rounded-full bg-[var(--accent-yellow)] opacity-70 blur-2xl" />
+          <div className="relative overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-brand)]">
             <img
               src={oficinaAsset}
               alt="Fachada da unidade PneuZ Araucária"
@@ -810,18 +821,18 @@ function About() {
           </div>
         </Reveal>
         <Reveal>
-          <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary">
+          <div className="mb-3 inline-block rounded-full bg-primary px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[var(--accent-yellow)]">
             Sobre nós
           </div>
-          <h2 className="text-3xl font-black leading-tight text-white md:text-4xl">
+          <h2 className="text-3xl font-black leading-tight text-primary md:text-4xl">
             Referência em pneus e reparação automotiva
           </h2>
-          <p className="mt-5 text-base leading-relaxed text-white/75">
+          <p className="mt-5 text-base leading-relaxed text-foreground/80">
             A PneuZ é referência na venda de pneus e reparação automotiva, sendo uma das maiores
             redes de centro automotivo do país. Trabalhamos apenas com produtos e tecnologias mais
             avançadas do mercado, buscando sempre a segurança dos nossos clientes.
           </p>
-          <p className="mt-4 text-base leading-relaxed text-white/75">
+          <p className="mt-4 text-base leading-relaxed text-foreground/80">
             Nossa unidade de Araucária conta com equipe qualificada e equipamentos de primeira
             linha para oferecer atendimento impecável e o mais alto padrão em serviços de
             mecânica automotiva. Avaliações sem compromisso e um especialista para acompanhar
@@ -840,9 +851,9 @@ function About() {
 
 function Stat({ n, label }: { n: string; label: string }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-center backdrop-blur transition-all hover:-translate-y-1 hover:bg-white/10">
-      <div className="text-lg font-black text-[var(--accent-yellow)] md:text-xl">{n}</div>
-      <div className="mt-1 text-[11px] font-semibold uppercase tracking-wider text-white/60">{label}</div>
+    <div className="rounded-2xl border border-border bg-card p-4 text-center transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)]">
+      <div className="text-lg font-black text-primary md:text-xl">{n}</div>
+      <div className="mt-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{label}</div>
     </div>
   );
 }
@@ -854,8 +865,9 @@ function Contact() {
 function Reviews() {
   return (
     <section id="depoimentos" className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-graphite)" }}>
+      <div className="absolute inset-0 -z-10 opacity-40 bg-lines-blue" aria-hidden="true" />
       <div className="absolute -left-24 top-24 -z-10 h-72 w-72 rounded-full bg-[var(--accent-yellow)] opacity-10 blur-3xl" />
-      <div className="absolute -right-24 bottom-24 -z-10 h-72 w-72 rounded-full bg-primary opacity-20 blur-3xl" />
+      <div className="absolute -right-24 bottom-24 -z-10 h-72 w-72 rounded-full bg-primary opacity-30 blur-3xl" />
       <div className="mx-auto max-w-7xl px-4">
         <Reveal className="mb-12 text-center">
           <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
@@ -928,14 +940,16 @@ function Reviews() {
 
 function ContactSection() {
   return (
-    <section id="contato" className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-graphite)" }}>
+    <section id="contato" className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-light)" }}>
+      <div className="absolute inset-0 -z-10 opacity-[0.5] bg-lines-blue" aria-hidden="true" />
+      <div className="absolute -left-24 top-0 -z-10 h-72 w-72 rounded-full bg-primary opacity-[0.06] blur-[110px]" aria-hidden="true" />
       <div className="mx-auto max-w-7xl px-4">
         <Reveal className="mb-14 text-center">
           <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
             Contato
           </div>
-          <h2 className="text-2xl font-black text-white sm:text-3xl md:text-4xl">Entre em contato</h2>
-          <p className="mt-3 text-white/65">Estamos prontos para atender você em Araucária.</p>
+          <h2 className="text-2xl font-black text-primary sm:text-3xl md:text-4xl">Entre em contato</h2>
+          <p className="mt-3 text-muted-foreground">Estamos prontos para atender você em Araucária.</p>
         </Reveal>
         <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
           <ContactCard
@@ -967,12 +981,12 @@ function ContactSection() {
             href={waLink("Olá, gostaria de saber como chegar até a loja e confirmar o endereço.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/25 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10 sm:px-8"
+            className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary px-7 py-3.5 text-sm font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground sm:px-8"
           >
             <MapPin className="h-4 w-4" /> Como chegar
           </a>
         </div>
-        <div className="mt-10 overflow-hidden rounded-3xl border border-white/15 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.6)]">
+        <div className="mt-10 overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-brand)]">
           <iframe
             title="Mapa da PneuZ Araucária"
             src="https://www.google.com/maps?q=Av.+Dr.+V%C3%ADtor+do+Amaral,+1380,+Centro,+Arauc%C3%A1ria+-+PR,+83702-040&output=embed"
@@ -991,13 +1005,13 @@ function ContactSection() {
 
 function ContactCard({ icon: Icon, title, lines }: { icon: typeof MapPin; title: string; lines: string[] }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur transition-all hover:-translate-y-1 hover:bg-white/10 sm:p-7">
-      <div className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--accent-yellow)] text-primary">
+    <div className="rounded-2xl border border-border bg-card p-6 text-center transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-brand)] sm:p-7">
+      <div className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-[var(--accent-yellow)]">
         <Icon className="h-6 w-6" />
       </div>
-      <h3 className="text-lg font-bold text-white">{title}</h3>
+      <h3 className="text-lg font-bold text-primary">{title}</h3>
       {lines.map((l) => (
-        <p key={l} className="mt-1 text-sm text-white/65">{l}</p>
+        <p key={l} className="mt-1 text-sm text-muted-foreground">{l}</p>
       ))}
     </div>
   );
@@ -1006,8 +1020,10 @@ function ContactCard({ icon: Icon, title, lines }: { icon: typeof MapPin; title:
 function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-navy)" }}>
-      <div className="mx-auto max-w-3xl px-4">
+    <section className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-graphite)" }}>
+      <div className="absolute -left-24 top-1/3 -z-0 h-72 w-72 rounded-full bg-primary opacity-25 blur-[110px]" aria-hidden="true" />
+      <div className="absolute -right-24 bottom-0 -z-0 h-72 w-72 rounded-full bg-primary-glow opacity-15 blur-[110px]" aria-hidden="true" />
+      <div className="relative mx-auto max-w-3xl px-4">
         <Reveal className="mb-10 text-center">
           <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
             FAQ
