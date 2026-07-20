@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import {
   Wrench,
   Gauge,
@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import logoAsset from "@/assets/pneuz-logo.jpg";
 import iconAsset from "@/assets/pneuz-icon.png";
-import oficinaAsset from "@/assets/oficina-facade.jpg";
+import oficinaAsset from "@/assets/oficina-pneuz.png";
 import heroTiresImg from "@/assets/hero-tires.jpg";
 import whatsappIcon from "@/assets/whatsapp-icon.png";
 import { Star } from "lucide-react";
@@ -284,51 +284,27 @@ function Header() {
   );
 }
 
-function HeroParticles() {
-  const particles = [
-    { left: "8%", size: 5, duration: 5.5, delay: 0 },
-    { left: "18%", size: 3, duration: 4.2, delay: 1.1 },
-    { left: "32%", size: 4, duration: 6.1, delay: 0.4 },
-    { left: "46%", size: 3, duration: 5, delay: 2 },
-    { left: "58%", size: 5, duration: 4.6, delay: 0.8 },
-    { left: "71%", size: 3, duration: 5.8, delay: 1.6 },
-    { left: "83%", size: 4, duration: 5.2, delay: 0.2 },
-    { left: "93%", size: 3, duration: 4.8, delay: 2.4 },
-  ];
-  return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-      {particles.map((p, i) => (
-        <span
-          key={i}
-          className="hero-particle absolute bottom-0 rounded-full bg-[var(--accent-yellow)]"
-          style={{
-            left: p.left,
-            width: p.size,
-            height: p.size,
-            animationDuration: `${p.duration}s`,
-            animationDelay: `${p.delay}s`,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
 function Hero() {
   return (
-    <section
-      id="inicio"
-      className="relative overflow-hidden"
-      style={{
-        background:
-          "radial-gradient(ellipse 900px 700px at 15% -10%, oklch(0.34 0.17 267) 0%, oklch(0.14 0.05 264) 55%, oklch(0.06 0.02 260) 100%)",
-      }}
-    >
-      <div className="hero-speedlines absolute inset-0 opacity-70" aria-hidden="true" />
-      <HeroParticles />
-      <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-[var(--accent-yellow)] opacity-20 blur-[110px]" aria-hidden="true" />
-      <div className="absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-accent-red opacity-25 blur-[120px]" aria-hidden="true" />
-      <div className="absolute inset-0 border-b border-white/5" aria-hidden="true" />
+    <section id="inicio" className="relative overflow-hidden">
+      <div className="absolute inset-0" aria-hidden="true">
+        <img
+          src={heroTiresImg}
+          alt=""
+          className="h-full w-full object-cover"
+          loading="eager"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(115deg, oklch(0.08 0.02 260 / 0.94) 0%, oklch(0.16 0.06 264 / 0.9) 45%, oklch(0.22 0.1 265 / 0.6) 100%)",
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
+      </div>
+      <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-[var(--accent-yellow)] opacity-15 blur-[110px]" aria-hidden="true" />
+      <div className="absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-accent-red opacity-20 blur-[120px]" aria-hidden="true" />
 
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-4 pb-24 pt-16 sm:pb-28 sm:pt-20 lg:grid-cols-[1.1fr_1fr] lg:pb-32 lg:pt-28">
         <div className="flex flex-col items-start">
@@ -398,8 +374,8 @@ function Hero() {
 
           <div className="animate-tire-float relative w-full overflow-hidden rounded-[2rem] border border-white/15 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.7)] ring-1 ring-white/10">
             <img
-              src={heroTiresImg}
-              alt="Estoque de pneus novos na PneuZ Araucária"
+              src={oficinaAsset}
+              alt="Fachada da unidade PneuZ Araucária"
               className="aspect-[4/5] w-full object-cover"
               loading="eager"
             />
@@ -435,7 +411,9 @@ function Hero() {
   );
 }
 
-function TireOfferCard({ t }: { t: { aro: number; price: string } }) {
+const tirePhotoCrops = ["25% 35%", "60% 15%", "85% 55%", "15% 70%", "50% 45%"];
+
+function TireOfferCard({ t, crop }: { t: { aro: number; price: string }; crop: string }) {
   return (
     <div className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
       <div className="relative h-36 w-full overflow-hidden sm:h-40">
@@ -443,7 +421,8 @@ function TireOfferCard({ t }: { t: { aro: number; price: string } }) {
           src={heroTiresImg}
           alt={`Pneu novo aro ${t.aro} disponível para instalação na PneuZ Araucária`}
           loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+          style={{ objectPosition: crop }}
+          className="h-full w-full scale-125 object-cover transition-transform duration-500 group-hover:scale-[1.35]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" aria-hidden="true" />
         <span
@@ -521,7 +500,7 @@ function TireOffers() {
   return (
     <section className="relative overflow-hidden bg-white pb-16 pt-10 sm:pb-20 sm:pt-14">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="mb-10 text-center">
+        <Reveal className="mb-10 text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-accent-red/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-accent-red">
             <Tag className="h-3.5 w-3.5" /> Ofertas da semana
           </span>
@@ -529,7 +508,7 @@ function TireOffers() {
           <p className="mx-auto mt-2 max-w-xl text-sm font-semibold text-muted-foreground">
             Preço exclusivo para instalação em nossa loja em Araucária. Parcelamento em até 10x no cartão.
           </p>
-        </div>
+        </Reveal>
 
         <Carousel
           setApi={setApi}
@@ -540,9 +519,9 @@ function TireOffers() {
           className="mx-auto"
         >
           <CarouselContent className="-ml-4 py-2">
-            {tirePromos.map((t) => (
+            {tirePromos.map((t, i) => (
               <CarouselItem key={t.aro} className="basis-[80%] pl-4 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                <TireOfferCard t={t} />
+                <TireOfferCard t={t} crop={tirePhotoCrops[i % tirePhotoCrops.length]} />
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -566,18 +545,55 @@ function TireOffers() {
   );
 }
 
+function Reveal({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className={`${visible ? "animate-hero-rise" : "opacity-0"} ${className}`}>
+      {children}
+    </div>
+  );
+}
+
 function Brands() {
   return (
     <section className="relative overflow-hidden border-y border-border bg-radial-brand py-12">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="mb-6 text-center">
+        <Reveal className="mb-6 text-center">
           <h3 className="text-sm font-black uppercase tracking-widest text-primary">
             Trabalhamos com as melhores marcas
           </h3>
           <p className="mt-2 text-sm text-muted-foreground">
             Pneus de qualidade para cada tipo de veículo, escolhemos considerando modelo, uso, orçamento e segurança.
           </p>
-        </div>
+        </Reveal>
         <div className="marquee-mask overflow-hidden">
           <div className="flex w-max animate-marquee items-center gap-10 sm:gap-14">
             {[...brands, ...brands].map((b, i) => (
@@ -616,13 +632,13 @@ function Services() {
       <div className="absolute inset-0 -z-10 bg-dots" />
       <div className="absolute inset-0 -z-10" style={{ background: "linear-gradient(180deg, oklch(1 0 0) 0%, oklch(0.98 0.01 260) 100%)" }} />
       <div className="mx-auto max-w-7xl px-4">
-        <div className="mb-14 text-center">
+        <Reveal className="mb-14 text-center">
           <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
             Serviços
           </div>
           <h2 className="text-3xl font-black text-primary md:text-4xl">O que fazemos por você</h2>
           <p className="mt-3 text-muted-foreground">Do pneu novo à revisão completa, cuidamos de cada detalhe.</p>
-        </div>
+        </Reveal>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s) => (
             <div
@@ -665,13 +681,13 @@ function WhyUs() {
       <div className="absolute inset-0 -z-0 opacity-30 bg-grid" />
       <div className="relative">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="mb-14 text-center">
+        <Reveal className="mb-14 text-center">
           <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
             Diferenciais
           </div>
           <h2 className="text-2xl font-black text-white sm:text-3xl md:text-4xl">Por que escolher a PneuZ Araucária?</h2>
           <p className="mt-3 text-white/70">Uma loja local com estrutura de grande rede, franquia reconhecida, atendimento próximo e personalizado.</p>
-        </div>
+        </Reveal>
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-6 [&>*:nth-child(1)]:lg:col-span-2 [&>*:nth-child(2)]:lg:col-span-2 [&>*:nth-child(3)]:lg:col-span-2 [&>*:nth-child(4)]:lg:col-span-3 [&>*:nth-child(5)]:lg:col-span-3">
           {items.map((it) => (
             <div key={it.title} className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-sm backdrop-blur transition-all hover:-translate-y-1 hover:bg-white/10">
@@ -699,12 +715,12 @@ function HowItWorks() {
   return (
     <section className="relative overflow-hidden py-20 sm:py-24 bg-radial-brand">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="mb-14 text-center">
+        <Reveal className="mb-14 text-center">
           <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
             Como funciona
           </div>
           <h2 className="text-2xl font-black text-primary sm:text-3xl md:text-4xl">Resolver o problema do seu carro é simples</h2>
-        </div>
+        </Reveal>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((s, i) => (
             <div key={s.title} className="relative rounded-2xl border border-border bg-card p-6 shadow-sm">
@@ -743,7 +759,7 @@ function FinalCTA() {
   ];
   return (
     <section className="relative overflow-hidden py-20 sm:py-24" style={{ background: "var(--gradient-hero)" }}>
-      <div className="mx-auto max-w-4xl px-4 text-center">
+      <Reveal className="mx-auto max-w-4xl px-4 text-center">
         <h2 className="text-2xl font-black leading-tight text-white sm:text-3xl md:text-4xl">
           Precisa trocar pneus ou revisar seu carro? <span className="text-[var(--accent-yellow)]">Faça uma cotação agora.</span>
         </h2>
@@ -764,7 +780,7 @@ function FinalCTA() {
             Quero meu orçamento
           </a>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
@@ -774,18 +790,19 @@ function About() {
     <section id="sobre" className="relative overflow-hidden py-20 sm:py-24" style={{ background: "linear-gradient(135deg, oklch(0.98 0.01 260) 0%, oklch(0.94 0.03 90 / 0.4) 100%)" }}>
       <div className="absolute inset-0 -z-0 opacity-40 bg-dots" />
       <div className="mx-auto grid max-w-7xl gap-12 px-4 md:grid-cols-2 md:items-center">
-        <div className="relative">
+        <Reveal className="relative">
           <div className="absolute -left-6 -top-6 h-32 w-32 rounded-full bg-[var(--accent-yellow)] opacity-70 blur-2xl" />
-          <div className="relative overflow-hidden rounded-3xl shadow-[var(--shadow-brand)]">
+          <div className="relative overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-brand)]">
             <img
               src={oficinaAsset}
-              alt="Fachada da oficina PneuZ Araucária"
+              alt="Fachada da unidade PneuZ Araucária"
               loading="lazy"
               className="aspect-[4/3] w-full object-cover"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/25 via-transparent to-transparent" aria-hidden="true" />
           </div>
-        </div>
-        <div>
+        </Reveal>
+        <Reveal>
           <div className="mb-3 inline-block rounded-full bg-primary px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[var(--accent-yellow)]">
             Sobre nós
           </div>
@@ -808,7 +825,7 @@ function About() {
             <Stat n="Honestidade" label="Indicamos só o necessário" />
             <Stat n="Qualidade" label="Produtos e serviços de primeira" />
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -834,7 +851,7 @@ function Reviews() {
       <div className="absolute -left-24 top-24 -z-10 h-72 w-72 rounded-full bg-[var(--accent-yellow)] opacity-20 blur-3xl" />
       <div className="absolute -right-24 bottom-24 -z-10 h-72 w-72 rounded-full bg-primary opacity-10 blur-3xl" />
       <div className="mx-auto max-w-7xl px-4">
-        <div className="mb-12 text-center">
+        <Reveal className="mb-12 text-center">
           <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
             <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
               <path fill="#4285F4" d="M22 12.2c0-.7-.06-1.4-.18-2H12v3.8h5.6a4.8 4.8 0 0 1-2.08 3.15v2.6h3.36C20.9 18 22 15.4 22 12.2Z"/>
@@ -855,7 +872,7 @@ function Reviews() {
             <span className="text-sm text-muted-foreground">· Avaliações verificadas</span>
           </div>
           <p className="mt-2 text-sm text-muted-foreground">Mais de 1.000 clientes já avaliaram nossa loja no Google.</p>
-        </div>
+        </Reveal>
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {reviews.map((r) => (
             <article
@@ -907,13 +924,13 @@ function ContactSection() {
   return (
     <section id="contato" className="relative overflow-hidden py-20 sm:py-24 bg-radial-brand">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="mb-14 text-center">
+        <Reveal className="mb-14 text-center">
           <div className="mb-3 inline-block rounded-full bg-[var(--accent-yellow)] px-5 py-1.5 text-xs font-black uppercase tracking-widest text-primary">
             Contato
           </div>
           <h2 className="text-2xl font-black text-primary sm:text-3xl md:text-4xl">Entre em contato</h2>
           <p className="mt-3 text-muted-foreground">Estamos prontos para atender você em Araucária.</p>
-        </div>
+        </Reveal>
         <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
           <ContactCard
             icon={MapPin}
@@ -985,12 +1002,12 @@ function FAQ() {
   return (
     <section className="relative overflow-hidden py-20 sm:py-24" style={{ background: "linear-gradient(180deg, oklch(1 0 0) 0%, oklch(0.96 0.02 267) 100%)" }}>
       <div className="mx-auto max-w-3xl px-4">
-        <div className="mb-10 text-center">
+        <Reveal className="mb-10 text-center">
           <div className="mb-3 inline-block rounded-full bg-primary px-5 py-1.5 text-xs font-black uppercase tracking-widest text-[var(--accent-yellow)]">
             FAQ
           </div>
           <h2 className="text-2xl font-black text-primary sm:text-3xl md:text-4xl">Perguntas frequentes</h2>
-        </div>
+        </Reveal>
         <div className="space-y-3">
           {faqs.map((f, i) => {
             const isOpen = open === i;
