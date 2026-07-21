@@ -510,7 +510,7 @@ function TireOffers() {
       <div className="absolute inset-0 -z-0 opacity-[0.5] bg-lines-blue" aria-hidden="true" />
       <div className="absolute -left-32 top-0 -z-0 h-72 w-72 rounded-full bg-primary opacity-[0.06] blur-[110px]" aria-hidden="true" />
       <div className="absolute -right-32 bottom-0 -z-0 h-72 w-72 rounded-full bg-accent-red opacity-[0.05] blur-[110px]" aria-hidden="true" />
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="relative mx-auto max-w-7xl px-4">
         <Reveal className="mb-10 text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-accent-red/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-accent-red">
             <Tag className="h-3.5 w-3.5" /> Ofertas da semana
@@ -625,7 +625,7 @@ function Brands() {
           ))}
         </div>
       </div>
-      <div className="mx-auto mt-8 max-w-7xl px-4 text-center">
+      <div className="relative z-10 mx-auto mt-8 max-w-7xl px-4 text-center">
         <a
           href={waLink("Olá, quero ajuda para encontrar o pneu ideal para o meu carro.")}
           target="_blank"
